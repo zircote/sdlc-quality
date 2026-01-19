@@ -1,0 +1,279 @@
+name: 'SDLC Compliance Check'
+description: 'Run comprehensive SDLC compliance checks against your project'
+author: 'zircote'
+
+branding:
+  icon: 'check-circle'
+  color: 'green'
+
+inputs:
+  domains:
+    description: 'Comma-separated list of domains to check (build,quality,testing,ci,security,docs,vcs,release,observability,ai) or "all"'
+    required: false
+    default: 'all'
+  fail-on-error:
+    description: 'Fail the action if any MUST requirements are not met'
+    required: false
+    default: 'true'
+  report-format:
+    description: 'Report format: markdown, json, sarif, or all'
+    required: false
+    default: 'markdown'
+  upload-artifact:
+    description: 'Upload report as artifact'
+    required: false
+    default: 'true'
+  create-pr-comment:
+    description: 'Create PR comment with results (only on pull_request events)'
+    required: false
+    default: 'true'
+  create-issue:
+    description: 'Create GitHub issue for failed checks'
+    required: false
+    default: 'false'
+  working-directory:
+    description: 'Directory to run checks in'
+    required: false
+    default: '.'
+  config-file:
+    description: 'Path to custom SDLC configuration file'
+    required: false
+    default: ''
+
+outputs:
+  score:
+    description: 'Overall compliance score (0-100)'
+    value: ${{ steps.check.outputs.score }}
+  status:
+    description: 'Compliance status: pass, warn, or fail'
+    value: ${{ steps.check.outputs.status }}
+  report-path:
+    description: 'Path to the generated report file'
+    value: ${{ steps.check.outputs.report-path }}
+  critical-count:
+    description: 'Number of critical (MUST) violations'
+    value: ${{ steps.check.outputs.critical-count }}
+  important-count:
+    description: 'Number of important (SHOULD) violations'
+    value: ${{ steps.check.outputs.important-count }}
+  suggestion-count:
+    description: 'Number of suggestions (MAY)'
+    value: ${{ steps.check.outputs.suggestion-count }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Validate inputs
+      shell: bash
+      run: |
+        # Validate domains input
+        valid_domains="build,quality,testing,ci,security,docs,vcs,release,observability,ai,all"
+        IFS=',' read -ra DOMAINS <<< "${{ inputs.domains }}"
+        for domain in "${DOMAINS[@]}"; do
+          domain=$(echo "$domain" | tr -d ' ')
+          if [[ ! ",$valid_domains," =~ ",$domain," ]]; then
+            echo "::error::Invalid domain: $domain"
+            echo "Valid domains: $valid_domains"
+            exit 1
+          fi
+        done
+
+        # Validate report format
+        valid_formats="markdown,json,sarif,all"
+        if [[ ! ",$valid_formats," =~ ",${{ inputs.report-format }}," ]]; then
+          echo "::error::Invalid report format: ${{ inputs.report-format }}"
+          echo "Valid formats: $valid_formats"
+          exit 1
+        fi
+
+    - name: Set up check environment
+      shell: bash
+      run: |
+        # Create output directory
+        mkdir -p "${{ github.workspace }}/.sdlc-reports"
+
+        # Export configuration
+        echo "SDLC_DOMAINS=${{ inputs.domains }}" >> $GITHUB_ENV
+        echo "SDLC_REPORT_FORMAT=${{ inputs.report-format }}" >> $GITHUB_ENV
+        echo "SDLC_WORKING_DIR=${{ inputs.working-directory }}" >> $GITHUB_ENV
+        echo "SDLC_REPORT_DIR=${{ github.workspace }}/.sdlc-reports" >> $GITHUB_ENV
+
+    - name: Run SDLC compliance checks
+      id: check
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: |
+        # Source the main check script
+        source "${{ github.action_path }}/scripts/sdlc-check.sh"
+
+        # Run checks
+        run_sdlc_checks "${{ inputs.domains }}" "${{ inputs.config-file }}"
+
+        # Capture outputs
+        echo "score=$(cat $SDLC_REPORT_DIR/score.txt)" >> $GITHUB_OUTPUT
+        echo "status=$(cat $SDLC_REPORT_DIR/status.txt)" >> $GITHUB_OUTPUT
+        echo "report-path=$SDLC_REPORT_DIR/report.md" >> $GITHUB_OUTPUT
+        echo "critical-count=$(cat $SDLC_REPORT_DIR/critical-count.txt)" >> $GITHUB_OUTPUT
+        echo "important-count=$(cat $SDLC_REPORT_DIR/important-count.txt)" >> $GITHUB_OUTPUT
+        echo "suggestion-count=$(cat $SDLC_REPORT_DIR/suggestion-count.txt)" >> $GITHUB_OUTPUT
+
+    - name: Generate reports
+      shell: bash
+      run: |
+        source "${{ github.action_path }}/scripts/report-generator.sh"
+
+        case "${{ inputs.report-format }}" in
+          markdown)
+            generate_markdown_report
+            ;;
+          json)
+            generate_json_report
+            ;;
+          sarif)
+            generate_sarif_report
+            ;;
+          all)
+            generate_markdown_report
+            generate_json_report
+            generate_sarif_report
+            ;;
+        esac
+
+    - name: Upload SARIF to GitHub Security
+      if: inputs.report-format == 'sarif' || inputs.report-format == 'all'
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: ${{ env.SDLC_REPORT_DIR }}/report.sarif
+      continue-on-error: true
+
+    - name: Upload report artifact
+      if: inputs.upload-artifact == 'true'
+      uses: actions/upload-artifact@v4
+      with:
+        name: sdlc-compliance-report
+        path: ${{ env.SDLC_REPORT_DIR }}/
+        retention-days: 30
+
+    - name: Create PR comment
+      if: inputs.create-pr-comment == 'true' && github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const reportPath = process.env.SDLC_REPORT_DIR + '/report.md';
+
+          if (!fs.existsSync(reportPath)) {
+            console.log('No markdown report found, skipping PR comment');
+            return;
+          }
+
+          const report = fs.readFileSync(reportPath, 'utf8');
+          const score = fs.readFileSync(process.env.SDLC_REPORT_DIR + '/score.txt', 'utf8').trim();
+          const status = fs.readFileSync(process.env.SDLC_REPORT_DIR + '/status.txt', 'utf8').trim();
+
+          const statusEmoji = status === 'pass' ? '✅' : status === 'warn' ? '⚠️' : '❌';
+
+          const body = `## ${statusEmoji} SDLC Compliance Report
+
+          **Score**: ${score}/100 | **Status**: ${status.toUpperCase()}
+
+          <details>
+          <summary>View Full Report</summary>
+
+          ${report}
+
+          </details>
+
+          ---
+          *Generated by [SDLC Standards Plugin](https://github.com/zircote/sdlc-quality)*`;
+
+          // Find existing comment
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number
+          });
+
+          const botComment = comments.find(c =>
+            c.user.type === 'Bot' &&
+            c.body.includes('SDLC Compliance Report')
+          );
+
+          if (botComment) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: body
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });
+          }
+
+    - name: Create issue for failures
+      if: inputs.create-issue == 'true' && steps.check.outputs.status == 'fail'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          const report = fs.readFileSync(process.env.SDLC_REPORT_DIR + '/report.md', 'utf8');
+          const criticalCount = fs.readFileSync(process.env.SDLC_REPORT_DIR + '/critical-count.txt', 'utf8').trim();
+
+          const title = `SDLC Compliance: ${criticalCount} critical violation(s) found`;
+
+          // Check for existing open issue
+          const { data: issues } = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            labels: 'sdlc-compliance'
+          });
+
+          const existingIssue = issues.find(i => i.title.startsWith('SDLC Compliance:'));
+
+          const body = `## SDLC Compliance Violations
+
+          This issue was automatically created because the SDLC compliance check found critical violations.
+
+          **Run**: [${context.runId}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+          **Commit**: ${context.sha.substring(0, 7)}
+          **Branch**: ${context.ref}
+
+          ${report}
+
+          ---
+          *Close this issue once all critical violations are resolved.*`;
+
+          if (existingIssue) {
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: existingIssue.number,
+              body: body
+            });
+            console.log(`Updated existing issue #${existingIssue.number}`);
+          } else {
+            const { data: newIssue } = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['sdlc-compliance', 'automated']
+            });
+            console.log(`Created new issue #${newIssue.number}`);
+          }
+
+    - name: Check failure threshold
+      if: inputs.fail-on-error == 'true'
+      shell: bash
+      run: |
+        status="${{ steps.check.outputs.status }}"
+        if [[ "$status" == "fail" ]]; then
+          echo "::error::SDLC compliance check failed with critical violations"
+          exit 1
+        fi

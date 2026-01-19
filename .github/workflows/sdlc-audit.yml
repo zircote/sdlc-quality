@@ -1,0 +1,294 @@
+name: SDLC Compliance Audit
+
+on:
+  workflow_call:
+    inputs:
+      domains:
+        description: 'Comma-separated list of domains to check (build,quality,testing,ci,security,docs,vcs,release,observability,ai) or "all"'
+        required: false
+        type: string
+        default: 'all'
+      fail-on-error:
+        description: 'Fail the workflow if any MUST requirements are not met'
+        required: false
+        type: boolean
+        default: true
+      report-format:
+        description: 'Report format: markdown, json, sarif, or all'
+        required: false
+        type: string
+        default: 'all'
+      upload-artifact:
+        description: 'Upload report as artifact'
+        required: false
+        type: boolean
+        default: true
+      create-pr-comment:
+        description: 'Create PR comment with results'
+        required: false
+        type: boolean
+        default: true
+      create-issue:
+        description: 'Create GitHub issue for failed checks'
+        required: false
+        type: boolean
+        default: false
+      working-directory:
+        description: 'Directory to run checks in'
+        required: false
+        type: string
+        default: '.'
+      runner:
+        description: 'Runner to use (ubuntu-latest, self-hosted, etc)'
+        required: false
+        type: string
+        default: 'ubuntu-latest'
+    outputs:
+      score:
+        description: 'Overall compliance score (0-100)'
+        value: ${{ jobs.audit.outputs.score }}
+      status:
+        description: 'Compliance status: pass, warn, or fail'
+        value: ${{ jobs.audit.outputs.status }}
+      critical-count:
+        description: 'Number of critical violations'
+        value: ${{ jobs.audit.outputs.critical-count }}
+      important-count:
+        description: 'Number of important violations'
+        value: ${{ jobs.audit.outputs.important-count }}
+    secrets:
+      GITHUB_TOKEN:
+        description: 'GitHub token for PR comments and issue creation'
+        required: false
+
+  workflow_dispatch:
+    inputs:
+      domains:
+        description: 'Domains to check'
+        required: false
+        type: choice
+        options:
+          - all
+          - build
+          - quality
+          - testing
+          - ci
+          - security
+          - docs
+          - vcs
+          - release
+          - observability
+          - ai
+        default: 'all'
+      fail-on-error:
+        description: 'Fail on critical violations'
+        required: false
+        type: boolean
+        default: false
+      create-issue:
+        description: 'Create issue for failures'
+        required: false
+        type: boolean
+        default: true
+
+  schedule:
+    # Run weekly on Monday at 9am UTC
+    - cron: '0 9 * * 1'
+
+  issues:
+    types: [opened, assigned]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  security-events: write
+
+concurrency:
+  group: sdlc-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Handle issue-triggered audits
+  check-trigger:
+    name: Check Trigger
+    runs-on: ubuntu-latest
+    outputs:
+      should-run: ${{ steps.check.outputs.should-run }}
+      domains: ${{ steps.check.outputs.domains }}
+    steps:
+      - name: Check issue trigger
+        id: check
+        env:
+          # Use environment variables to safely handle untrusted inputs
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_LABELS: ${{ toJson(github.event.issue.labels.*.name) }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_DOMAINS: ${{ inputs.domains }}
+        run: |
+          # Default to run for non-issue events
+          if [[ "$EVENT_NAME" != "issues" ]]; then
+            echo "should-run=true" >> $GITHUB_OUTPUT
+            echo "domains=${INPUT_DOMAINS:-all}" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # For issues, check if it's an SDLC audit request
+          # Check for SDLC audit label or title pattern
+          if echo "$ISSUE_LABELS" | grep -qi "sdlc-audit"; then
+            echo "should-run=true" >> $GITHUB_OUTPUT
+          elif echo "$ISSUE_TITLE" | grep -qiE "sdlc|compliance|audit"; then
+            echo "should-run=true" >> $GITHUB_OUTPUT
+          else
+            echo "should-run=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Extract domains from issue body if specified
+          # Use safe pattern matching
+          domains="all"
+          if echo "$ISSUE_BODY" | grep -qiE "^domains?:"; then
+            # Extract only alphanumeric and comma characters for safety
+            extracted=$(echo "$ISSUE_BODY" | grep -iE "^domains?:" | sed 's/.*domains?:\s*//i' | tr -cd 'a-zA-Z,')
+            if [[ -n "$extracted" ]]; then
+              domains="$extracted"
+            fi
+          fi
+          echo "domains=$domains" >> $GITHUB_OUTPUT
+
+  audit:
+    name: SDLC Compliance Audit
+    needs: check-trigger
+    if: needs.check-trigger.outputs.should-run == 'true'
+    runs-on: ${{ inputs.runner || 'ubuntu-latest' }}
+    outputs:
+      score: ${{ steps.audit.outputs.score }}
+      status: ${{ steps.audit.outputs.status }}
+      critical-count: ${{ steps.audit.outputs.critical-count }}
+      important-count: ${{ steps.audit.outputs.important-count }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout SDLC plugin
+        uses: actions/checkout@v4
+        with:
+          repository: zircote/sdlc-quality
+          path: .sdlc-plugin
+          sparse-checkout: |
+            .github/actions/sdlc-check
+
+      - name: Run SDLC compliance check
+        id: audit
+        uses: ./.sdlc-plugin/.github/actions/sdlc-check
+        with:
+          domains: ${{ needs.check-trigger.outputs.domains || inputs.domains || 'all' }}
+          fail-on-error: ${{ inputs.fail-on-error || false }}
+          report-format: ${{ inputs.report-format || 'all' }}
+          upload-artifact: ${{ inputs.upload-artifact || true }}
+          create-pr-comment: ${{ inputs.create-pr-comment || true }}
+          create-issue: ${{ inputs.create-issue || false }}
+          working-directory: ${{ inputs.working-directory || '.' }}
+
+      - name: Comment on trigger issue
+        if: github.event_name == 'issues' && needs.check-trigger.outputs.should-run == 'true'
+        uses: actions/github-script@v7
+        env:
+          REPORT_DIR: ${{ github.workspace }}/.sdlc-reports
+        with:
+          script: |
+            const fs = require('fs');
+            const reportDir = process.env.REPORT_DIR;
+
+            let body = '## SDLC Compliance Audit Results\n\n';
+
+            if (fs.existsSync(reportDir + '/report.md')) {
+              const report = fs.readFileSync(reportDir + '/report.md', 'utf8');
+              body += report;
+            } else {
+              body += 'Audit completed. Check the workflow run for details.';
+            }
+
+            body += '\n\n---\n';
+            body += `*Workflow run: [${context.runId}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})*`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });
+
+      - name: Upload SARIF to Security tab
+        if: inputs.report-format == 'sarif' || inputs.report-format == 'all'
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: .sdlc-reports/report.sarif
+        continue-on-error: true
+
+  # Notify on scheduled runs
+  notify:
+    name: Notify Results
+    needs: audit
+    if: github.event_name == 'schedule' && needs.audit.outputs.status == 'fail'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create tracking issue
+        uses: actions/github-script@v7
+        env:
+          AUDIT_SCORE: ${{ needs.audit.outputs.score }}
+          AUDIT_STATUS: ${{ needs.audit.outputs.status }}
+          CRITICAL_COUNT: ${{ needs.audit.outputs.critical-count }}
+          IMPORTANT_COUNT: ${{ needs.audit.outputs.important-count }}
+        with:
+          script: |
+            const criticalCount = process.env.CRITICAL_COUNT;
+            const title = `Weekly SDLC Audit: ${criticalCount} critical violation(s)`;
+
+            // Check for existing open issue
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'sdlc-audit,automated'
+            });
+
+            const existingIssue = issues.find(i => i.title.includes('Weekly SDLC Audit'));
+
+            const body = `## Weekly SDLC Compliance Audit
+
+            The scheduled SDLC audit found critical violations that need attention.
+
+            **Score**: ${process.env.AUDIT_SCORE}/100
+            **Status**: ${process.env.AUDIT_STATUS}
+            **Critical Issues**: ${process.env.CRITICAL_COUNT}
+            **Important Issues**: ${process.env.IMPORTANT_COUNT}
+
+            **Workflow Run**: [View Details](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})
+
+            Please review the detailed report in the workflow artifacts.
+
+            ---
+            *This issue was automatically created by the weekly SDLC audit.*`;
+
+            if (existingIssue) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existingIssue.number,
+                body: body
+              });
+              console.log(`Updated issue #${existingIssue.number}`);
+            } else {
+              const { data: newIssue } = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['sdlc-audit', 'automated', 'compliance']
+              });
+              console.log(`Created issue #${newIssue.number}`);
+            }
