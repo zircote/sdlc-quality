@@ -73,15 +73,15 @@ add_finding() {
 
   case "$severity" in
     "$SEVERITY_MUST")
-      ((CRITICAL_COUNT++))
+      CRITICAL_COUNT=$((CRITICAL_COUNT + 1))
       log_error "[$domain] MUST: $message"
       ;;
     "$SEVERITY_SHOULD")
-      ((IMPORTANT_COUNT++))
+      IMPORTANT_COUNT=$((IMPORTANT_COUNT + 1))
       log_warning "[$domain] SHOULD: $message"
       ;;
     "$SEVERITY_MAY")
-      ((SUGGESTION_COUNT++))
+      SUGGESTION_COUNT=$((SUGGESTION_COUNT + 1))
       log_info "[$domain] MAY: $message"
       ;;
   esac
