@@ -56,10 +56,6 @@ on:
       important-count:
         description: "Number of important violations"
         value: ${{ jobs.audit.outputs.important-count }}
-    secrets:
-      GITHUB_TOKEN:
-        description: "GitHub token for PR comments and issue creation"
-        required: false
 
   workflow_dispatch:
     inputs:
