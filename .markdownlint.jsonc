@@ -1,0 +1,31 @@
+{
+  // Markdownlint configuration for SDLC Standards Plugin
+  "default": true,
+
+  // Allow long lines (we use 100 as guideline, not strict limit)
+  "MD013": {
+    "line_length": 120,
+    "code_blocks": false,
+    "tables": false
+  },
+
+  // Allow multiple headers with same content (needed for templates)
+  "MD024": {
+    "siblings_only": true
+  },
+
+  // Allow inline HTML (needed for some formatting)
+  "MD033": false,
+
+  // Allow bare URLs (common in documentation)
+  "MD034": false,
+
+  // Allow emphasis as headers (used in some contexts)
+  "MD036": false,
+
+  // First line doesn't need to be a header (YAML frontmatter)
+  "MD041": false,
+
+  // Allow code blocks without language specification
+  "MD040": false
+}

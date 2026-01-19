@@ -1,0 +1,21 @@
+{
+  "name": "sdlc",
+  "version": "1.0.0",
+  "description": "Software Development Lifecycle standards and requirements for project quality, security, and compliance",
+  "author": {
+    "name": "zircote",
+    "url": "https://github.com/zircote"
+  },
+  "repository": "https://github.com/zircote/sdlc-quality",
+  "license": "MIT",
+  "keywords": [
+    "sdlc",
+    "quality",
+    "standards",
+    "ci-cd",
+    "security",
+    "testing",
+    "documentation",
+    "compliance"
+  ]
+}

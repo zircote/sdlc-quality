@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/zircote/sdlc-quality/blob/main/docs/PROJECT_REQUIREMENTS.md
+    about: Check the SDLC standards documentation
+  - name: Discussions
+    url: https://github.com/zircote/sdlc-quality/discussions
+    about: Ask questions and discuss ideas

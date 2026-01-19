@@ -1,0 +1,144 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  CI: true
+
+jobs:
+  format:
+    name: Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install -D prettier
+
+      - name: Check formatting
+        run: npx prettier --check "**/*.md" "**/*.yml" "**/*.yaml" "**/*.json"
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: format
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install -D markdownlint-cli2
+
+      - name: Lint markdown
+        run: npx markdownlint-cli2 "**/*.md" "#node_modules"
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run tests
+        run: ./scripts/test.sh
+
+  validate-plugin:
+    name: Validate Plugin Structure
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate plugin.json
+        run: |
+          jq empty .claude-plugin/plugin.json
+          echo "plugin.json is valid JSON"
+
+      - name: Check required fields
+        run: |
+          name=$(jq -r '.name' .claude-plugin/plugin.json)
+          version=$(jq -r '.version' .claude-plugin/plugin.json)
+          description=$(jq -r '.description' .claude-plugin/plugin.json)
+
+          if [ "$name" = "null" ] || [ -z "$name" ]; then
+            echo "Error: plugin.json missing 'name' field"
+            exit 1
+          fi
+
+          if [ "$version" = "null" ] || [ -z "$version" ]; then
+            echo "Error: plugin.json missing 'version' field"
+            exit 1
+          fi
+
+          if [ "$description" = "null" ] || [ -z "$description" ]; then
+            echo "Error: plugin.json missing 'description' field"
+            exit 1
+          fi
+
+      - name: Verify skills structure
+        run: |
+          for dir in skills/*/; do
+            if [ ! -f "${dir}SKILL.md" ]; then
+              echo "Error: Missing SKILL.md in $dir"
+              exit 1
+            fi
+          done
+
+      - name: Verify commands structure
+        run: |
+          for file in commands/*.md; do
+            if [ -f "$file" ]; then
+              echo "Found command: $file"
+            fi
+          done
+
+      - name: Verify agents structure
+        run: |
+          for file in agents/*.md; do
+            if [ -f "$file" ]; then
+              echo "Found agent: $file"
+            fi
+          done
+
+  link-check:
+    name: Check Links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install link checker
+        run: npm install -D markdown-link-check
+
+      - name: Check links in README
+        run: npx markdown-link-check README.md --quiet || true
+
+      - name: Check links in CONTRIBUTING
+        run: npx markdown-link-check CONTRIBUTING.md --quiet || true

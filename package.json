@@ -1,0 +1,23 @@
+{
+  "name": "sdlc-quality",
+  "version": "1.0.0",
+  "description": "SDLC Standards Plugin for AI coding assistants",
+  "private": true,
+  "scripts": {
+    "lint": "markdownlint-cli2 '**/*.md' '#node_modules'",
+    "format": "prettier --write '**/*.md' '**/*.yml' '**/*.yaml' '**/*.json'",
+    "format:check": "prettier --check '**/*.md' '**/*.yml' '**/*.yaml' '**/*.json'",
+    "test": "./scripts/test.sh"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "^0.17.0",
+    "prettier": "^3.4.0",
+    "markdown-link-check": "^3.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zircote/sdlc-quality.git"
+  },
+  "author": "zircote",
+  "license": "MIT"
+}
