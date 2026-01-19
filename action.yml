@@ -148,7 +148,7 @@ runs:
 
     - name: Upload report artifact
       if: inputs.upload-artifact == 'true'
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: sdlc-compliance-report
         path: ${{ env.SDLC_REPORT_DIR }}/
