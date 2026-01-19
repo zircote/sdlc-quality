@@ -22,13 +22,13 @@ Projects MUST follow Semantic Versioning (SemVer):
 MAJOR.MINOR.PATCH[-PRERELEASE][+BUILD]
 ```
 
-| Component | When to Increment |
-|-----------|-------------------|
-| MAJOR | Breaking API changes |
-| MINOR | New backwards-compatible features |
-| PATCH | Backwards-compatible bug fixes |
-| PRERELEASE | Pre-release versions (alpha, beta, rc) |
-| BUILD | Build metadata (ignored for precedence) |
+| Component  | When to Increment                       |
+| ---------- | --------------------------------------- |
+| MAJOR      | Breaking API changes                    |
+| MINOR      | New backwards-compatible features       |
+| PATCH      | Backwards-compatible bug fixes          |
+| PRERELEASE | Pre-release versions (alpha, beta, rc)  |
+| BUILD      | Build metadata (ignored for precedence) |
 
 ### Version Examples
 
@@ -45,6 +45,7 @@ MAJOR.MINOR.PATCH[-PRERELEASE][+BUILD]
 ### Pre-release Versions (MUST)
 
 Pre-release versions MUST follow this progression:
+
 1. `x.y.z-alpha.N` - Early testing, unstable
 2. `x.y.z-beta.N` - Feature complete, testing
 3. `x.y.z-rc.N` - Release candidate, final testing
@@ -55,15 +56,15 @@ Pre-release versions MUST follow this progression:
 
 Before releasing, verify:
 
-| Check | Requirement |
-|-------|-------------|
-| All tests pass | MUST |
-| No security vulnerabilities | MUST |
-| Documentation updated | MUST |
-| CHANGELOG updated | MUST |
-| Version bumped | MUST |
-| Breaking changes documented | MUST (if applicable) |
-| Migration guide provided | SHOULD (for major versions) |
+| Check                       | Requirement                 |
+| --------------------------- | --------------------------- |
+| All tests pass              | MUST                        |
+| No security vulnerabilities | MUST                        |
+| Documentation updated       | MUST                        |
+| CHANGELOG updated           | MUST                        |
+| Version bumped              | MUST                        |
+| Breaking changes documented | MUST (if applicable)        |
+| Migration guide provided    | SHOULD (for major versions) |
 
 ### Release Workflow (MUST)
 
@@ -77,6 +78,7 @@ Before releasing, verify:
 ### Git Tags (MUST)
 
 Release tags MUST:
+
 - Use `v` prefix: `v1.2.3`
 - Be annotated or signed
 - Reference the release commit
@@ -94,6 +96,7 @@ git tag -s v1.2.3 -m "Release v1.2.3"
 ### Changelog Requirements (MUST)
 
 CHANGELOG.md MUST:
+
 - Follow Keep a Changelog format
 - Be updated before every release
 - Include all notable changes
@@ -105,15 +108,19 @@ CHANGELOG.md MUST:
 ## [1.2.0] - 2024-01-15
 
 ### Added
+
 - New authentication methods (#123)
 
 ### Changed
+
 - Improved error messages (#124)
 
 ### Fixed
+
 - Memory leak in parser (#125)
 
 ### Security
+
 - Updated dependencies for CVE-2024-001
 
 [1.2.0]: https://github.com/org/repo/compare/v1.1.0...v1.2.0
@@ -132,7 +139,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   release:
@@ -155,11 +162,11 @@ jobs:
 
 Automate version bumps based on commit types:
 
-| Commit Type | Version Bump |
-|-------------|--------------|
-| `fix:` | PATCH |
-| `feat:` | MINOR |
-| `feat!:` or `BREAKING CHANGE:` | MAJOR |
+| Commit Type                    | Version Bump |
+| ------------------------------ | ------------ |
+| `fix:`                         | PATCH        |
+| `feat:`                        | MINOR        |
+| `feat!:` or `BREAKING CHANGE:` | MAJOR        |
 
 ## Package Publishing
 
@@ -167,17 +174,18 @@ Automate version bumps based on commit types:
 
 Configure publishing to appropriate registries:
 
-| Language | Registry | Config File |
-|----------|----------|-------------|
-| Rust | crates.io | `Cargo.toml` |
-| Node.js | npm | `package.json` |
-| Python | PyPI | `pyproject.toml` |
-| Java | Maven Central | `pom.xml` |
-| Go | Go Modules | `go.mod` |
+| Language | Registry      | Config File      |
+| -------- | ------------- | ---------------- |
+| Rust     | crates.io     | `Cargo.toml`     |
+| Node.js  | npm           | `package.json`   |
+| Python   | PyPI          | `pyproject.toml` |
+| Java     | Maven Central | `pom.xml`        |
+| Go       | Go Modules    | `go.mod`         |
 
 ### Publishing Checklist (MUST)
 
 Before publishing:
+
 - [ ] Version matches Git tag
 - [ ] Package metadata complete
 - [ ] License file included
@@ -188,6 +196,7 @@ Before publishing:
 ### Publish Verification (MUST)
 
 After publishing, verify:
+
 - Package installable from registry
 - Version appears correctly
 - Documentation renders properly
@@ -198,6 +207,7 @@ After publishing, verify:
 ### Release Notes Content (MUST)
 
 Release notes MUST include:
+
 - Version number and release date
 - Summary of changes
 - Breaking changes (highlighted)
@@ -210,19 +220,24 @@ Release notes MUST include:
 # Release v1.2.0
 
 ## Highlights
+
 Brief summary of key changes
 
 ## Breaking Changes
+
 - Change 1: Migration steps...
 
 ## New Features
+
 - Feature 1 (#123)
 - Feature 2 (#124)
 
 ## Bug Fixes
+
 - Fix 1 (#125)
 
 ## Contributors
+
 Thanks to @contributor1, @contributor2
 ```
 

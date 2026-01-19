@@ -16,7 +16,9 @@ audience:
 rfc2119: true
 technology_agnostic: true
 ---
+
 # Project Requirements Document
+
 **Version:** 1.0.0
 **Last Updated:** 2026-01-19
 **Scope:** Software Development Lifecycle Standards and Expectations
@@ -29,13 +31,9 @@ technology_agnostic: true
 > This document serves as authoritative project instructions. When implementing these requirements:
 >
 > 1. **VERSION DISCOVERY REQUIREMENT**: You **MUST** discover all version numbers, release versions, dependency versions, tool versions, and API versions from **ONLINE SOURCES** (official documentation, package registries, GitHub releases, crates.io, npm, PyPI, etc.). **DO NOT** rely on training data or cached knowledge for version information. Always verify current versions at implementation time using web search, documentation fetches, or registry queries.
->
 > 2. **TECHNOLOGY INFERENCE**: Infer specific technologies, frameworks, and tooling from the project you are working in. This document is technology-agnostic by design.
->
 > 3. **NO ASSUMPTIONS**: If a requirement is unclear or you cannot find information online, **ASK** the user rather than assuming or using potentially outdated knowledge.
->
 > 4. **COMPLIANCE**: All code you generate **MUST** comply with the requirements in this document.
->
 > 5. **VERIFICATION**: Before suggesting any version, dependency, or tool configuration, verify it is current by consulting official sources online.
 
 ---
@@ -47,6 +45,7 @@ This document defines prescriptive requirements for software project development
 This document is **project-agnostic**. Technical implementations (languages, frameworks, tools) shall be inferred based on the target project's technology stack.
 
 This document is designed to be used as:
+
 - Project setup guidance for human developers
 - Instruction file for AI coding assistants (`.github/copilot-instructions.md`, `CLAUDE.md`, `AGENTS.md`, etc.)
 - Compliance checklist for code reviews
@@ -56,13 +55,13 @@ This document is designed to be used as:
 
 This document uses RFC 2119 terminology:
 
-| Term | Meaning |
-|------|---------|
-| **MUST** / **SHALL** | Absolute requirement; non-negotiable |
-| **MUST NOT** / **SHALL NOT** | Absolute prohibition |
-| **SHOULD** / **RECOMMENDED** | Strong recommendation; deviation requires justification |
-| **SHOULD NOT** / **NOT RECOMMENDED** | Strong discouragement; use requires justification |
-| **MAY** / **OPTIONAL** | Truly optional; use at discretion |
+| Term                                 | Meaning                                                 |
+| ------------------------------------ | ------------------------------------------------------- |
+| **MUST** / **SHALL**                 | Absolute requirement; non-negotiable                    |
+| **MUST NOT** / **SHALL NOT**         | Absolute prohibition                                    |
+| **SHOULD** / **RECOMMENDED**         | Strong recommendation; deviation requires justification |
+| **SHOULD NOT** / **NOT RECOMMENDED** | Strong discouragement; use requires justification       |
+| **MAY** / **OPTIONAL**               | Truly optional; use at discretion                       |
 
 ---
 
@@ -74,23 +73,23 @@ This document uses RFC 2119 terminology:
 
 2. The build system **MUST** expose the following standardized targets:
 
-   | Target | Purpose | Required |
-   |--------|---------|----------|
-   | `build` | Compile debug/development build | MUST |
-   | `release` | Compile optimized production build | MUST |
-   | `test` | Run all tests | MUST |
-   | `lint` | Run linting with warnings allowed | MUST |
-   | `lint-strict` | Run linting with warnings as errors | MUST |
-   | `format` | Apply code formatting | MUST |
-   | `format-check` | Verify code formatting without changes | MUST |
-   | `clean` | Remove build artifacts | MUST |
-   | `install` | Install to system path | SHOULD |
-   | `dev` | Full development workflow (check + install) | SHOULD |
-   | `quick` | Fast build + install (skip tests) | SHOULD |
-   | `doc` | Generate documentation | SHOULD |
-   | `bench` | Run performance benchmarks | SHOULD |
-   | `ci` | Run all CI gates locally | MUST |
-   | `help` | Display available targets | MUST |
+   | Target         | Purpose                                     | Required |
+   | -------------- | ------------------------------------------- | -------- |
+   | `build`        | Compile debug/development build             | MUST     |
+   | `release`      | Compile optimized production build          | MUST     |
+   | `test`         | Run all tests                               | MUST     |
+   | `lint`         | Run linting with warnings allowed           | MUST     |
+   | `lint-strict`  | Run linting with warnings as errors         | MUST     |
+   | `format`       | Apply code formatting                       | MUST     |
+   | `format-check` | Verify code formatting without changes      | MUST     |
+   | `clean`        | Remove build artifacts                      | MUST     |
+   | `install`      | Install to system path                      | SHOULD   |
+   | `dev`          | Full development workflow (check + install) | SHOULD   |
+   | `quick`        | Fast build + install (skip tests)           | SHOULD   |
+   | `doc`          | Generate documentation                      | SHOULD   |
+   | `bench`        | Run performance benchmarks                  | SHOULD   |
+   | `ci`           | Run all CI gates locally                    | MUST     |
+   | `help`         | Display available targets                   | MUST     |
 
 3. The `ci` target **MUST** execute all checks in the same order as the CI pipeline.
 
@@ -136,13 +135,13 @@ This document uses RFC 2119 terminology:
 
 3. The following formatting standards **MUST** be enforced:
 
-   | Standard | Requirement |
-   |----------|-------------|
-   | Line length | MUST be 100 characters maximum |
-   | Indentation | MUST be consistent (spaces or tabs, not mixed) |
-   | Line endings | MUST be Unix-style (LF) |
-   | Trailing whitespace | MUST be removed |
-   | Final newline | MUST be present |
+   | Standard            | Requirement                                    |
+   | ------------------- | ---------------------------------------------- |
+   | Line length         | MUST be 100 characters maximum                 |
+   | Indentation         | MUST be consistent (spaces or tabs, not mixed) |
+   | Line endings        | MUST be Unix-style (LF)                        |
+   | Trailing whitespace | MUST be removed                                |
+   | Final newline       | MUST be present                                |
 
 4. Import/include statements **MUST** be automatically sorted and grouped.
 
@@ -154,15 +153,15 @@ This document uses RFC 2119 terminology:
 
 3. Linting **MUST** include the following categories:
 
-   | Category | Enforcement |
-   |----------|-------------|
-   | Correctness | MUST be enabled |
-   | Performance | MUST be enabled |
-   | Style | SHOULD be enabled |
-   | Complexity | SHOULD be enabled |
-   | Documentation | SHOULD be enabled |
-   | Pedantic | SHOULD be enabled |
-   | Nursery (experimental) | MAY be enabled |
+   | Category               | Enforcement       |
+   | ---------------------- | ----------------- |
+   | Correctness            | MUST be enabled   |
+   | Performance            | MUST be enabled   |
+   | Style                  | SHOULD be enabled |
+   | Complexity             | SHOULD be enabled |
+   | Documentation          | SHOULD be enabled |
+   | Pedantic               | SHOULD be enabled |
+   | Nursery (experimental) | MAY be enabled    |
 
 4. Lint rule exceptions **MUST** be documented with justification.
 
@@ -216,12 +215,12 @@ This document uses RFC 2119 terminology:
 
 1. Projects **MUST** maintain the following test categories:
 
-   | Category | Location | Purpose |
-   |----------|----------|---------|
-   | Unit tests | Alongside source code | Test individual functions/methods |
-   | Integration tests | Dedicated test directory | Test component interactions |
-   | Documentation tests | Within doc comments | Verify examples work |
-   | End-to-end tests | Dedicated e2e directory | Test full system behavior |
+   | Category            | Location                 | Purpose                           |
+   | ------------------- | ------------------------ | --------------------------------- |
+   | Unit tests          | Alongside source code    | Test individual functions/methods |
+   | Integration tests   | Dedicated test directory | Test component interactions       |
+   | Documentation tests | Within doc comments      | Verify examples work              |
+   | End-to-end tests    | Dedicated e2e directory  | Test full system behavior         |
 
 2. Test files **MUST** be clearly identifiable by naming convention.
 
@@ -278,16 +277,16 @@ This document uses RFC 2119 terminology:
 
 2. CI pipelines **MUST** include the following jobs in order:
 
-   | Job | Purpose | Required |
-   |-----|---------|----------|
-   | Format check | Verify code formatting | MUST |
-   | Lint | Static analysis with errors | MUST |
-   | Test | Run all tests | MUST |
-   | Documentation | Verify docs build | MUST |
-   | Security audit | Check for vulnerabilities | MUST |
-   | MSV check | Verify minimum version support | MUST |
-   | Coverage | Measure test coverage | SHOULD |
-   | Benchmarks | Performance regression check | SHOULD |
+   | Job            | Purpose                        | Required |
+   | -------------- | ------------------------------ | -------- |
+   | Format check   | Verify code formatting         | MUST     |
+   | Lint           | Static analysis with errors    | MUST     |
+   | Test           | Run all tests                  | MUST     |
+   | Documentation  | Verify docs build              | MUST     |
+   | Security audit | Check for vulnerabilities      | MUST     |
+   | MSV check      | Verify minimum version support | MUST     |
+   | Coverage       | Measure test coverage          | SHOULD   |
+   | Benchmarks     | Performance regression check   | SHOULD   |
 
 3. All CI jobs **MUST** pass before a PR can be merged.
 
@@ -335,13 +334,13 @@ This document uses RFC 2119 terminology:
 
 2. The following checks **MUST** be performed:
 
-   | Check | Purpose |
-   |-------|---------|
-   | License compliance | Verify all dependencies use allowed licenses |
+   | Check               | Purpose                                       |
+   | ------------------- | --------------------------------------------- |
+   | License compliance  | Verify all dependencies use allowed licenses  |
    | Source verification | Ensure dependencies come from trusted sources |
-   | Advisory database | Check against known vulnerability databases |
-   | Package bans | Block known problematic packages |
-   | Duplicate detection | Identify multiple versions of same package |
+   | Advisory database   | Check against known vulnerability databases   |
+   | Package bans        | Block known problematic packages              |
+   | Duplicate detection | Identify multiple versions of same package    |
 
 3. Allowed licenses **MUST** be explicitly defined.
 
@@ -389,21 +388,21 @@ This document uses RFC 2119 terminology:
 
 1. Projects **MUST** maintain the following documentation:
 
-   | Document | Purpose |
-   |----------|---------|
-   | README.md | Project overview, quick start, installation |
-   | CONTRIBUTING.md | Contributor guidelines, setup instructions |
-   | CHANGELOG.md | Version history and change documentation |
-   | LICENSE | Software license terms |
-   | SECURITY.md | Security policy and vulnerability reporting |
+   | Document        | Purpose                                     |
+   | --------------- | ------------------------------------------- |
+   | README.md       | Project overview, quick start, installation |
+   | CONTRIBUTING.md | Contributor guidelines, setup instructions  |
+   | CHANGELOG.md    | Version history and change documentation    |
+   | LICENSE         | Software license terms                      |
+   | SECURITY.md     | Security policy and vulnerability reporting |
 
 2. Projects **SHOULD** also maintain:
 
-   | Document | Purpose |
-   |----------|---------|
-   | CODE_OF_CONDUCT.md | Community standards |
-   | Architecture documentation | System design and decisions |
-   | API documentation | Generated from code comments |
+   | Document                   | Purpose                      |
+   | -------------------------- | ---------------------------- |
+   | CODE_OF_CONDUCT.md         | Community standards          |
+   | Architecture documentation | System design and decisions  |
+   | API documentation          | Generated from code comments |
 
 ### 7.2 README Requirements
 
@@ -469,13 +468,13 @@ This document uses RFC 2119 terminology:
 
 3. Each ADR **MUST** include:
 
-   | Section | Content |
-   |---------|---------|
-   | Title | Descriptive title with ADR number |
-   | Status | Proposed, Accepted, Deprecated, Superseded |
-   | Context | Background and problem statement |
-   | Decision | The chosen approach |
-   | Consequences | Positive and negative outcomes |
+   | Section      | Content                                    |
+   | ------------ | ------------------------------------------ |
+   | Title        | Descriptive title with ADR number          |
+   | Status       | Proposed, Accepted, Deprecated, Superseded |
+   | Context      | Background and problem statement           |
+   | Decision     | The chosen approach                        |
+   | Consequences | Positive and negative outcomes             |
 
 4. ADRs **SHOULD** also include:
    - Decision drivers (weighted criteria)
@@ -538,18 +537,18 @@ This document uses RFC 2119 terminology:
 
 2. Allowed commit types:
 
-   | Type | Purpose |
-   |------|---------|
-   | `feat` | New feature |
-   | `fix` | Bug fix |
-   | `docs` | Documentation changes |
-   | `style` | Formatting, no code change |
-   | `refactor` | Code restructuring |
-   | `perf` | Performance improvement |
-   | `test` | Test additions/changes |
-   | `chore` | Maintenance tasks |
-   | `ci` | CI configuration changes |
-   | `build` | Build system changes |
+   | Type       | Purpose                    |
+   | ---------- | -------------------------- |
+   | `feat`     | New feature                |
+   | `fix`      | Bug fix                    |
+   | `docs`     | Documentation changes      |
+   | `style`    | Formatting, no code change |
+   | `refactor` | Code restructuring         |
+   | `perf`     | Performance improvement    |
+   | `test`     | Test additions/changes     |
+   | `chore`    | Maintenance tasks          |
+   | `ci`       | CI configuration changes   |
+   | `build`    | Build system changes       |
 
 3. Commit messages **MUST**:
    - Use imperative mood ("Add feature" not "Added feature")
@@ -581,10 +580,10 @@ This document uses RFC 2119 terminology:
 
 1. Projects **MUST** provide structured issue templates for:
 
-   | Template | Purpose |
-   |----------|---------|
-   | Bug Report | Report defects and unexpected behavior |
-   | Feature Request | Propose new functionality |
+   | Template        | Purpose                                |
+   | --------------- | -------------------------------------- |
+   | Bug Report      | Report defects and unexpected behavior |
+   | Feature Request | Propose new functionality              |
 
 2. Bug report templates **MUST** require:
    - Bug description
@@ -607,13 +606,13 @@ This document uses RFC 2119 terminology:
 
 1. PR templates **MUST** include checklists for:
 
-   | Category | Items |
-   |----------|-------|
-   | Code Quality | Formatting, linting, no unsafe patterns |
-   | Testing | Tests added, tests pass, doc tests |
-   | Documentation | Docs updated, doc comments, changelog |
-   | Supply Chain | Security audit passed, dependencies justified |
-   | Commit Hygiene | Conventional commits, rebased |
+   | Category       | Items                                         |
+   | -------------- | --------------------------------------------- |
+   | Code Quality   | Formatting, linting, no unsafe patterns       |
+   | Testing        | Tests added, tests pass, doc tests            |
+   | Documentation  | Docs updated, doc comments, changelog         |
+   | Supply Chain   | Security audit passed, dependencies justified |
+   | Commit Hygiene | Conventional commits, rebased                 |
 
 2. PR templates **SHOULD** include sections for:
    - API changes (before/after)
@@ -632,11 +631,11 @@ This document uses RFC 2119 terminology:
    MAJOR.MINOR.PATCH
    ```
 
-   | Component | Increment When |
-   |-----------|----------------|
-   | MAJOR | Breaking API changes |
-   | MINOR | New backward-compatible features |
-   | PATCH | Backward-compatible bug fixes |
+   | Component | Increment When                   |
+   | --------- | -------------------------------- |
+   | MAJOR     | Breaking API changes             |
+   | MINOR     | New backward-compatible features |
+   | PATCH     | Backward-compatible bug fixes    |
 
 2. Pre-release versions **MUST** use suffixes: `-alpha.N`, `-beta.N`, `-rc.N`.
 
@@ -663,12 +662,12 @@ This document uses RFC 2119 terminology:
 
 1. Projects **SHOULD** support multiple distribution channels:
 
-   | Channel | Use Case |
-   |---------|----------|
-   | Package registry | Language ecosystem users |
-   | Homebrew/apt/etc. | System package managers |
-   | Container images | Containerized deployments |
-   | Direct download | Manual installation |
+   | Channel           | Use Case                  |
+   | ----------------- | ------------------------- |
+   | Package registry  | Language ecosystem users  |
+   | Homebrew/apt/etc. | System package managers   |
+   | Container images  | Containerized deployments |
+   | Direct download   | Manual installation       |
 
 2. Each distribution artifact **MUST** include checksum verification.
 
@@ -714,13 +713,13 @@ This document uses RFC 2119 terminology:
 
 3. Example performance target categories:
 
-   | Category | Example Metric |
-   |----------|----------------|
-   | Latency | Operation completes in < X ms |
-   | Throughput | Handle > X operations/second |
-   | Resource usage | Memory < X MB, CPU < X% |
-   | Startup time | Cold start < X ms |
-   | Binary size | Artifact < X MB |
+   | Category       | Example Metric                |
+   | -------------- | ----------------------------- |
+   | Latency        | Operation completes in < X ms |
+   | Throughput     | Handle > X operations/second  |
+   | Resource usage | Memory < X MB, CPU < X%       |
+   | Startup time   | Cold start < X ms             |
+   | Binary size    | Artifact < X MB               |
 
 ### 13.2 Performance Benchmarks
 
@@ -837,22 +836,22 @@ This document uses RFC 2119 terminology:
 
 1. Projects **MUST** configure the following in `.github/`:
 
-   | File | Purpose |
-   |------|---------|
-   | `workflows/ci.yml` | Continuous integration pipeline |
-   | `workflows/release.yml` | Automated releases |
-   | `workflows/security.yml` | Security scanning |
-   | `PULL_REQUEST_TEMPLATE.md` | PR template |
-   | `ISSUE_TEMPLATE/` | Issue templates |
-   | `dependabot.yml` | Dependency updates |
+   | File                       | Purpose                         |
+   | -------------------------- | ------------------------------- |
+   | `workflows/ci.yml`         | Continuous integration pipeline |
+   | `workflows/release.yml`    | Automated releases              |
+   | `workflows/security.yml`   | Security scanning               |
+   | `PULL_REQUEST_TEMPLATE.md` | PR template                     |
+   | `ISSUE_TEMPLATE/`          | Issue templates                 |
+   | `dependabot.yml`           | Dependency updates              |
 
 2. Projects **SHOULD** also configure:
 
-   | File | Purpose |
-   |------|---------|
-   | `CODEOWNERS` | Automatic review assignment |
-   | `FUNDING.yml` | Sponsorship links |
-   | `SECURITY.md` | Security policy |
+   | File                      | Purpose                      |
+   | ------------------------- | ---------------------------- |
+   | `CODEOWNERS`              | Automatic review assignment  |
+   | `FUNDING.yml`             | Sponsorship links            |
+   | `SECURITY.md`             | Security policy              |
    | `copilot-instructions.md` | GitHub Copilot configuration |
 
 ### 16.2 Branch Protection
@@ -873,6 +872,7 @@ This document uses RFC 2119 terminology:
 Use this checklist when setting up a new project:
 
 ### Repository Setup
+
 - [ ] Initialize git repository
 - [ ] Create `.gitignore` appropriate to technology
 - [ ] Set up branch protection rules
@@ -880,6 +880,7 @@ Use this checklist when setting up a new project:
 - [ ] Add CODEOWNERS file
 
 ### Documentation
+
 - [ ] Create README.md with required sections
 - [ ] Create CONTRIBUTING.md
 - [ ] Create CHANGELOG.md
@@ -889,6 +890,7 @@ Use this checklist when setting up a new project:
 - [ ] Initialize ADR directory with template
 
 ### Build System
+
 - [ ] Create build configuration (Makefile, etc.)
 - [ ] Define all required targets (ci, build, test, lint, format, etc.)
 - [ ] Configure build profiles (dev, release)
@@ -897,12 +899,14 @@ Use this checklist when setting up a new project:
 - [ ] Add `make help` target
 
 ### Code Quality
+
 - [ ] Configure formatter with config file
 - [ ] Configure linter with strict rules
 - [ ] Define error handling patterns
 - [ ] Document code style requirements
 
 ### CI/CD
+
 - [ ] Create CI workflow with all required jobs
 - [ ] Configure caching
 - [ ] Set up multi-platform testing
@@ -911,24 +915,28 @@ Use this checklist when setting up a new project:
 - [ ] Create release workflow
 
 ### Security
+
 - [ ] Set up dependency vulnerability scanning
 - [ ] Configure supply chain security (license, advisories)
 - [ ] Define allowed licenses
 - [ ] Create security audit schedule
 
 ### Issue/PR Management
+
 - [ ] Create bug report template
 - [ ] Create feature request template
 - [ ] Create PR template with checklists
 - [ ] Configure labels
 
 ### Release
+
 - [ ] Define versioning strategy
 - [ ] Create release workflow
 - [ ] Configure distribution channels
 - [ ] Set up changelog automation
 
 ### AI Tool Configuration
+
 - [ ] Create AI instruction files (CLAUDE.md, copilot-instructions.md)
 - [ ] Document version discovery requirements
 - [ ] Configure code generation standards
@@ -937,17 +945,17 @@ Use this checklist when setting up a new project:
 
 ## Appendix B: Compliance Matrix
 
-| Requirement Area | Critical | High | Medium | Low |
-|------------------|----------|------|--------|-----|
-| Build System | ci target, locked deps, MSV | All standard targets | Install, doc, bench | Help target |
-| Code Quality | Format, lint, no panics | Documentation, pedantic lints | Unsafe restrictions | Style lints |
-| Testing | Tests pass, deterministic | Coverage tracking (80%+) | Performance tests | E2E tests |
-| CI/CD | All jobs pass, pinned actions | Multi-platform | Coverage upload | Benchmark tracking |
-| Security | Vuln scanning, supply chain | CodeQL/Semgrep | Scheduled scans | Secret scanning |
-| Documentation | README, CONTRIBUTING, CHANGELOG | ADRs, SECURITY.md | Architecture docs | API docs |
-| Version Control | Protected branches, conventional commits | PR templates | Issue templates | CODEOWNERS |
-| Release | SemVer, automated releases | Multi-channel distribution | SBOM | Homebrew formula |
-| AI Configuration | Version discovery online | Project-specific config | No AI attribution | Tool configs |
+| Requirement Area | Critical                                 | High                          | Medium              | Low                |
+| ---------------- | ---------------------------------------- | ----------------------------- | ------------------- | ------------------ |
+| Build System     | ci target, locked deps, MSV              | All standard targets          | Install, doc, bench | Help target        |
+| Code Quality     | Format, lint, no panics                  | Documentation, pedantic lints | Unsafe restrictions | Style lints        |
+| Testing          | Tests pass, deterministic                | Coverage tracking (80%+)      | Performance tests   | E2E tests          |
+| CI/CD            | All jobs pass, pinned actions            | Multi-platform                | Coverage upload     | Benchmark tracking |
+| Security         | Vuln scanning, supply chain              | CodeQL/Semgrep                | Scheduled scans     | Secret scanning    |
+| Documentation    | README, CONTRIBUTING, CHANGELOG          | ADRs, SECURITY.md             | Architecture docs   | API docs           |
+| Version Control  | Protected branches, conventional commits | PR templates                  | Issue templates     | CODEOWNERS         |
+| Release          | SemVer, automated releases               | Multi-channel distribution    | SBOM                | Homebrew formula   |
+| AI Configuration | Version discovery online                 | Project-specific config       | No AI attribution   | Tool configs       |
 
 ---
 
@@ -965,6 +973,6 @@ The standards in this document are derived from production-grade projects. When 
 
 ---
 
-*This document establishes baseline requirements. Projects may exceed these standards but must not fall below them without documented justification and approval.*
+_This document establishes baseline requirements. Projects may exceed these standards but must not fall below them without documented justification and approval._
 
-*When using this document as AI assistant instructions, the AI MUST verify all version information from online sources and MUST NOT rely on training data for technical specifications.*
+_When using this document as AI assistant instructions, the AI MUST verify all version information from online sources and MUST NOT rely on training data for technical specifications._

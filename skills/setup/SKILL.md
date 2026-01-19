@@ -18,15 +18,15 @@ Guidance for initializing new projects that comply with all SDLC requirements fr
 
 New projects MUST complete these setup steps:
 
-| Order | Step | Purpose |
-|-------|------|---------|
-| 1 | Create repository | Initialize Git with main branch |
-| 2 | Add standard files | LICENSE, README, etc. |
-| 3 | Configure build system | Makefile with standard targets |
-| 4 | Set up CI pipeline | GitHub Actions workflow |
-| 5 | Configure quality tools | Formatter, linter, etc. |
-| 6 | Add security scanning | Dependency audit, secrets scan |
-| 7 | Create documentation | README, CONTRIBUTING, etc. |
+| Order | Step                    | Purpose                         |
+| ----- | ----------------------- | ------------------------------- |
+| 1     | Create repository       | Initialize Git with main branch |
+| 2     | Add standard files      | LICENSE, README, etc.           |
+| 3     | Configure build system  | Makefile with standard targets  |
+| 4     | Set up CI pipeline      | GitHub Actions workflow         |
+| 5     | Configure quality tools | Formatter, linter, etc.         |
+| 6     | Add security scanning   | Dependency audit, secrets scan  |
+| 7     | Create documentation    | README, CONTRIBUTING, etc.      |
 
 ### Repository Initialization
 
@@ -48,28 +48,28 @@ git commit --allow-empty -m "chore: initialize repository"
 
 Every project MUST include:
 
-| File | Purpose | Template |
-|------|---------|----------|
-| `README.md` | Project overview | See docs skill |
-| `LICENSE` | License terms | MIT, Apache-2.0, etc. |
-| `CONTRIBUTING.md` | Contributor guide | See docs skill |
-| `CHANGELOG.md` | Version history | Keep a Changelog |
-| `SECURITY.md` | Security policy | See security skill |
-| `.gitignore` | Git exclusions | Language-specific |
-| `.gitattributes` | Git attributes | See vcs skill |
-| `Makefile` | Build commands | See build skill |
+| File              | Purpose           | Template              |
+| ----------------- | ----------------- | --------------------- |
+| `README.md`       | Project overview  | See docs skill        |
+| `LICENSE`         | License terms     | MIT, Apache-2.0, etc. |
+| `CONTRIBUTING.md` | Contributor guide | See docs skill        |
+| `CHANGELOG.md`    | Version history   | Keep a Changelog      |
+| `SECURITY.md`     | Security policy   | See security skill    |
+| `.gitignore`      | Git exclusions    | Language-specific     |
+| `.gitattributes`  | Git attributes    | See vcs skill         |
+| `Makefile`        | Build commands    | See build skill       |
 
 ### Configuration Files (MUST)
 
 Projects MUST include appropriate configuration:
 
-| Category | Files |
-|----------|-------|
-| Build | `Makefile`, `Cargo.toml`/`package.json`/etc. |
-| Formatting | `rustfmt.toml`/`.prettierrc`/etc. |
-| Linting | `clippy.toml`/`eslint.config.js`/etc. |
-| CI | `.github/workflows/ci.yml` |
-| Editor | `.editorconfig` |
+| Category   | Files                                        |
+| ---------- | -------------------------------------------- |
+| Build      | `Makefile`, `Cargo.toml`/`package.json`/etc. |
+| Formatting | `rustfmt.toml`/`.prettierrc`/etc.            |
+| Linting    | `clippy.toml`/`eslint.config.js`/etc.        |
+| CI         | `.github/workflows/ci.yml`                   |
+| Editor     | `.editorconfig`                              |
 
 ### EditorConfig (MUST)
 
@@ -200,6 +200,7 @@ jobs:
 ### Branch Protection (MUST)
 
 Configure branch protection for `main`:
+
 - Require pull request reviews
 - Require status checks to pass
 - Require linear history (recommended)
@@ -249,6 +250,7 @@ Configure automated dependency scanning based on language.
 ### README Template
 
 Create README.md with required sections:
+
 - Project name and description
 - Badges (CI, version, license)
 - Installation instructions
@@ -268,6 +270,7 @@ touch docs/adrs/README.md
 ## Implementation Checklist
 
 ### Repository Setup
+
 - [ ] Initialize Git repository
 - [ ] Create main branch
 - [ ] Add `.gitignore`
@@ -275,6 +278,7 @@ touch docs/adrs/README.md
 - [ ] Configure branch protection
 
 ### Required Files
+
 - [ ] Create `README.md`
 - [ ] Add `LICENSE`
 - [ ] Create `CONTRIBUTING.md`
@@ -283,22 +287,26 @@ touch docs/adrs/README.md
 - [ ] Create `.editorconfig`
 
 ### Build System
+
 - [ ] Create `Makefile` with standard targets
 - [ ] Add language-specific build config
 - [ ] Verify `make all` works
 
 ### Quality Tools
+
 - [ ] Configure formatter
 - [ ] Configure linter
 - [ ] Set up pre-commit hooks
 - [ ] Verify `make lint` and `make format` work
 
 ### CI/CD
+
 - [ ] Create GitHub Actions workflow
 - [ ] Configure required status checks
 - [ ] Add security scanning job
 
 ### Documentation
+
 - [ ] Populate README with content
 - [ ] Set up ADR directory
 - [ ] Create initial ADRs if applicable

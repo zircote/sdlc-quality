@@ -119,24 +119,26 @@ sdlc-quality/
 
 All standards content MUST use RFC 2119 terminology:
 
-| Term | Meaning | Example |
-|------|---------|---------|
-| **MUST** | Absolute requirement | "Projects MUST have a Makefile" |
-| **MUST NOT** | Absolute prohibition | "Wildcards MUST NOT be used" |
-| **SHOULD** | Strong recommendation | "Projects SHOULD have 80% coverage" |
+| Term           | Meaning               | Example                                   |
+| -------------- | --------------------- | ----------------------------------------- |
+| **MUST**       | Absolute requirement  | "Projects MUST have a Makefile"           |
+| **MUST NOT**   | Absolute prohibition  | "Wildcards MUST NOT be used"              |
+| **SHOULD**     | Strong recommendation | "Projects SHOULD have 80% coverage"       |
 | **SHOULD NOT** | Strong discouragement | "Panics SHOULD NOT occur in library code" |
-| **MAY** | Optional | "Projects MAY include benchmarks" |
+| **MAY**        | Optional              | "Projects MAY include benchmarks"         |
 
 ### Technology Agnosticism
 
 Core content must be technology-agnostic:
 
 **Good:**
+
 ```markdown
 Projects MUST use a unified build system entry point.
 ```
 
 **Bad:**
+
 ```markdown
 Projects MUST use a Makefile.
 ```
@@ -212,11 +214,13 @@ When changing PROJECT_REQUIREMENTS.md:
 ### Before Submitting
 
 1. Run all checks locally:
+
    ```bash
    make ci
    ```
 
 2. Verify plugin works:
+
    ```bash
    claude plugins add .
    /sdlc:check  # In a test project
@@ -260,24 +264,26 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 **Types:**
 
-| Type | Purpose |
-|------|---------|
-| `feat` | New feature (skill, agent, command) |
-| `fix` | Bug fix |
-| `docs` | Documentation changes |
-| `style` | Formatting (no content change) |
-| `refactor` | Restructuring (no behavior change) |
-| `test` | Test changes |
-| `chore` | Maintenance tasks |
-| `ci` | CI/CD changes |
+| Type       | Purpose                             |
+| ---------- | ----------------------------------- |
+| `feat`     | New feature (skill, agent, command) |
+| `fix`      | Bug fix                             |
+| `docs`     | Documentation changes               |
+| `style`    | Formatting (no content change)      |
+| `refactor` | Restructuring (no behavior change)  |
+| `test`     | Test changes                        |
+| `chore`    | Maintenance tasks                   |
+| `ci`       | CI/CD changes                       |
 
 **Scopes:**
+
 - `skills`, `skills/build`, `skills/ci`, etc.
 - `agents`, `agents/compliance-auditor`, etc.
 - `commands`, `commands/check`, etc.
 - `docs`, `ci`, `deps`
 
 **Examples:**
+
 ```bash
 feat(skills): add kubernetes deployment skill
 fix(agents/compliance-auditor): correct scoring calculation
@@ -309,6 +315,7 @@ make ci
 ### Manual Testing
 
 1. **Install plugin locally:**
+
    ```bash
    claude plugins add .
    ```
@@ -318,6 +325,7 @@ make ci
    - Verify correct content is surfaced
 
 3. **Test commands:**
+
    ```bash
    /sdlc:check    # Should produce compliance report
    /sdlc:init     # Should create structure (in test dir)
@@ -331,6 +339,7 @@ make ci
 ### Test Projects
 
 Keep sample projects for testing:
+
 - One with full SDLC compliance (should pass)
 - One with missing elements (should identify issues)
 - One empty (for testing /sdlc:init)
@@ -379,7 +388,7 @@ Use proper alignment:
 
 ```markdown
 | Column 1 | Column 2 | Column 3 |
-|----------|----------|----------|
+| -------- | -------- | -------- |
 | Value 1  | Value 2  | Value 3  |
 ```
 

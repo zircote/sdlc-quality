@@ -18,17 +18,18 @@ Guidance for implementing security requirements including dependency scanning, s
 
 Projects MUST use automated dependency vulnerability scanning.
 
-| Language | Tool | Command |
-|----------|------|---------|
-| Rust | cargo-audit | `cargo audit` |
-| Node.js | npm audit | `npm audit` |
-| Python | pip-audit, safety | `pip-audit` |
-| Java | OWASP Dependency-Check | `dependency-check` |
-| Go | govulncheck | `govulncheck ./...` |
+| Language | Tool                   | Command             |
+| -------- | ---------------------- | ------------------- |
+| Rust     | cargo-audit            | `cargo audit`       |
+| Node.js  | npm audit              | `npm audit`         |
+| Python   | pip-audit, safety      | `pip-audit`         |
+| Java     | OWASP Dependency-Check | `dependency-check`  |
+| Go       | govulncheck            | `govulncheck ./...` |
 
 ### Scanning Schedule (MUST)
 
 Scanning MUST occur:
+
 - On every pull request
 - On every push to protected branches
 - On a scheduled basis (daily minimum)
@@ -40,6 +41,7 @@ Critical and high severity vulnerabilities MUST block PR merges.
 ### Vulnerability Exceptions
 
 Known vulnerabilities that cannot be fixed MUST be:
+
 1. Documented with justification
 2. Listed in an ignore/allowlist with expiration dates
 3. Reviewed quarterly
@@ -58,29 +60,29 @@ ignore = [
 
 ### Required Checks (MUST)
 
-| Check | Purpose |
-|-------|---------|
-| License compliance | Verify all dependencies use allowed licenses |
-| Source verification | Ensure dependencies from trusted sources |
-| Advisory database | Check against known vulnerability databases |
-| Package bans | Block known problematic packages |
-| Duplicate detection | Identify multiple versions of same package |
+| Check               | Purpose                                      |
+| ------------------- | -------------------------------------------- |
+| License compliance  | Verify all dependencies use allowed licenses |
+| Source verification | Ensure dependencies from trusted sources     |
+| Advisory database   | Check against known vulnerability databases  |
+| Package bans        | Block known problematic packages             |
+| Duplicate detection | Identify multiple versions of same package   |
 
 ### Allowed Licenses (MUST)
 
 Allowed licenses MUST be explicitly defined. Recommended allowed licenses:
 
-| License | Status |
-|---------|--------|
-| MIT | SHOULD allow |
-| Apache-2.0 | SHOULD allow |
+| License      | Status       |
+| ------------ | ------------ |
+| MIT          | SHOULD allow |
+| Apache-2.0   | SHOULD allow |
 | BSD-2-Clause | SHOULD allow |
 | BSD-3-Clause | SHOULD allow |
-| ISC | SHOULD allow |
-| MPL-2.0 | SHOULD allow |
-| CC0-1.0 | SHOULD allow |
-| Unlicense | SHOULD allow |
-| Zlib | SHOULD allow |
+| ISC          | SHOULD allow |
+| MPL-2.0      | SHOULD allow |
+| CC0-1.0      | SHOULD allow |
+| Unlicense    | SHOULD allow |
+| Zlib         | SHOULD allow |
 
 ### Copyleft Licenses (MUST)
 
@@ -119,6 +121,7 @@ unknown-git = "deny"
 ### Security Scanning (MUST)
 
 All code MUST be scanned for:
+
 - Hardcoded secrets
 - Security misconfigurations
 - Common vulnerability patterns (OWASP Top 10)
@@ -127,11 +130,11 @@ All code MUST be scanned for:
 
 Use secret scanning tools:
 
-| Tool | Usage |
-|------|-------|
-| gitleaks | `gitleaks detect` |
-| truffleHog | `trufflehog git file://./` |
-| GitHub Secret Scanning | Enabled in repo settings |
+| Tool                   | Usage                      |
+| ---------------------- | -------------------------- |
+| gitleaks               | `gitleaks detect`          |
+| truffleHog             | `trufflehog git file://./` |
+| GitHub Secret Scanning | Enabled in repo settings   |
 
 ### Security Dashboard (MUST)
 
@@ -140,6 +143,7 @@ Security scan results MUST be uploaded to a centralized security dashboard (e.g.
 ### Semantic Code Analysis (SHOULD)
 
 Projects SHOULD implement semantic code analysis:
+
 - CodeQL (GitHub)
 - Semgrep
 - SonarQube
@@ -159,11 +163,11 @@ Pre-release dependencies MUST be monitored and documented.
 Audit findings MUST be tracked and remediated within defined SLAs:
 
 | Severity | Remediation Window |
-|----------|-------------------|
-| Critical | 7 days |
-| High | 30 days |
-| Medium | 90 days |
-| Low | Next major release |
+| -------- | ------------------ |
+| Critical | 7 days             |
+| High     | 30 days            |
+| Medium   | 90 days            |
+| Low      | Next major release |
 
 ## Implementation Checklist
 

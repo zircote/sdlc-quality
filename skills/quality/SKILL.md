@@ -22,23 +22,23 @@ Guidance for implementing code quality requirements including formatting, lintin
 
 ### Formatting Standards (MUST)
 
-| Standard | Requirement |
-|----------|-------------|
-| Line length | MUST be 100 characters maximum |
-| Indentation | MUST be consistent (spaces or tabs, not mixed) |
-| Line endings | MUST be Unix-style (LF) |
-| Trailing whitespace | MUST be removed |
-| Final newline | MUST be present |
+| Standard            | Requirement                                    |
+| ------------------- | ---------------------------------------------- |
+| Line length         | MUST be 100 characters maximum                 |
+| Indentation         | MUST be consistent (spaces or tabs, not mixed) |
+| Line endings        | MUST be Unix-style (LF)                        |
+| Trailing whitespace | MUST be removed                                |
+| Final newline       | MUST be present                                |
 
 ### Formatter Configuration by Language
 
-| Language | Tool | Config File |
-|----------|------|-------------|
-| Rust | rustfmt | `rustfmt.toml` |
-| TypeScript/JS | Prettier | `.prettierrc` |
-| Python | Black/Ruff | `pyproject.toml` |
-| Java | google-java-format | `.editorconfig` |
-| Go | gofmt | (built-in) |
+| Language      | Tool               | Config File      |
+| ------------- | ------------------ | ---------------- |
+| Rust          | rustfmt            | `rustfmt.toml`   |
+| TypeScript/JS | Prettier           | `.prettierrc`    |
+| Python        | Black/Ruff         | `pyproject.toml` |
+| Java          | google-java-format | `.editorconfig`  |
+| Go            | gofmt              | (built-in)       |
 
 ## Linting Requirements
 
@@ -50,25 +50,25 @@ Guidance for implementing code quality requirements including formatting, lintin
 
 ### Lint Categories
 
-| Category | Enforcement |
-|----------|-------------|
-| Correctness | MUST be enabled |
-| Performance | MUST be enabled |
-| Style | SHOULD be enabled |
-| Complexity | SHOULD be enabled |
-| Documentation | SHOULD be enabled |
-| Pedantic | SHOULD be enabled |
-| Nursery/Experimental | MAY be enabled |
+| Category             | Enforcement       |
+| -------------------- | ----------------- |
+| Correctness          | MUST be enabled   |
+| Performance          | MUST be enabled   |
+| Style                | SHOULD be enabled |
+| Complexity           | SHOULD be enabled |
+| Documentation        | SHOULD be enabled |
+| Pedantic             | SHOULD be enabled |
+| Nursery/Experimental | MAY be enabled    |
 
 ### Linter Configuration by Language
 
-| Language | Tool | Config File |
-|----------|------|-------------|
-| Rust | Clippy | `clippy.toml`, `Cargo.toml` |
-| TypeScript | ESLint | `eslint.config.js` |
-| Python | Ruff | `pyproject.toml` |
-| Java | SpotBugs, PMD | `spotbugs.xml`, `pmd.xml` |
-| Go | golangci-lint | `.golangci.yml` |
+| Language   | Tool          | Config File                 |
+| ---------- | ------------- | --------------------------- |
+| Rust       | Clippy        | `clippy.toml`, `Cargo.toml` |
+| TypeScript | ESLint        | `eslint.config.js`          |
+| Python     | Ruff          | `pyproject.toml`            |
+| Java       | SpotBugs, PMD | `spotbugs.xml`, `pmd.xml`   |
+| Go         | golangci-lint | `.golangci.yml`             |
 
 ### Documenting Lint Exceptions
 
@@ -93,6 +93,7 @@ const data: any = externalLib.getData();
 ### Library Code (MUST NOT)
 
 Library code MUST NOT:
+
 - Panic, abort, or terminate the process unexpectedly
 - Use unchecked unwrapping of optional/nullable values
 - Use unchecked type assertions/casts
@@ -103,13 +104,13 @@ Library code MUST NOT:
 
 All error conditions MUST be handled via structured error types or result types:
 
-| Language | Pattern |
-|----------|---------|
-| Rust | `Result<T, E>`, `Option<T>` |
+| Language   | Pattern                               |
+| ---------- | ------------------------------------- |
+| Rust       | `Result<T, E>`, `Option<T>`           |
 | TypeScript | `Result` type, explicit error returns |
-| Python | Custom exceptions, explicit raises |
-| Java | Checked exceptions, `Optional<T>` |
-| Go | Multiple return values `(T, error)` |
+| Python     | Custom exceptions, explicit raises    |
+| Java       | Checked exceptions, `Optional<T>`     |
+| Go         | Multiple return values `(T, error)`   |
 
 ### Exceptions for Test/CLI Code
 
@@ -124,6 +125,7 @@ Unsafe code blocks MUST be minimized.
 ### Documentation (MUST)
 
 All unsafe code MUST be:
+
 1. Documented with safety invariants
 2. Encapsulated in safe abstractions
 3. Reviewed by at least one additional maintainer
@@ -142,6 +144,7 @@ Projects MUST enable compiler/linter warnings for unsafe code usage:
 ### Public API Documentation (MUST)
 
 All public APIs MUST have documentation comments including:
+
 - Brief description of purpose
 - Parameter descriptions
 - Return value descriptions
@@ -150,6 +153,7 @@ All public APIs MUST have documentation comments including:
 ### Recommended Documentation
 
 Documentation SHOULD include:
+
 - Usage examples (preferably as tested code)
 - References to related APIs
 - Notes on thread safety or concurrency
@@ -157,6 +161,7 @@ Documentation SHOULD include:
 ### Documentation Validation (MUST)
 
 Documentation MUST be validated as part of CI:
+
 - No broken links
 - Valid examples (doc tests where supported)
 

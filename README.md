@@ -55,6 +55,7 @@ claude plugins list
 ```
 
 **Output:**
+
 ```
 SDLC Compliance Report
 
@@ -80,6 +81,7 @@ Important: SECURITY.md needs update
 ```
 
 **Creates:**
+
 - `Makefile` with standard targets
 - `README.md`, `CONTRIBUTING.md`, `CHANGELOG.md`
 - `LICENSE`, `SECURITY.md`
@@ -91,32 +93,33 @@ Important: SECURITY.md needs update
 
 Skills provide contextual guidance when you ask related questions.
 
-| Skill | Purpose | Triggers |
-|-------|---------|----------|
-| `sdlc:build` | Build system automation | "Makefile", "build targets", "dependencies" |
-| `sdlc:quality` | Code formatting, linting | "linter", "formatter", "code style" |
-| `sdlc:testing` | Test organization, coverage | "tests", "coverage", "TDD" |
-| `sdlc:ci` | CI/CD pipeline structure | "GitHub Actions", "CI pipeline", "workflow" |
-| `sdlc:security` | Dependency scanning | "vulnerabilities", "security audit", "supply chain" |
-| `sdlc:docs` | Documentation requirements | "README", "changelog", "ADR" |
-| `sdlc:vcs` | Version control practices | "git", "branching", "commits" |
-| `sdlc:release` | Semantic versioning | "release", "versioning", "publish" |
-| `sdlc:observability` | Logging, metrics | "logging", "metrics", "performance" |
-| `sdlc:ai` | AI context configuration | "CLAUDE.md", "copilot-instructions" |
-| `sdlc:setup` | Project initialization | "new project", "setup", "scaffold" |
+| Skill                | Purpose                     | Triggers                                            |
+| -------------------- | --------------------------- | --------------------------------------------------- |
+| `sdlc:build`         | Build system automation     | "Makefile", "build targets", "dependencies"         |
+| `sdlc:quality`       | Code formatting, linting    | "linter", "formatter", "code style"                 |
+| `sdlc:testing`       | Test organization, coverage | "tests", "coverage", "TDD"                          |
+| `sdlc:ci`            | CI/CD pipeline structure    | "GitHub Actions", "CI pipeline", "workflow"         |
+| `sdlc:security`      | Dependency scanning         | "vulnerabilities", "security audit", "supply chain" |
+| `sdlc:docs`          | Documentation requirements  | "README", "changelog", "ADR"                        |
+| `sdlc:vcs`           | Version control practices   | "git", "branching", "commits"                       |
+| `sdlc:release`       | Semantic versioning         | "release", "versioning", "publish"                  |
+| `sdlc:observability` | Logging, metrics            | "logging", "metrics", "performance"                 |
+| `sdlc:ai`            | AI context configuration    | "CLAUDE.md", "copilot-instructions"                 |
+| `sdlc:setup`         | Project initialization      | "new project", "setup", "scaffold"                  |
 
 ## Agents (Claude Code only)
 
 Specialized agents for autonomous, deep analysis:
 
-| Agent | Purpose | When to Use |
-|-------|---------|-------------|
-| `compliance-auditor` | Full SDLC audit | Pre-release, periodic reviews |
-| `security-reviewer` | Security analysis | Security assessments, supply chain audits |
-| `quality-enforcer` | Code quality checks | Pre-PR, quality gates |
-| `ci-architect` | CI/CD design | Pipeline setup, optimization |
+| Agent                | Purpose             | When to Use                               |
+| -------------------- | ------------------- | ----------------------------------------- |
+| `compliance-auditor` | Full SDLC audit     | Pre-release, periodic reviews             |
+| `security-reviewer`  | Security analysis   | Security assessments, supply chain audits |
+| `quality-enforcer`   | Code quality checks | Pre-PR, quality gates                     |
+| `ci-architect`       | CI/CD design        | Pipeline setup, optimization              |
 
 **Example:**
+
 ```
 User: Run a full compliance audit on this project
 Claude: [Launches compliance-auditor agent for autonomous analysis]
@@ -124,10 +127,10 @@ Claude: [Launches compliance-auditor agent for autonomous analysis]
 
 ## Commands (Claude Code only)
 
-| Command | Purpose |
-|---------|---------|
+| Command       | Purpose                                       |
+| ------------- | --------------------------------------------- |
 | `/sdlc:check` | Assess current project against SDLC standards |
-| `/sdlc:init` | Initialize a new SDLC-compliant project |
+| `/sdlc:init`  | Initialize a new SDLC-compliant project       |
 
 ## GitHub Actions Integration
 
@@ -151,12 +154,13 @@ jobs:
       - name: Run SDLC Check
         uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
         with:
-          domains: 'all'
-          fail-on-error: 'true'
-          create-pr-comment: 'true'
+          domains: "all"
+          fail-on-error: "true"
+          create-pr-comment: "true"
 ```
 
 **Features:**
+
 - Composite action for easy integration
 - Reusable workflow for full audit capabilities
 - Multiple trigger modes: PR, push, schedule, issue assignment
@@ -170,72 +174,80 @@ See [GitHub Actions Integration](docs/GITHUB_ACTIONS.md) for complete documentat
 
 This plugin is designed to work with multiple AI coding assistants:
 
-| Agent | Configuration |
-|-------|---------------|
-| Claude Code | `.claude-plugin/`, skills, agents, commands |
+| Agent          | Configuration                                                |
+| -------------- | ------------------------------------------------------------ |
+| Claude Code    | `.claude-plugin/`, skills, agents, commands                  |
 | GitHub Copilot | `.github/copilot-instructions.md`, `copilot-setup-steps.yml` |
-| OpenAI Codex | `AGENTS.md` |
+| OpenAI Codex   | `AGENTS.md`                                                  |
 
 All agents follow the same SDLC standards and can be used interchangeably.
 
 ## Documentation
 
-| Document | Purpose |
-|----------|---------|
+| Document                                             | Purpose                               |
+| ---------------------------------------------------- | ------------------------------------- |
 | [Project Requirements](docs/PROJECT_REQUIREMENTS.md) | Complete SDLC standards specification |
-| [GitHub Actions](docs/GITHUB_ACTIONS.md) | CI/CD integration guide |
-| [Architecture](docs/ARCHITECTURE.md) | Plugin design and structure |
-| [Usage Guide](docs/USAGE.md) | Detailed usage instructions |
-| [Contributing](CONTRIBUTING.md) | How to contribute |
-| [Changelog](CHANGELOG.md) | Version history |
+| [GitHub Actions](docs/GITHUB_ACTIONS.md)             | CI/CD integration guide               |
+| [Architecture](docs/ARCHITECTURE.md)                 | Plugin design and structure           |
+| [Usage Guide](docs/USAGE.md)                         | Detailed usage instructions           |
+| [Contributing](CONTRIBUTING.md)                      | How to contribute                     |
+| [Changelog](CHANGELOG.md)                            | Version history                       |
 
 ## Standards Covered
 
 The plugin enforces standards across these domains:
 
 ### Build System
+
 - Unified entry point (Makefile/Justfile)
 - Standard targets (build, test, lint, format, ci)
 - Locked dependencies
 - MSV (Minimum Supported Version)
 
 ### Code Quality
+
 - Automated formatting
 - Strict linting
 - Error handling patterns
 - Documentation comments
 
 ### Testing
+
 - Test organization
 - Coverage requirements (80% general, 95% critical)
 - Deterministic tests
 - AAA pattern
 
 ### CI/CD
+
 - Required jobs (format, lint, test, security)
 - Pinned action versions
 - Caching
 - Multi-platform
 
 ### Security
+
 - Vulnerability scanning
 - License compliance
 - Supply chain security
 - Secret scanning
 
 ### Documentation
+
 - README with required sections
 - CONTRIBUTING.md
 - CHANGELOG.md (Keep a Changelog)
 - ADRs
 
 ### Version Control
+
 - Branch protection
 - Conventional Commits
 - PR templates
 - Linear history
 
 ### Release
+
 - Semantic Versioning
 - Automated releases
 - Checksums
@@ -244,6 +256,7 @@ The plugin enforces standards across these domains:
 ## Technology Examples
 
 Each skill includes implementation examples for:
+
 - **Rust** (Cargo, clippy, rustfmt)
 - **TypeScript** (npm, ESLint, Prettier)
 - **Python** (pip, ruff, black)

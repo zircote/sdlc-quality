@@ -49,7 +49,7 @@ mkdir -p src tests docs docs/adrs .github/workflows
 
 #### README.md
 
-```markdown
+````markdown
 # Project Name
 
 [![CI](https://github.com/org/repo/actions/workflows/ci.yml/badge.svg)](...)
@@ -62,6 +62,7 @@ Brief project description.
 ```bash
 # Installation instructions
 ```
+````
 
 ## Quick Start
 
@@ -80,18 +81,21 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ## License
 
 [MIT](LICENSE)
+
 ```
 
 #### LICENSE (MIT default)
 
 ```
+
 MIT License
 
 Copyright (c) [year] [name]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 ...
-```
+
+````
 
 #### CONTRIBUTING.md
 
@@ -125,7 +129,7 @@ Follow Conventional Commits:
 - `docs:` Documentation
 - `test:` Tests
 - `refactor:` Code restructuring
-```
+````
 
 #### CHANGELOG.md
 
@@ -140,6 +144,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+
 - Initial project setup
 
 [Unreleased]: https://github.com/org/repo/compare/v0.1.0...HEAD
@@ -153,8 +158,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## Supported Versions
 
 | Version | Supported |
-|---------|-----------|
-| 0.x.x | ✅ |
+| ------- | --------- |
+| 0.x.x   | ✅        |
 
 ## Reporting a Vulnerability
 
@@ -312,23 +317,28 @@ jobs:
 Create language-specific configuration files:
 
 **Rust:**
+
 - `rustfmt.toml`
 - `clippy.toml`
 - `deny.toml`
 
 **TypeScript:**
+
 - `.prettierrc`
 - `eslint.config.js`
 - `tsconfig.json`
 
 **Python:**
+
 - `pyproject.toml` (with ruff config)
 
 **Java:**
+
 - `checkstyle.xml`
 - `spotbugs.xml`
 
 **Go:**
+
 - `.golangci.yml`
 
 ### 7. Initialize ADRs
@@ -346,8 +356,8 @@ This directory contains Architecture Decision Records (ADRs) for this project.
 
 ## Index
 
-| ADR | Title | Status |
-|-----|-------|--------|
+| ADR                                          | Title                | Status   |
+| -------------------------------------------- | -------------------- | -------- |
 | [ADR-0001](adr-0001-initial-architecture.md) | Initial Architecture | Accepted |
 ```
 
@@ -366,6 +376,7 @@ After initialization, run `/sdlc:check` to verify compliance.
 ## Customization
 
 The init command creates a standard structure. Customize as needed:
+
 - Adjust Makefile targets for your build system
 - Modify CI workflow for your needs
 - Add language-specific configuration
@@ -373,6 +384,7 @@ The init command creates a standard structure. Customize as needed:
 ## Language-Specific Templates
 
 For detailed language-specific setup, refer to the skill files:
+
 - `skills/build/SKILL.md` - Build system details
 - `skills/quality/SKILL.md` - Quality tool configuration
 - `skills/ci/SKILL.md` - CI workflow templates

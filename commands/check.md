@@ -23,6 +23,7 @@ ls Cargo.toml package.json pyproject.toml pom.xml build.gradle go.mod 2>/dev/nul
 Check each SDLC domain for compliance. Use the specialized agents if available, or perform checks directly.
 
 #### Build System Check
+
 - [ ] Makefile exists with standard targets
 - [ ] Build configuration present
 - [ ] `make build` works
@@ -36,6 +37,7 @@ make -n build test lint format clean 2>/dev/null && echo "✓ Makefile targets O
 ```
 
 #### Code Quality Check
+
 - [ ] Formatter configured
 - [ ] Linter configured
 - [ ] Format check passes
@@ -50,6 +52,7 @@ make lint 2>/dev/null || echo "Lint failed or not configured"
 ```
 
 #### Testing Check
+
 - [ ] Tests exist
 - [ ] Tests pass
 - [ ] Coverage configured
@@ -60,6 +63,7 @@ make test 2>/dev/null || echo "Tests failed or not configured"
 ```
 
 #### CI/CD Check
+
 - [ ] Workflow file exists
 - [ ] Required jobs present
 - [ ] Actions pinned
@@ -74,6 +78,7 @@ grep -E "uses:.*@v[0-9]" .github/workflows/*.yml 2>/dev/null | head -5
 ```
 
 #### Security Check
+
 - [ ] Vulnerability scanning configured
 - [ ] License compliance defined
 - [ ] SECURITY.md exists
@@ -86,6 +91,7 @@ ls .npmrc package.json 2>/dev/null | xargs grep -l "audit" 2>/dev/null  # Node
 ```
 
 #### Documentation Check
+
 - [ ] README.md exists with required sections
 - [ ] CONTRIBUTING.md exists
 - [ ] CHANGELOG.md exists
@@ -99,6 +105,7 @@ done
 ```
 
 #### Version Control Check
+
 - [ ] .gitignore exists
 - [ ] .gitattributes exists
 - [ ] Branch protection (check via gh if available)
@@ -123,28 +130,32 @@ Compile findings into a compliance report:
 
 ## Summary
 
-| Domain | Status | Issues |
-|--------|--------|--------|
-| Build | ✓/✗ | N |
-| Quality | ✓/✗ | N |
-| Testing | ✓/✗ | N |
-| CI/CD | ✓/✗ | N |
-| Security | ✓/✗ | N |
-| Docs | ✓/✗ | N |
-| VCS | ✓/✗ | N |
+| Domain   | Status | Issues |
+| -------- | ------ | ------ |
+| Build    | ✓/✗    | N      |
+| Quality  | ✓/✗    | N      |
+| Testing  | ✓/✗    | N      |
+| CI/CD    | ✓/✗    | N      |
+| Security | ✓/✗    | N      |
+| Docs     | ✓/✗    | N      |
+| VCS      | ✓/✗    | N      |
 
 ## Findings
 
 ### Critical (Must Fix)
+
 - [List critical issues]
 
 ### Important (Should Fix)
+
 - [List important issues]
 
 ### Suggestions
+
 - [List recommendations]
 
 ## Next Steps
+
 1. [Prioritized remediation steps]
 ```
 
@@ -180,6 +191,7 @@ Example: "Run the compliance-auditor agent for a full SDLC audit"
 ## Output
 
 Present findings clearly with:
+
 1. Overall compliance status
 2. Domain-by-domain breakdown
 3. Prioritized list of issues

@@ -16,27 +16,28 @@ Guidance for implementing documentation requirements including project docs, cha
 
 ### Mandatory Files (MUST)
 
-| Document | Purpose |
-|----------|---------|
-| `README.md` | Project overview, quick start, installation |
-| `CONTRIBUTING.md` | Contributor guidelines, setup instructions |
-| `CHANGELOG.md` | Version history and change documentation |
-| `LICENSE` | Software license terms |
-| `SECURITY.md` | Security policy and vulnerability reporting |
+| Document          | Purpose                                     |
+| ----------------- | ------------------------------------------- |
+| `README.md`       | Project overview, quick start, installation |
+| `CONTRIBUTING.md` | Contributor guidelines, setup instructions  |
+| `CHANGELOG.md`    | Version history and change documentation    |
+| `LICENSE`         | Software license terms                      |
+| `SECURITY.md`     | Security policy and vulnerability reporting |
 
 ### Recommended Files (SHOULD)
 
-| Document | Purpose |
-|----------|---------|
-| `CODE_OF_CONDUCT.md` | Community standards |
-| `docs/architecture.md` | System design and decisions |
-| API documentation | Generated from code comments |
+| Document               | Purpose                      |
+| ---------------------- | ---------------------------- |
+| `CODE_OF_CONDUCT.md`   | Community standards          |
+| `docs/architecture.md` | System design and decisions  |
+| API documentation      | Generated from code comments |
 
 ## README Requirements
 
 ### Required Sections (MUST)
 
 README MUST include:
+
 - Project name and brief description
 - Badge indicators (CI status, version, coverage, license)
 - Installation instructions (multiple methods if applicable)
@@ -48,6 +49,7 @@ README MUST include:
 ### Recommended Sections (SHOULD)
 
 README SHOULD include:
+
 - Feature list with descriptions
 - Architecture overview (diagram recommended)
 - Performance characteristics
@@ -73,18 +75,19 @@ Changelogs MUST follow the [Keep a Changelog](https://keepachangelog.com/) forma
 
 Each version entry MUST be organized into these categories:
 
-| Category | Purpose |
-|----------|---------|
-| Added | New features |
-| Changed | Changes to existing functionality |
-| Deprecated | Features to be removed |
-| Removed | Removed features |
-| Fixed | Bug fixes |
-| Security | Security-related changes |
+| Category   | Purpose                           |
+| ---------- | --------------------------------- |
+| Added      | New features                      |
+| Changed    | Changes to existing functionality |
+| Deprecated | Features to be removed            |
+| Removed    | Removed features                  |
+| Fixed      | Bug fixes                         |
+| Security   | Security-related changes          |
 
 ### Required Elements (MUST)
 
 Changelogs MUST include:
+
 - Version number
 - Release date
 - Comparison links to previous versions
@@ -106,14 +109,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+
 - New feature description
 
 ## [1.0.0] - 2024-01-15
 
 ### Added
+
 - Initial release features
 
 ### Fixed
+
 - Bug fix description
 
 [Unreleased]: https://github.com/org/repo/compare/v1.0.0...HEAD
@@ -125,6 +131,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ### Required Sections (MUST)
 
 CONTRIBUTING.md MUST include:
+
 - Prerequisites and tool requirements
 - Development environment setup steps
 - Build and test instructions
@@ -135,6 +142,7 @@ CONTRIBUTING.md MUST include:
 ### Recommended Sections (SHOULD)
 
 CONTRIBUTING.md SHOULD include:
+
 - Project structure overview
 - Troubleshooting section
 - Contact/support information
@@ -153,17 +161,18 @@ ADRs MUST be stored in version control at `docs/adrs/` (or `docs/decisions/`).
 
 Each ADR MUST include:
 
-| Section | Content |
-|---------|---------|
-| Title | Descriptive title with ADR number |
-| Status | Proposed, Accepted, Deprecated, Superseded |
-| Context | Background and problem statement |
-| Decision | The chosen approach |
-| Consequences | Positive and negative outcomes |
+| Section      | Content                                    |
+| ------------ | ------------------------------------------ |
+| Title        | Descriptive title with ADR number          |
+| Status       | Proposed, Accepted, Deprecated, Superseded |
+| Context      | Background and problem statement           |
+| Decision     | The chosen approach                        |
+| Consequences | Positive and negative outcomes             |
 
 ### Recommended Sections (SHOULD)
 
 ADRs SHOULD also include:
+
 - Decision drivers (weighted criteria)
 - Considered alternatives
 - Implementation notes
@@ -172,6 +181,7 @@ ADRs SHOULD also include:
 ### ADR Format (MUST)
 
 ADRs MUST use a structured format such as:
+
 - **Structured MADR** (recommended)
 - MADR (Markdown Architectural Decision Records)
 - Nygard format

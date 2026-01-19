@@ -35,6 +35,7 @@ claude "/sdlc:check"
 ```
 
 This will analyze your project against SDLC standards and report:
+
 - Build system configuration
 - Code quality setup
 - Testing practices
@@ -52,6 +53,7 @@ claude "/sdlc:init"
 ```
 
 This creates:
+
 - Standard directory structure
 - Required documentation files
 - Build system (Makefile)
@@ -66,17 +68,20 @@ Skills are automatically activated when you ask related questions.
 ### Build System (`sdlc:build`)
 
 **Triggers:**
+
 - "How should I set up my build system?"
 - "What Makefile targets do I need?"
 - "Configure build profiles"
 
 **Provides:**
+
 - Required build targets (build, test, lint, format, clean, ci)
 - Build profile configuration (dev vs release)
 - Dependency management best practices
 - Lockfile requirements
 
 **Example:**
+
 ```
 User: How do I set up a Makefile for my Rust project?
 Claude: [Provides SDLC-compliant Makefile with all required targets]
@@ -85,11 +90,13 @@ Claude: [Provides SDLC-compliant Makefile with all required targets]
 ### Code Quality (`sdlc:quality`)
 
 **Triggers:**
+
 - "Configure linting"
 - "Set up code formatting"
 - "Error handling best practices"
 
 **Provides:**
+
 - Formatter configuration
 - Linter rules and configuration
 - Error handling patterns
@@ -98,11 +105,13 @@ Claude: [Provides SDLC-compliant Makefile with all required targets]
 ### Testing (`sdlc:testing`)
 
 **Triggers:**
+
 - "Test organization"
 - "Coverage requirements"
 - "Testing best practices"
 
 **Provides:**
+
 - Test directory structure
 - Coverage targets (80% general, 95% critical paths)
 - Test naming conventions
@@ -111,11 +120,13 @@ Claude: [Provides SDLC-compliant Makefile with all required targets]
 ### CI/CD (`sdlc:ci`)
 
 **Triggers:**
+
 - "Set up GitHub Actions"
 - "Configure CI pipeline"
 - "CI job structure"
 
 **Provides:**
+
 - Required CI jobs (format, lint, test, security)
 - Job ordering and dependencies
 - Caching configuration
@@ -124,11 +135,13 @@ Claude: [Provides SDLC-compliant Makefile with all required targets]
 ### Security (`sdlc:security`)
 
 **Triggers:**
+
 - "Dependency security scanning"
 - "Supply chain security"
 - "License compliance"
 
 **Provides:**
+
 - Vulnerability scanning setup
 - License allowlist
 - Security audit schedules
@@ -137,11 +150,13 @@ Claude: [Provides SDLC-compliant Makefile with all required targets]
 ### Documentation (`sdlc:docs`)
 
 **Triggers:**
+
 - "README requirements"
 - "Changelog format"
 - "Documentation standards"
 
 **Provides:**
+
 - Required documentation files
 - README section requirements
 - Keep a Changelog format
@@ -150,11 +165,13 @@ Claude: [Provides SDLC-compliant Makefile with all required targets]
 ### Version Control (`sdlc:vcs`)
 
 **Triggers:**
+
 - "Git branching strategy"
 - "Commit message format"
 - "PR standards"
 
 **Provides:**
+
 - Branch protection rules
 - Conventional Commits format
 - PR template requirements
@@ -163,11 +180,13 @@ Claude: [Provides SDLC-compliant Makefile with all required targets]
 ### Release (`sdlc:release`)
 
 **Triggers:**
+
 - "Semantic versioning"
 - "Release process"
 - "Distribution channels"
 
 **Provides:**
+
 - SemVer requirements
 - Release workflow
 - Artifact checksums
@@ -176,11 +195,13 @@ Claude: [Provides SDLC-compliant Makefile with all required targets]
 ### Observability (`sdlc:observability`)
 
 **Triggers:**
+
 - "Logging requirements"
 - "Metrics setup"
 - "Performance targets"
 
 **Provides:**
+
 - Structured logging setup
 - Metrics naming conventions
 - Performance benchmarking
@@ -189,11 +210,13 @@ Claude: [Provides SDLC-compliant Makefile with all required targets]
 ### AI Context (`sdlc:ai`)
 
 **Triggers:**
+
 - "CLAUDE.md configuration"
 - "AI coding assistant setup"
 - "Copilot instructions"
 
 **Provides:**
+
 - AI context file structure
 - Version discovery requirements
 - Code generation standards
@@ -206,17 +229,20 @@ Agents perform autonomous, multi-step analysis.
 ### Compliance Auditor
 
 **When to use:**
+
 - Full project compliance assessment
 - Pre-release audit
 - Periodic compliance review
 
 **Usage:**
+
 ```
 User: Run a full SDLC compliance audit
 Claude: [Runs compliance-auditor agent]
 ```
 
 **Output:**
+
 - Overall compliance score
 - Domain-by-domain breakdown
 - Critical/important findings
@@ -225,17 +251,20 @@ Claude: [Runs compliance-auditor agent]
 ### Security Reviewer
 
 **When to use:**
+
 - Security-focused analysis
 - Vulnerability assessment
 - Supply chain review
 
 **Usage:**
+
 ```
 User: Review this project for security issues
 Claude: [Runs security-reviewer agent]
 ```
 
 **Output:**
+
 - Security score
 - Vulnerability findings
 - Supply chain risks
@@ -244,17 +273,20 @@ Claude: [Runs security-reviewer agent]
 ### Quality Enforcer
 
 **When to use:**
+
 - Code quality assessment
 - Pre-PR review
 - Quality gate validation
 
 **Usage:**
+
 ```
 User: Check code quality standards
 Claude: [Runs quality-enforcer agent]
 ```
 
 **Output:**
+
 - Quality score
 - Formatting issues
 - Linting violations
@@ -263,17 +295,20 @@ Claude: [Runs quality-enforcer agent]
 ### CI Architect
 
 **When to use:**
+
 - CI/CD pipeline design
 - Workflow optimization
 - Pipeline troubleshooting
 
 **Usage:**
+
 ```
 User: Design a CI pipeline for this project
 Claude: [Runs ci-architect agent]
 ```
 
 **Output:**
+
 - Pipeline design
 - Job configuration
 - Optimization suggestions
@@ -286,15 +321,18 @@ Claude: [Runs ci-architect agent]
 Run compliance check on current project.
 
 **Syntax:**
+
 ```bash
 /sdlc:check
 ```
 
 **Options:**
+
 - No arguments: Full check
 - Future: `--quick` for essential files only
 
 **Output:**
+
 - Compliance report
 - Domain scores
 - Issue list
@@ -305,11 +343,13 @@ Run compliance check on current project.
 Initialize SDLC-compliant project structure.
 
 **Syntax:**
+
 ```bash
 /sdlc:init
 ```
 
 **Process:**
+
 1. Detect or ask for language
 2. Create directory structure
 3. Generate required files
@@ -318,6 +358,7 @@ Initialize SDLC-compliant project structure.
 6. Create templates
 
 **Created Files:**
+
 ```
 ├── .github/
 │   ├── workflows/ci.yml
@@ -358,30 +399,30 @@ jobs:
 ```yaml
 - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
   with:
-    domains: 'all'           # or 'security,ci,docs'
-    fail-on-error: 'true'
-    report-format: 'all'     # markdown, json, sarif
-    create-pr-comment: 'true'
-    create-issue: 'true'
+    domains: "all" # or 'security,ci,docs'
+    fail-on-error: "true"
+    report-format: "all" # markdown, json, sarif
+    create-pr-comment: "true"
+    create-issue: "true"
 ```
 
 ### Available Inputs
 
-| Input | Description | Default |
-|-------|-------------|---------|
-| `domains` | Domains to check (or "all") | `all` |
-| `fail-on-error` | Fail if MUST requirements unmet | `true` |
-| `report-format` | Output format(s) | `markdown` |
-| `create-pr-comment` | Comment on PR | `true` |
-| `create-issue` | Create issue on failure | `false` |
+| Input               | Description                     | Default    |
+| ------------------- | ------------------------------- | ---------- |
+| `domains`           | Domains to check (or "all")     | `all`      |
+| `fail-on-error`     | Fail if MUST requirements unmet | `true`     |
+| `report-format`     | Output format(s)                | `markdown` |
+| `create-pr-comment` | Comment on PR                   | `true`     |
+| `create-issue`      | Create issue on failure         | `false`    |
 
 ### Outputs
 
-| Output | Description |
-|--------|-------------|
-| `score` | Overall compliance score (0-100) |
-| `status` | pass, warn, or fail |
-| `critical-count` | MUST violations count |
+| Output           | Description                      |
+| ---------------- | -------------------------------- |
+| `score`          | Overall compliance score (0-100) |
+| `status`         | pass, warn, or fail              |
+| `critical-count` | MUST violations count            |
 
 See [GitHub Actions Integration](GITHUB_ACTIONS.md) for complete documentation.
 
@@ -440,6 +481,7 @@ claude plugins add github:zircote/sdlc-quality
 ### Skills Not Triggering
 
 Skills activate based on keywords. Try:
+
 - More specific queries
 - Use exact terminology ("build system", "CI pipeline")
 - Explicitly reference the standard
@@ -447,6 +489,7 @@ Skills activate based on keywords. Try:
 ### Agent Errors
 
 If an agent fails:
+
 1. Check file permissions
 2. Verify project structure
 3. Try with simpler query
@@ -481,11 +524,11 @@ If an agent fails:
 
 This plugin supports multiple AI coding assistants:
 
-| Agent | Configuration | Usage |
-|-------|---------------|-------|
-| Claude Code | `.claude-plugin/`, skills, agents | Install plugin, use `/sdlc:check` |
-| GitHub Copilot | `.github/copilot-instructions.md` | Provides repo context to Copilot |
-| OpenAI Codex | `AGENTS.md` | Guidelines for Codex interactions |
+| Agent          | Configuration                     | Usage                             |
+| -------------- | --------------------------------- | --------------------------------- |
+| Claude Code    | `.claude-plugin/`, skills, agents | Install plugin, use `/sdlc:check` |
+| GitHub Copilot | `.github/copilot-instructions.md` | Provides repo context to Copilot  |
+| OpenAI Codex   | `AGENTS.md`                       | Guidelines for Codex interactions |
 
 All agents reference the same SDLC standards from `docs/PROJECT_REQUIREMENTS.md`.
 

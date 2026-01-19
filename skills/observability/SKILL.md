@@ -35,40 +35,41 @@ All logging MUST use structured format (JSON preferred):
 
 Use consistent log levels with defined semantics:
 
-| Level | Purpose | When to Use |
-|-------|---------|-------------|
-| ERROR | Errors requiring attention | Failures, exceptions |
-| WARN | Potential issues | Degraded performance, retries |
-| INFO | Significant events | Request completion, state changes |
-| DEBUG | Detailed information | Development, troubleshooting |
-| TRACE | Very detailed tracing | Deep debugging |
+| Level | Purpose                    | When to Use                       |
+| ----- | -------------------------- | --------------------------------- |
+| ERROR | Errors requiring attention | Failures, exceptions              |
+| WARN  | Potential issues           | Degraded performance, retries     |
+| INFO  | Significant events         | Request completion, state changes |
+| DEBUG | Detailed information       | Development, troubleshooting      |
+| TRACE | Very detailed tracing      | Deep debugging                    |
 
 ### Required Log Fields (MUST)
 
 All log entries MUST include:
 
-| Field | Description |
-|-------|-------------|
+| Field       | Description                   |
+| ----------- | ----------------------------- |
 | `timestamp` | ISO 8601 format with timezone |
-| `level` | Log severity level |
-| `message` | Human-readable description |
-| `service` | Service/application name |
+| `level`     | Log severity level            |
+| `message`   | Human-readable description    |
+| `service`   | Service/application name      |
 
 ### Recommended Log Fields (SHOULD)
 
 Log entries SHOULD include when applicable:
 
-| Field | Description |
-|-------|-------------|
-| `trace_id` | Distributed trace identifier |
-| `span_id` | Span identifier |
-| `user_id` | User identifier (if authenticated) |
-| `request_id` | Request correlation ID |
-| `duration_ms` | Operation duration |
+| Field         | Description                        |
+| ------------- | ---------------------------------- |
+| `trace_id`    | Distributed trace identifier       |
+| `span_id`     | Span identifier                    |
+| `user_id`     | User identifier (if authenticated) |
+| `request_id`  | Request correlation ID             |
+| `duration_ms` | Operation duration                 |
 
 ### Sensitive Data (MUST NOT)
 
 Logs MUST NOT contain:
+
 - Passwords or secrets
 - API keys or tokens
 - Personal identifiable information (PII)
@@ -81,23 +82,23 @@ Logs MUST NOT contain:
 
 Implement appropriate metric types:
 
-| Type | Purpose | Examples |
-|------|---------|----------|
-| Counter | Cumulative values | Request count, errors |
-| Gauge | Current values | Queue size, connections |
-| Histogram | Value distributions | Response time, payload size |
-| Summary | Quantile calculations | P50, P95, P99 latencies |
+| Type      | Purpose               | Examples                    |
+| --------- | --------------------- | --------------------------- |
+| Counter   | Cumulative values     | Request count, errors       |
+| Gauge     | Current values        | Queue size, connections     |
+| Histogram | Value distributions   | Response time, payload size |
+| Summary   | Quantile calculations | P50, P95, P99 latencies     |
 
 ### Required Metrics (MUST)
 
 Services MUST expose:
 
-| Metric | Type | Description |
-|--------|------|-------------|
-| `requests_total` | Counter | Total requests by endpoint/status |
-| `request_duration_seconds` | Histogram | Request latency |
-| `errors_total` | Counter | Error count by type |
-| `active_connections` | Gauge | Current connections |
+| Metric                     | Type      | Description                       |
+| -------------------------- | --------- | --------------------------------- |
+| `requests_total`           | Counter   | Total requests by endpoint/status |
+| `request_duration_seconds` | Histogram | Request latency                   |
+| `errors_total`             | Counter   | Error count by type               |
+| `active_connections`       | Gauge     | Current connections               |
 
 ### Metric Naming (MUST)
 
@@ -115,12 +116,12 @@ cache_hits_total
 
 Use consistent label naming:
 
-| Label | Description |
-|-------|-------------|
-| `service` | Service name |
-| `endpoint` | API endpoint |
-| `method` | HTTP method |
-| `status` | Response status |
+| Label        | Description          |
+| ------------ | -------------------- |
+| `service`    | Service name         |
+| `endpoint`   | API endpoint         |
+| `method`     | HTTP method          |
+| `status`     | Response status      |
 | `error_type` | Error classification |
 
 ## Distributed Tracing
@@ -147,15 +148,16 @@ service:
 
 When tracing is implemented, propagate context:
 
-| Header | Standard |
-|--------|----------|
-| `traceparent` | W3C Trace Context |
-| `tracestate` | W3C Trace Context |
+| Header         | Standard            |
+| -------------- | ------------------- |
+| `traceparent`  | W3C Trace Context   |
+| `tracestate`   | W3C Trace Context   |
 | `X-Request-ID` | Request correlation |
 
 ### Span Requirements (SHOULD)
 
 Spans SHOULD include:
+
 - Operation name
 - Start/end timestamps
 - Status (OK, ERROR)
@@ -168,10 +170,10 @@ Spans SHOULD include:
 
 Services MUST expose health endpoints:
 
-| Endpoint | Purpose | Response |
-|----------|---------|----------|
-| `/health` | Basic health | 200 OK or 503 |
-| `/health/live` | Liveness probe | 200 if running |
+| Endpoint        | Purpose         | Response              |
+| --------------- | --------------- | --------------------- |
+| `/health`       | Basic health    | 200 OK or 503         |
+| `/health/live`  | Liveness probe  | 200 if running        |
 | `/health/ready` | Readiness probe | 200 if ready to serve |
 
 ### Health Response Format (MUST)
@@ -197,6 +199,7 @@ Services MUST expose health endpoints:
 ### Dependency Checks (SHOULD)
 
 Health checks SHOULD verify:
+
 - Database connectivity
 - Cache availability
 - External service reachability
@@ -209,16 +212,17 @@ Health checks SHOULD verify:
 
 Define alerts for critical conditions:
 
-| Condition | Severity | Response |
-|-----------|----------|----------|
-| Service down | Critical | Immediate page |
-| Error rate > 5% | High | Page within 5 min |
-| Latency P95 > 1s | Medium | Notify team |
-| Disk > 80% | Warning | Create ticket |
+| Condition        | Severity | Response          |
+| ---------------- | -------- | ----------------- |
+| Service down     | Critical | Immediate page    |
+| Error rate > 5%  | High     | Page within 5 min |
+| Latency P95 > 1s | Medium   | Notify team       |
+| Disk > 80%       | Warning  | Create ticket     |
 
 ### Alert Requirements (MUST)
 
 Alerts MUST include:
+
 - Clear description of condition
 - Severity level
 - Runbook link
@@ -268,16 +272,16 @@ fn process_request(id: &str) {
 ### TypeScript (pino)
 
 ```typescript
-import pino from 'pino';
+import pino from "pino";
 
 const logger = pino({
-  level: 'info',
+  level: "info",
   formatters: {
     level: (label) => ({ level: label }),
   },
 });
 
-logger.info({ requestId, duration }, 'Request processed');
+logger.info({ requestId, duration }, "Request processed");
 ```
 
 ### Python (structlog)

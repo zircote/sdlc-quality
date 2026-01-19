@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 ## [Unreleased]
 
 ### Added
+
 - GitHub Actions composite action for SDLC compliance checking
 - Reusable workflow for comprehensive audits
 - Multiple trigger modes: PR, push, schedule, issue assignment, manual dispatch
@@ -22,12 +23,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Domain-specific check modules for all 11 SDLC domains
 
 ### Changed
+
 - Updated README with GitHub Actions quick start example
 - Added AI Agent Interoperability section to README
 
 ## [1.0.0] - 2025-01-19
 
 ### Added
+
 - Initial plugin structure with skills, agents, and commands
 - Comprehensive SDLC standards in `docs/PROJECT_REQUIREMENTS.md`
 - Skills for build, quality, testing, CI, security, docs, VCS, release, observability, AI, and setup

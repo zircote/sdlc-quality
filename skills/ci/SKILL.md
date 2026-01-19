@@ -17,6 +17,7 @@ Guidance for implementing compliant CI/CD pipelines that meet SDLC requirements.
 ### When CI MUST Run
 
 CI MUST run on:
+
 - All pull requests to protected branches
 - All pushes to protected branches (develop, main)
 - Scheduled intervals (daily/weekly for security scans)
@@ -38,16 +39,16 @@ concurrency:
 
 CI pipelines MUST include these jobs in order:
 
-| Order | Job | Purpose | Required |
-|-------|-----|---------|----------|
-| 1 | Format check | Verify code formatting | MUST |
-| 2 | Lint | Static analysis with errors | MUST |
-| 3 | Test | Run all tests | MUST |
-| 4 | Documentation | Verify docs build | MUST |
-| 5 | Security audit | Check for vulnerabilities | MUST |
-| 6 | MSV check | Verify minimum version support | MUST |
-| 7 | Coverage | Measure test coverage | SHOULD |
-| 8 | Benchmarks | Performance regression check | SHOULD |
+| Order | Job            | Purpose                        | Required |
+| ----- | -------------- | ------------------------------ | -------- |
+| 1     | Format check   | Verify code formatting         | MUST     |
+| 2     | Lint           | Static analysis with errors    | MUST     |
+| 3     | Test           | Run all tests                  | MUST     |
+| 4     | Documentation  | Verify docs build              | MUST     |
+| 5     | Security audit | Check for vulnerabilities      | MUST     |
+| 6     | MSV check      | Verify minimum version support | MUST     |
+| 7     | Coverage       | Measure test coverage          | SHOULD   |
+| 8     | Benchmarks     | Performance regression check   | SHOULD   |
 
 ### All Jobs Must Pass (MUST)
 
@@ -131,7 +132,7 @@ CI MUST use minimal permissions (principle of least privilege):
 ```yaml
 permissions:
   contents: read
-  pull-requests: write  # Only if needed
+  pull-requests: write # Only if needed
 ```
 
 ## Implementation Checklist
@@ -174,7 +175,7 @@ on:
   pull_request:
     branches: [main, develop]
   schedule:
-    - cron: '0 0 * * *'  # Daily security scan
+    - cron: "0 0 * * *" # Daily security scan
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

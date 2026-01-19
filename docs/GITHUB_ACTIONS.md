@@ -22,6 +22,7 @@ The SDLC Standards Plugin provides two integration options:
 2. **Reusable Workflow** (`zircote/sdlc-quality/.github/workflows/sdlc-audit.yml@main`) - Call as a complete workflow
 
 Both options support:
+
 - All 11 SDLC domains
 - Multiple report formats (Markdown, JSON, SARIF)
 - PR comments with results
@@ -64,7 +65,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '0 9 * * 1'  # Weekly on Monday
+    - cron: "0 9 * * 1" # Weekly on Monday
 
 permissions:
   contents: read
@@ -82,12 +83,12 @@ jobs:
         id: sdlc
         uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
         with:
-          domains: 'all'
-          fail-on-error: 'true'
-          report-format: 'all'
-          upload-artifact: 'true'
-          create-pr-comment: 'true'
-          create-issue: 'true'
+          domains: "all"
+          fail-on-error: "true"
+          report-format: "all"
+          upload-artifact: "true"
+          create-pr-comment: "true"
+          create-issue: "true"
 
       - name: Check Results
         run: |
@@ -100,27 +101,27 @@ jobs:
 
 ### Inputs
 
-| Input | Description | Default |
-|-------|-------------|---------|
-| `domains` | Comma-separated domains or "all" | `all` |
-| `fail-on-error` | Fail if MUST requirements not met | `true` |
-| `report-format` | Format: markdown, json, sarif, all | `markdown` |
-| `upload-artifact` | Upload report as artifact | `true` |
-| `create-pr-comment` | Comment on PR with results | `true` |
-| `create-issue` | Create issue for failures | `false` |
-| `working-directory` | Directory to check | `.` |
-| `config-file` | Custom configuration file | `` |
+| Input               | Description                        | Default    |
+| ------------------- | ---------------------------------- | ---------- |
+| `domains`           | Comma-separated domains or "all"   | `all`      |
+| `fail-on-error`     | Fail if MUST requirements not met  | `true`     |
+| `report-format`     | Format: markdown, json, sarif, all | `markdown` |
+| `upload-artifact`   | Upload report as artifact          | `true`     |
+| `create-pr-comment` | Comment on PR with results         | `true`     |
+| `create-issue`      | Create issue for failures          | `false`    |
+| `working-directory` | Directory to check                 | `.`        |
+| `config-file`       | Custom configuration file          | ``         |
 
 ### Outputs
 
-| Output | Description |
-|--------|-------------|
-| `score` | Overall compliance score (0-100) |
-| `status` | Status: pass, warn, or fail |
-| `report-path` | Path to generated report |
-| `critical-count` | Number of MUST violations |
-| `important-count` | Number of SHOULD violations |
-| `suggestion-count` | Number of MAY suggestions |
+| Output             | Description                      |
+| ------------------ | -------------------------------- |
+| `score`            | Overall compliance score (0-100) |
+| `status`           | Status: pass, warn, or fail      |
+| `report-path`      | Path to generated report         |
+| `critical-count`   | Number of MUST violations        |
+| `important-count`  | Number of SHOULD violations      |
+| `suggestion-count` | Number of MAY suggestions        |
 
 ### Domain Selection
 
@@ -129,10 +130,11 @@ Check specific domains:
 ```yaml
 - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
   with:
-    domains: 'security,ci,docs'
+    domains: "security,ci,docs"
 ```
 
 Available domains:
+
 - `build` - Build system (Makefile, dependencies)
 - `quality` - Code formatting and linting
 - `testing` - Test coverage and organization
@@ -153,14 +155,14 @@ name: Weekly Audit
 
 on:
   schedule:
-    - cron: '0 9 * * 1'
+    - cron: "0 9 * * 1"
   workflow_dispatch:
 
 jobs:
   audit:
     uses: zircote/sdlc-quality/.github/workflows/sdlc-audit.yml@main
     with:
-      domains: 'all'
+      domains: "all"
       fail-on-error: false
       create-issue: true
     permissions:
@@ -174,18 +176,18 @@ jobs:
 
 Same as composite action, plus:
 
-| Input | Description | Default |
-|-------|-------------|---------|
+| Input    | Description   | Default         |
+| -------- | ------------- | --------------- |
 | `runner` | Runner to use | `ubuntu-latest` |
 
 ### Workflow Outputs
 
-| Output | Description |
-|--------|-------------|
-| `score` | Overall compliance score |
-| `status` | Compliance status |
-| `critical-count` | Critical violations |
-| `important-count` | Important violations |
+| Output            | Description              |
+| ----------------- | ------------------------ |
+| `score`           | Overall compliance score |
+| `status`          | Compliance status        |
+| `critical-count`  | Critical violations      |
+| `important-count` | Important violations     |
 
 ## Trigger Modes
 
@@ -216,7 +218,7 @@ Weekly compliance audit:
 ```yaml
 on:
   schedule:
-    - cron: '0 9 * * 1'  # Monday 9am UTC
+    - cron: "0 9 * * 1" # Monday 9am UTC
 ```
 
 ### Manual Dispatch
@@ -228,10 +230,10 @@ on:
   workflow_dispatch:
     inputs:
       domains:
-        description: 'Domains to check'
+        description: "Domains to check"
         type: choice
         options: [all, security, ci, docs]
-        default: 'all'
+        default: "all"
 ```
 
 ### Issue Assignment
@@ -245,6 +247,7 @@ on:
 ```
 
 Create an issue with:
+
 - Title containing "SDLC", "compliance", or "audit"
 - Label `sdlc-audit`
 - Body with optional `domains: security,ci` line
@@ -254,13 +257,14 @@ Create an issue with:
 ### Markdown Report
 
 Human-readable report with:
+
 - Summary table
 - Domain scores
 - Prioritized findings
 - Remediation guidance
 
 ```yaml
-report-format: 'markdown'
+report-format: "markdown"
 ```
 
 ### JSON Report
@@ -268,10 +272,11 @@ report-format: 'markdown'
 Machine-readable for tooling integration:
 
 ```yaml
-report-format: 'json'
+report-format: "json"
 ```
 
 Structure:
+
 ```json
 {
   "project_name": "my-project",
@@ -296,7 +301,7 @@ Structure:
 For GitHub Security tab integration:
 
 ```yaml
-report-format: 'sarif'
+report-format: "sarif"
 ```
 
 Automatically uploads to GitHub Code Scanning when permissions allow.
@@ -306,7 +311,7 @@ Automatically uploads to GitHub Code Scanning when permissions allow.
 Generate all formats:
 
 ```yaml
-report-format: 'all'
+report-format: "all"
 ```
 
 ## AI Agent Integration
@@ -330,6 +335,7 @@ claude plugins add github:zircote/sdlc-quality
 ```
 
 Use slash commands:
+
 ```
 /sdlc:check
 /sdlc:init
@@ -349,10 +355,10 @@ name: Security Audit
 on:
   pull_request:
     paths:
-      - 'Cargo.toml'
-      - 'package.json'
-      - 'requirements.txt'
-      - '.github/workflows/**'
+      - "Cargo.toml"
+      - "package.json"
+      - "requirements.txt"
+      - ".github/workflows/**"
 
 jobs:
   security:
@@ -362,9 +368,9 @@ jobs:
 
       - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
         with:
-          domains: 'security'
-          fail-on-error: 'true'
-          create-pr-comment: 'true'
+          domains: "security"
+          fail-on-error: "true"
+          create-pr-comment: "true"
 ```
 
 ### Documentation Compliance
@@ -375,8 +381,8 @@ name: Docs Check
 on:
   pull_request:
     paths:
-      - '**.md'
-      - 'docs/**'
+      - "**.md"
+      - "docs/**"
 
 jobs:
   docs:
@@ -386,8 +392,8 @@ jobs:
 
       - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
         with:
-          domains: 'docs,ai'
-          fail-on-error: 'false'
+          domains: "docs,ai"
+          fail-on-error: "false"
 ```
 
 ### Multi-Platform Matrix
@@ -408,7 +414,7 @@ jobs:
 
       - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
         with:
-          domains: 'build,testing'
+          domains: "build,testing"
 ```
 
 ### Monorepo with Working Directory
@@ -429,8 +435,8 @@ jobs:
 
       - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
         with:
-          working-directory: 'services/${{ matrix.service }}'
-          upload-artifact: 'true'
+          working-directory: "services/${{ matrix.service }}"
+          upload-artifact: "true"
 ```
 
 ## Troubleshooting
@@ -438,6 +444,7 @@ jobs:
 ### Action Not Found
 
 Ensure you're using the correct path:
+
 ```yaml
 uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
 ```
@@ -445,6 +452,7 @@ uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
 ### Permission Denied
 
 Add required permissions:
+
 ```yaml
 permissions:
   contents: read
@@ -460,6 +468,7 @@ SARIF upload requires `security-events: write` permission and is only available 
 ### PR Comment Not Created
 
 Ensure:
+
 1. `create-pr-comment: 'true'`
 2. Running on `pull_request` event
 3. `pull-requests: write` permission
@@ -477,7 +486,7 @@ COVERAGE_THRESHOLD=70
 ```yaml
 - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
   with:
-    config-file: '.sdlc-config.sh'
+    config-file: ".sdlc-config.sh"
 ```
 
 ## Support

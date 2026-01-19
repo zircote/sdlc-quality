@@ -12,8 +12,8 @@ We use the [MADR](https://adr.github.io/madr/) (Markdown Architectural Decision 
 
 ## Index
 
-| ADR | Title | Status | Date |
-|-----|-------|--------|------|
+| ADR                                      | Title            | Status   | Date       |
+| ---------------------------------------- | ---------------- | -------- | ---------- |
 | [ADR-0001](adr-0001-plugin-structure.md) | Plugin Structure | Accepted | 2026-01-19 |
 
 ## Creating a New ADR

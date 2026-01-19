@@ -26,14 +26,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm install -D prettier
 
       - name: Check formatting
-        run: npx prettier --check "**/*.md" "**/*.yml" "**/*.yaml" "**/*.json"
+        run: npx prettier --check "**/*.md" "**/*.yml" "**/*.json"
 
   lint:
     name: Lint
@@ -45,8 +45,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm install -D markdownlint-cli2
@@ -131,8 +131,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install link checker
         run: npm install -D markdown-link-check

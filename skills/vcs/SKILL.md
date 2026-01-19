@@ -18,18 +18,19 @@ Guidance for implementing version control requirements including branching strat
 
 Projects MUST use a defined branching strategy with these branch types:
 
-| Branch Type | Naming Pattern | Purpose |
-|-------------|----------------|---------|
-| Main | `main` | Production-ready code |
-| Development | `develop` | Integration branch |
-| Feature | `feature/*` | New functionality |
-| Bugfix | `bugfix/*` | Bug repairs |
-| Hotfix | `hotfix/*` | Emergency production fixes |
-| Release | `release/*` | Release preparation |
+| Branch Type | Naming Pattern | Purpose                    |
+| ----------- | -------------- | -------------------------- |
+| Main        | `main`         | Production-ready code      |
+| Development | `develop`      | Integration branch         |
+| Feature     | `feature/*`    | New functionality          |
+| Bugfix      | `bugfix/*`     | Bug repairs                |
+| Hotfix      | `hotfix/*`     | Emergency production fixes |
+| Release     | `release/*`    | Release preparation        |
 
 ### Branch Protection (MUST)
 
 Protected branches (`main`, `develop`) MUST require:
+
 - Pull request reviews before merge
 - Status checks passing
 - No direct commits
@@ -40,6 +41,7 @@ Protected branches (`main`, `develop`) MUST require:
 Branch names MUST follow the pattern: `type/description-with-dashes`
 
 **Good:**
+
 ```
 feature/user-authentication
 bugfix/login-timeout-error
@@ -48,6 +50,7 @@ release/v2.1.0
 ```
 
 **Bad:**
+
 ```
 my-branch
 fix
@@ -70,22 +73,23 @@ Projects MUST use Conventional Commits format:
 
 ### Commit Types (MUST)
 
-| Type | Purpose |
-|------|---------|
-| `feat` | New feature |
-| `fix` | Bug fix |
-| `docs` | Documentation only |
-| `style` | Formatting, no code change |
-| `refactor` | Code restructuring |
-| `perf` | Performance improvement |
-| `test` | Adding/updating tests |
-| `build` | Build system changes |
-| `ci` | CI configuration |
-| `chore` | Maintenance tasks |
+| Type       | Purpose                    |
+| ---------- | -------------------------- |
+| `feat`     | New feature                |
+| `fix`      | Bug fix                    |
+| `docs`     | Documentation only         |
+| `style`    | Formatting, no code change |
+| `refactor` | Code restructuring         |
+| `perf`     | Performance improvement    |
+| `test`     | Adding/updating tests      |
+| `build`    | Build system changes       |
+| `ci`       | CI configuration           |
+| `chore`    | Maintenance tasks          |
 
 ### Message Requirements (MUST)
 
 Commit messages MUST:
+
 - Use imperative mood ("Add feature" not "Added feature")
 - Keep subject line under 72 characters
 - Separate subject from body with blank line
@@ -94,12 +98,14 @@ Commit messages MUST:
 ### Breaking Changes (MUST)
 
 Breaking changes MUST be indicated with:
+
 - `!` after type/scope: `feat(api)!: change response format`
 - `BREAKING CHANGE:` footer in body
 
 ### Commit Message Examples
 
 **Good:**
+
 ```
 feat(auth): add OAuth2 support for GitHub login
 
@@ -110,6 +116,7 @@ Closes #123
 ```
 
 **Bad:**
+
 ```
 fixed stuff
 WIP
@@ -121,6 +128,7 @@ updates
 ### PR Requirements (MUST)
 
 Pull requests MUST include:
+
 - Descriptive title following commit convention
 - Summary of changes
 - Testing instructions
@@ -130,27 +138,31 @@ Pull requests MUST include:
 
 ```markdown
 ## Summary
+
 Brief description of changes
 
 ## Changes
+
 - Change 1
 - Change 2
 
 ## Testing
+
 How to test these changes
 
 ## Related Issues
+
 Closes #123
 ```
 
 ### Review Requirements (MUST)
 
-| Requirement | Level |
-|-------------|-------|
-| Minimum reviewers | MUST be at least 1 |
-| CI checks passing | MUST pass |
-| Code owner approval | SHOULD be required for critical paths |
-| Merge conflicts resolved | MUST be resolved |
+| Requirement              | Level                                 |
+| ------------------------ | ------------------------------------- |
+| Minimum reviewers        | MUST be at least 1                    |
+| CI checks passing        | MUST pass                             |
+| Code owner approval      | SHOULD be required for critical paths |
+| Merge conflicts resolved | MUST be resolved                      |
 
 ## Git Configuration
 
@@ -190,6 +202,7 @@ Projects MUST define `.gitattributes` for consistent line endings:
 ### Git Ignore (MUST)
 
 Projects MUST maintain comprehensive `.gitignore` covering:
+
 - Build artifacts
 - IDE/editor files
 - OS-specific files
@@ -202,11 +215,11 @@ Projects MUST maintain comprehensive `.gitignore` covering:
 
 Define allowed merge methods per branch:
 
-| Target Branch | Allowed Methods |
-|---------------|-----------------|
-| main | Squash merge, Rebase |
-| develop | Merge commit, Squash |
-| feature/* | Any |
+| Target Branch | Allowed Methods      |
+| ------------- | -------------------- |
+| main          | Squash merge, Rebase |
+| develop       | Merge commit, Squash |
+| feature/\*    | Any                  |
 
 ### Squash Merge (SHOULD)
 

@@ -18,24 +18,24 @@ Guidance for implementing AI-assisted development requirements including context
 
 Projects using AI assistants MUST maintain context files:
 
-| File | Purpose | Location |
-|------|---------|----------|
-| `CLAUDE.md` | Claude-specific instructions | Repository root |
-| `.cursorrules` | Cursor AI configuration | Repository root |
-| `AI_CONTEXT.md` | Generic AI context | Repository root |
-| `.github/copilot-instructions.md` | GitHub Copilot | `.github/` |
+| File                              | Purpose                      | Location        |
+| --------------------------------- | ---------------------------- | --------------- |
+| `CLAUDE.md`                       | Claude-specific instructions | Repository root |
+| `.cursorrules`                    | Cursor AI configuration      | Repository root |
+| `AI_CONTEXT.md`                   | Generic AI context           | Repository root |
+| `.github/copilot-instructions.md` | GitHub Copilot               | `.github/`      |
 
 ### Context File Content (MUST)
 
 AI context files MUST include:
 
-| Section | Content |
-|---------|---------|
-| Project overview | Brief description and purpose |
-| Architecture | Key patterns and structures |
-| Conventions | Naming, formatting, style rules |
-| Constraints | What AI should NOT do |
-| Key files | Important files to understand |
+| Section          | Content                         |
+| ---------------- | ------------------------------- |
+| Project overview | Brief description and purpose   |
+| Architecture     | Key patterns and structures     |
+| Conventions      | Naming, formatting, style rules |
+| Constraints      | What AI should NOT do           |
+| Key files        | Important files to understand   |
 
 ### Context File Template
 
@@ -43,24 +43,29 @@ AI context files MUST include:
 # Project Context for AI Assistants
 
 ## Overview
+
 Brief project description and purpose.
 
 ## Architecture
+
 - Pattern: [MVC/Clean Architecture/etc.]
 - Key directories and their purposes
 - Core abstractions
 
 ## Conventions
+
 - Naming: camelCase for functions, PascalCase for types
 - Error handling: Use Result types
 - Testing: Unit tests alongside source
 
 ## Constraints
+
 - Do NOT modify configuration files without asking
 - Do NOT add new dependencies without approval
 - Always run tests after changes
 
 ## Key Files
+
 - `src/lib.rs` - Main library entry
 - `src/config.rs` - Configuration handling
 ```
@@ -70,6 +75,7 @@ Brief project description and purpose.
 ### Review Requirements (MUST)
 
 All AI-generated code MUST be:
+
 - Reviewed by a human developer
 - Tested before merge
 - Compliant with project standards
@@ -78,6 +84,7 @@ All AI-generated code MUST be:
 ### Code Quality (MUST)
 
 AI-generated code MUST meet the same standards as human-written code:
+
 - Pass all linting rules
 - Include appropriate tests
 - Follow project conventions
@@ -86,6 +93,7 @@ AI-generated code MUST meet the same standards as human-written code:
 ### Attribution (SHOULD)
 
 AI-generated code SHOULD be attributable:
+
 - Commit messages may indicate AI assistance
 - Significant AI contributions noted in PR description
 - License compliance verified
@@ -94,17 +102,18 @@ AI-generated code SHOULD be attributable:
 
 ### Development Workflow
 
-| Phase | AI Integration |
-|-------|----------------|
-| Planning | Use for architecture exploration |
-| Implementation | Code generation with review |
-| Testing | Test case generation |
-| Review | AI-assisted code review |
-| Documentation | Doc generation and review |
+| Phase          | AI Integration                   |
+| -------------- | -------------------------------- |
+| Planning       | Use for architecture exploration |
+| Implementation | Code generation with review      |
+| Testing        | Test case generation             |
+| Review         | AI-assisted code review          |
+| Documentation  | Doc generation and review        |
 
 ### Review Workflow (MUST)
 
 AI-assisted code reviews MUST:
+
 1. Run automated checks first
 2. Apply AI review as additional layer
 3. Require human final approval
@@ -113,6 +122,7 @@ AI-assisted code reviews MUST:
 ### Iterative Refinement (SHOULD)
 
 When using AI for code generation:
+
 1. Start with clear requirements
 2. Review initial output
 3. Provide specific feedback
@@ -124,6 +134,7 @@ When using AI for code generation:
 ### Sensitive Data (MUST NOT)
 
 AI context and prompts MUST NOT include:
+
 - API keys or secrets
 - Passwords or credentials
 - Production database contents
@@ -133,6 +144,7 @@ AI context and prompts MUST NOT include:
 ### Code Review for Security (MUST)
 
 AI-generated code MUST be reviewed for:
+
 - Input validation
 - Authentication/authorization
 - Injection vulnerabilities
@@ -142,6 +154,7 @@ AI-generated code MUST be reviewed for:
 ### Dependency Addition (MUST)
 
 AI-suggested dependencies MUST be:
+
 - Reviewed for necessity
 - Checked for security vulnerabilities
 - Verified for license compatibility
@@ -152,6 +165,7 @@ AI-suggested dependencies MUST be:
 ### Testing AI Code (MUST)
 
 AI-generated code MUST:
+
 - Have test coverage matching project standards
 - Include edge case tests
 - Be verified manually for logic correctness
@@ -160,6 +174,7 @@ AI-generated code MUST:
 ### Documentation (MUST)
 
 AI-generated documentation MUST be:
+
 - Reviewed for accuracy
 - Checked for completeness
 - Verified against actual code behavior
@@ -170,6 +185,7 @@ AI-generated documentation MUST be:
 ### Training (SHOULD)
 
 Teams SHOULD:
+
 - Establish AI usage guidelines
 - Train developers on effective prompting
 - Share successful patterns
@@ -178,6 +194,7 @@ Teams SHOULD:
 ### Consistency (MUST)
 
 AI usage MUST:
+
 - Follow team-agreed practices
 - Use consistent context files
 - Apply uniform quality standards
@@ -212,6 +229,7 @@ grep -E "^##" CLAUDE.md | head -10
 ### Keep Updated (MUST)
 
 Context files MUST be updated when:
+
 - Architecture changes
 - New conventions adopted
 - Constraints modified
@@ -220,6 +238,7 @@ Context files MUST be updated when:
 ### Be Specific (SHOULD)
 
 Context files SHOULD:
+
 - Provide concrete examples
 - Reference specific files
 - Explain the "why" behind rules
@@ -228,6 +247,7 @@ Context files SHOULD:
 ### Be Concise (SHOULD)
 
 Context files SHOULD:
+
 - Focus on essential information
 - Avoid redundant documentation
 - Link to detailed docs rather than duplicate

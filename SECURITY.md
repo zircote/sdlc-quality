@@ -3,7 +3,7 @@
 ## Supported Versions
 
 | Version | Supported |
-|---------|-----------|
+| ------- | --------- |
 | 1.x.x   | Yes       |
 
 ## Reporting a Vulnerability
@@ -27,11 +27,11 @@ If you discover a security vulnerability in this plugin, please report it respon
 - **Fix timeline**: Based on severity
 
 | Severity | Target Resolution |
-|----------|-------------------|
-| Critical | 7 days |
-| High     | 30 days |
-| Medium   | 90 days |
-| Low      | Next release |
+| -------- | ----------------- |
+| Critical | 7 days            |
+| High     | 30 days           |
+| Medium   | 90 days           |
+| Low      | Next release      |
 
 ## Security Scope
 

@@ -1,67 +1,67 @@
-name: 'SDLC Compliance Check'
-description: 'Run comprehensive SDLC compliance checks against your project'
-author: 'zircote'
+name: "SDLC Compliance Check"
+description: "Run comprehensive SDLC compliance checks against your project"
+author: "zircote"
 
 branding:
-  icon: 'check-circle'
-  color: 'green'
+  icon: "check-circle"
+  color: "green"
 
 inputs:
   domains:
     description: 'Comma-separated list of domains to check (build,quality,testing,ci,security,docs,vcs,release,observability,ai) or "all"'
     required: false
-    default: 'all'
+    default: "all"
   fail-on-error:
-    description: 'Fail the action if any MUST requirements are not met'
+    description: "Fail the action if any MUST requirements are not met"
     required: false
-    default: 'true'
+    default: "true"
   report-format:
-    description: 'Report format: markdown, json, sarif, or all'
+    description: "Report format: markdown, json, sarif, or all"
     required: false
-    default: 'markdown'
+    default: "markdown"
   upload-artifact:
-    description: 'Upload report as artifact'
+    description: "Upload report as artifact"
     required: false
-    default: 'true'
+    default: "true"
   create-pr-comment:
-    description: 'Create PR comment with results (only on pull_request events)'
+    description: "Create PR comment with results (only on pull_request events)"
     required: false
-    default: 'true'
+    default: "true"
   create-issue:
-    description: 'Create GitHub issue for failed checks'
+    description: "Create GitHub issue for failed checks"
     required: false
-    default: 'false'
+    default: "false"
   working-directory:
-    description: 'Directory to run checks in'
+    description: "Directory to run checks in"
     required: false
-    default: '.'
+    default: "."
   config-file:
-    description: 'Path to custom SDLC configuration file'
+    description: "Path to custom SDLC configuration file"
     required: false
-    default: ''
+    default: ""
 
 outputs:
   score:
-    description: 'Overall compliance score (0-100)'
+    description: "Overall compliance score (0-100)"
     value: ${{ steps.check.outputs.score }}
   status:
-    description: 'Compliance status: pass, warn, or fail'
+    description: "Compliance status: pass, warn, or fail"
     value: ${{ steps.check.outputs.status }}
   report-path:
-    description: 'Path to the generated report file'
+    description: "Path to the generated report file"
     value: ${{ steps.check.outputs.report-path }}
   critical-count:
-    description: 'Number of critical (MUST) violations'
+    description: "Number of critical (MUST) violations"
     value: ${{ steps.check.outputs.critical-count }}
   important-count:
-    description: 'Number of important (SHOULD) violations'
+    description: "Number of important (SHOULD) violations"
     value: ${{ steps.check.outputs.important-count }}
   suggestion-count:
-    description: 'Number of suggestions (MAY)'
+    description: "Number of suggestions (MAY)"
     value: ${{ steps.check.outputs.suggestion-count }}
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Validate inputs
       shell: bash

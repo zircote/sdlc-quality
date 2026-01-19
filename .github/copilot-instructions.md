@@ -34,6 +34,7 @@ sdlc-quality/
 ### RFC 2119 Terminology
 
 This project uses RFC 2119 compliance levels:
+
 - **MUST**: Mandatory requirement. Non-compliance blocks release.
 - **SHOULD**: Strong recommendation. Should be followed unless there's good reason not to.
 - **MAY**: Optional enhancement. Nice to have.
@@ -41,6 +42,7 @@ This project uses RFC 2119 compliance levels:
 ### SDLC Domains
 
 The plugin covers 11 domains:
+
 1. **build** - Build system configuration (Makefile, dependencies)
 2. **quality** - Code formatting, linting, error handling
 3. **testing** - Test organization, coverage, patterns
@@ -132,6 +134,7 @@ run_sdlc_checks "all"
 ### Adding Technology-Specific Examples
 
 When adding examples for a new language/framework:
+
 1. Add to the relevant skill file in `skills/<domain>/SKILL.md`
 2. Include complete, working examples
 3. Show both configuration and CLI usage

@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "lint": "markdownlint-cli2 '**/*.md' '#node_modules'",
-    "format": "prettier --write '**/*.md' '**/*.yml' '**/*.yaml' '**/*.json'",
-    "format:check": "prettier --check '**/*.md' '**/*.yml' '**/*.yaml' '**/*.json'",
+    "format": "prettier --write '**/*.md' '**/*.yml' '**/*.json'",
+    "format:check": "prettier --check '**/*.md' '**/*.yml' '**/*.json'",
     "test": "./scripts/test.sh"
   },
   "devDependencies": {

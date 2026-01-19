@@ -18,41 +18,42 @@ Guidance for implementing comprehensive testing that meets SDLC requirements.
 
 Projects MUST maintain these test categories:
 
-| Category | Location | Purpose |
-|----------|----------|---------|
-| Unit tests | Alongside source code | Test individual functions/methods |
-| Integration tests | Dedicated test directory | Test component interactions |
-| Documentation tests | Within doc comments | Verify examples work |
-| End-to-end tests | Dedicated e2e directory | Test full system behavior |
+| Category            | Location                 | Purpose                           |
+| ------------------- | ------------------------ | --------------------------------- |
+| Unit tests          | Alongside source code    | Test individual functions/methods |
+| Integration tests   | Dedicated test directory | Test component interactions       |
+| Documentation tests | Within doc comments      | Verify examples work              |
+| End-to-end tests    | Dedicated e2e directory  | Test full system behavior         |
 
 ### Naming Convention (MUST)
 
 Test files MUST be clearly identifiable by naming convention:
 
-| Language | Unit Tests | Integration Tests |
-|----------|------------|-------------------|
-| Rust | `mod tests` in source | `tests/` directory |
-| TypeScript | `*.test.ts`, `*.spec.ts` | `tests/integration/` |
-| Python | `test_*.py`, `*_test.py` | `tests/integration/` |
-| Java | `*Test.java` | `*IntegrationTest.java` |
-| Go | `*_test.go` | `*_integration_test.go` |
+| Language   | Unit Tests               | Integration Tests       |
+| ---------- | ------------------------ | ----------------------- |
+| Rust       | `mod tests` in source    | `tests/` directory      |
+| TypeScript | `*.test.ts`, `*.spec.ts` | `tests/integration/`    |
+| Python     | `test_*.py`, `*_test.py` | `tests/integration/`    |
+| Java       | `*Test.java`             | `*IntegrationTest.java` |
+| Go         | `*_test.go`              | `*_integration_test.go` |
 
 ## Test Coverage
 
 ### Coverage Requirements
 
-| Requirement | Level |
-|-------------|-------|
-| New functionality | MUST include tests |
-| Bug fixes | MUST include regression tests |
-| Coverage measurement | MUST be tracked |
-| Minimum coverage | SHOULD target 80% |
-| Critical paths | MUST have 95%+ coverage |
-| Coverage reports | MUST be uploaded to tracking service |
+| Requirement          | Level                                |
+| -------------------- | ------------------------------------ |
+| New functionality    | MUST include tests                   |
+| Bug fixes            | MUST include regression tests        |
+| Coverage measurement | MUST be tracked                      |
+| Minimum coverage     | SHOULD target 80%                    |
+| Critical paths       | MUST have 95%+ coverage              |
+| Coverage reports     | MUST be uploaded to tracking service |
 
 ### Regression Tests (MUST)
 
 Bug fixes MUST include regression tests that:
+
 1. Fail before the fix is applied
 2. Pass after the fix is applied
 3. Document the bug being fixed
@@ -70,6 +71,7 @@ fn test_issue_123_null_pointer_on_empty_input() {
 ### Critical Path Coverage (MUST)
 
 Critical paths requiring 95%+ coverage:
+
 - Authentication and authorization
 - Data validation and sanitization
 - Financial calculations
@@ -87,15 +89,16 @@ Critical paths requiring 95%+ coverage:
 
 ### Performance Guidelines (SHOULD)
 
-| Test Type | Target Duration |
-|-----------|-----------------|
-| Unit tests | < 1 second each |
+| Test Type         | Target Duration   |
+| ----------------- | ----------------- |
+| Unit tests        | < 1 second each   |
 | Integration tests | < 30 seconds each |
-| Full test suite | < 10 minutes |
+| Full test suite   | < 10 minutes      |
 
 ### Flaky Test Policy
 
 Flaky tests (tests that sometimes pass, sometimes fail) MUST be:
+
 1. Identified and tracked
 2. Fixed or quarantined immediately
 3. Never ignored or re-run until green
@@ -107,7 +110,7 @@ Flaky tests (tests that sometimes pass, sometimes fail) MUST be:
 Tests MUST follow the AAA pattern:
 
 ```typescript
-test('should calculate total with discount', () => {
+test("should calculate total with discount", () => {
   // Arrange
   const cart = new ShoppingCart();
   cart.addItem({ price: 100, quantity: 2 });
@@ -126,6 +129,7 @@ test('should calculate total with discount', () => {
 Test names MUST clearly describe what is being tested:
 
 **Good:**
+
 ```
 test_user_creation_with_valid_email_succeeds
 test_login_with_invalid_password_returns_401
@@ -133,6 +137,7 @@ test_empty_cart_returns_zero_total
 ```
 
 **Bad:**
+
 ```
 test1
 testUser
@@ -142,19 +147,20 @@ test_it_works
 ### Coverage Requirements (MUST)
 
 Tests MUST cover:
+
 - **Happy path**: Expected inputs produce expected outputs
 - **Error cases**: Invalid inputs produce appropriate errors
 - **Edge cases**: Boundary conditions handled correctly
 
 ### Edge Cases to Test
 
-| Category | Examples |
-|----------|----------|
-| Empty inputs | Empty strings, empty arrays, null/None |
-| Boundary values | 0, -1, MAX_INT, empty, single item |
-| Invalid inputs | Wrong types, malformed data |
-| Concurrent access | Race conditions, deadlocks |
-| Resource limits | Large inputs, memory constraints |
+| Category          | Examples                               |
+| ----------------- | -------------------------------------- |
+| Empty inputs      | Empty strings, empty arrays, null/None |
+| Boundary values   | 0, -1, MAX_INT, empty, single item     |
+| Invalid inputs    | Wrong types, malformed data            |
+| Concurrent access | Race conditions, deadlocks             |
+| Resource limits   | Large inputs, memory constraints       |
 
 ## Implementation Checklist
 

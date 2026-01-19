@@ -47,6 +47,7 @@ skills/
 ```
 
 **Skill Structure:**
+
 ```yaml
 ---
 name: Skill Name
@@ -57,6 +58,7 @@ version: 1.0.0
 ```
 
 **Design Principles:**
+
 - Technology-agnostic core content
 - RFC 2119 terminology (MUST/SHOULD/MAY)
 - Language-specific examples at end
@@ -75,6 +77,7 @@ agents/
 ```
 
 **Agent Structure:**
+
 ```yaml
 ---
 description: When to use this agent...
@@ -85,6 +88,7 @@ color: blue
 ```
 
 **Agent Capabilities:**
+
 - Autonomous multi-step workflows
 - Access to file system tools (Glob, Grep, Read)
 - Structured output generation
@@ -101,6 +105,7 @@ commands/
 ```
 
 **Command Naming:**
+
 - All commands MUST be namespaced: `/sdlc:<command>`
 - Clear, action-oriented names
 
@@ -135,11 +140,13 @@ GitHub Actions integration for CI/CD compliance checking.
 ```
 
 **Output Formats:**
+
 - Markdown: Human-readable compliance reports
 - JSON: Machine-readable for tooling integration
 - SARIF: GitHub Security tab integration
 
 **Trigger Modes:**
+
 - Pull Request / Push events
 - Scheduled (cron) for periodic audits
 - Manual dispatch with parameters
@@ -150,6 +157,7 @@ GitHub Actions integration for CI/CD compliance checking.
 The single source of truth for all SDLC standards. Skills derive their content from this document.
 
 **Sections:**
+
 1. Build System Requirements
 2. Code Quality Requirements
 3. Testing Requirements
@@ -277,14 +285,14 @@ See [ADRs](adrs/) for detailed architectural decisions.
 
 ## Technology Stack
 
-| Component | Technology |
-|-----------|------------|
+| Component      | Technology                     |
+| -------------- | ------------------------------ |
 | Content format | Markdown with YAML frontmatter |
-| Configuration | JSON (plugin.json) |
-| Build/Test | Makefile, Bash, Node.js tools |
-| CI/CD | GitHub Actions |
-| Linting | markdownlint-cli2 |
-| Formatting | Prettier |
+| Configuration  | JSON (plugin.json)             |
+| Build/Test     | Makefile, Bash, Node.js tools  |
+| CI/CD          | GitHub Actions                 |
+| Linting        | markdownlint-cli2              |
+| Formatting     | Prettier                       |
 
 ## Directory Structure
 

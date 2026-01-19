@@ -7,64 +7,64 @@ on:
         description: 'Comma-separated list of domains to check (build,quality,testing,ci,security,docs,vcs,release,observability,ai) or "all"'
         required: false
         type: string
-        default: 'all'
+        default: "all"
       fail-on-error:
-        description: 'Fail the workflow if any MUST requirements are not met'
+        description: "Fail the workflow if any MUST requirements are not met"
         required: false
         type: boolean
         default: true
       report-format:
-        description: 'Report format: markdown, json, sarif, or all'
+        description: "Report format: markdown, json, sarif, or all"
         required: false
         type: string
-        default: 'all'
+        default: "all"
       upload-artifact:
-        description: 'Upload report as artifact'
+        description: "Upload report as artifact"
         required: false
         type: boolean
         default: true
       create-pr-comment:
-        description: 'Create PR comment with results'
+        description: "Create PR comment with results"
         required: false
         type: boolean
         default: true
       create-issue:
-        description: 'Create GitHub issue for failed checks'
+        description: "Create GitHub issue for failed checks"
         required: false
         type: boolean
         default: false
       working-directory:
-        description: 'Directory to run checks in'
+        description: "Directory to run checks in"
         required: false
         type: string
-        default: '.'
+        default: "."
       runner:
-        description: 'Runner to use (ubuntu-latest, self-hosted, etc)'
+        description: "Runner to use (ubuntu-latest, self-hosted, etc)"
         required: false
         type: string
-        default: 'ubuntu-latest'
+        default: "ubuntu-latest"
     outputs:
       score:
-        description: 'Overall compliance score (0-100)'
+        description: "Overall compliance score (0-100)"
         value: ${{ jobs.audit.outputs.score }}
       status:
-        description: 'Compliance status: pass, warn, or fail'
+        description: "Compliance status: pass, warn, or fail"
         value: ${{ jobs.audit.outputs.status }}
       critical-count:
-        description: 'Number of critical violations'
+        description: "Number of critical violations"
         value: ${{ jobs.audit.outputs.critical-count }}
       important-count:
-        description: 'Number of important violations'
+        description: "Number of important violations"
         value: ${{ jobs.audit.outputs.important-count }}
     secrets:
       GITHUB_TOKEN:
-        description: 'GitHub token for PR comments and issue creation'
+        description: "GitHub token for PR comments and issue creation"
         required: false
 
   workflow_dispatch:
     inputs:
       domains:
-        description: 'Domains to check'
+        description: "Domains to check"
         required: false
         type: choice
         options:
@@ -79,24 +79,21 @@ on:
           - release
           - observability
           - ai
-        default: 'all'
+        default: "all"
       fail-on-error:
-        description: 'Fail on critical violations'
+        description: "Fail on critical violations"
         required: false
         type: boolean
         default: false
       create-issue:
-        description: 'Create issue for failures'
+        description: "Create issue for failures"
         required: false
         type: boolean
         default: true
 
   schedule:
     # Run weekly on Monday at 9am UTC
-    - cron: '0 9 * * 1'
-
-  issues:
-    types: [opened, assigned]
+    - cron: "0 9 * * 1"
 
 permissions:
   contents: read
@@ -109,58 +106,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Handle issue-triggered audits
-  check-trigger:
-    name: Check Trigger
-    runs-on: ubuntu-latest
-    outputs:
-      should-run: ${{ steps.check.outputs.should-run }}
-      domains: ${{ steps.check.outputs.domains }}
-    steps:
-      - name: Check issue trigger
-        id: check
-        env:
-          # Use environment variables to safely handle untrusted inputs
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          ISSUE_LABELS: ${{ toJson(github.event.issue.labels.*.name) }}
-          EVENT_NAME: ${{ github.event_name }}
-          INPUT_DOMAINS: ${{ inputs.domains }}
-        run: |
-          # Default to run for non-issue events
-          if [[ "$EVENT_NAME" != "issues" ]]; then
-            echo "should-run=true" >> $GITHUB_OUTPUT
-            echo "domains=${INPUT_DOMAINS:-all}" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # For issues, check if it's an SDLC audit request
-          # Check for SDLC audit label or title pattern
-          if echo "$ISSUE_LABELS" | grep -qi "sdlc-audit"; then
-            echo "should-run=true" >> $GITHUB_OUTPUT
-          elif echo "$ISSUE_TITLE" | grep -qiE "sdlc|compliance|audit"; then
-            echo "should-run=true" >> $GITHUB_OUTPUT
-          else
-            echo "should-run=false" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          # Extract domains from issue body if specified
-          # Use safe pattern matching
-          domains="all"
-          if echo "$ISSUE_BODY" | grep -qiE "^domains?:"; then
-            # Extract only alphanumeric and comma characters for safety
-            extracted=$(echo "$ISSUE_BODY" | grep -iE "^domains?:" | sed 's/.*domains?:\s*//i' | tr -cd 'a-zA-Z,')
-            if [[ -n "$extracted" ]]; then
-              domains="$extracted"
-            fi
-          fi
-          echo "domains=$domains" >> $GITHUB_OUTPUT
-
   audit:
     name: SDLC Compliance Audit
-    needs: check-trigger
-    if: needs.check-trigger.outputs.should-run == 'true'
     runs-on: ubuntu-latest
     outputs:
       score: ${{ steps.audit.outputs.score }}
@@ -186,42 +133,13 @@ jobs:
         id: audit
         uses: ./.sdlc-plugin/.github/actions/sdlc-check
         with:
-          domains: ${{ needs.check-trigger.outputs.domains || inputs.domains || 'all' }}
+          domains: ${{ inputs.domains || 'all' }}
           fail-on-error: ${{ inputs.fail-on-error || false }}
           report-format: ${{ inputs.report-format || 'all' }}
           upload-artifact: ${{ inputs.upload-artifact || true }}
           create-pr-comment: ${{ inputs.create-pr-comment || true }}
           create-issue: ${{ inputs.create-issue || false }}
           working-directory: ${{ inputs.working-directory || '.' }}
-
-      - name: Comment on trigger issue
-        if: github.event_name == 'issues' && needs.check-trigger.outputs.should-run == 'true'
-        uses: actions/github-script@v7
-        env:
-          REPORT_DIR: ${{ github.workspace }}/.sdlc-reports
-        with:
-          script: |
-            const fs = require('fs');
-            const reportDir = process.env.REPORT_DIR;
-
-            let body = '## SDLC Compliance Audit Results\n\n';
-
-            if (fs.existsSync(reportDir + '/report.md')) {
-              const report = fs.readFileSync(reportDir + '/report.md', 'utf8');
-              body += report;
-            } else {
-              body += 'Audit completed. Check the workflow run for details.';
-            }
-
-            body += '\n\n---\n';
-            body += `*Workflow run: [${context.runId}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})*`;
-
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: body
-            });
 
       - name: Upload SARIF to Security tab
         if: inputs.report-format == 'sarif' || inputs.report-format == 'all'
