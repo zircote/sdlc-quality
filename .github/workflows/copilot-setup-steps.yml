@@ -1,0 +1,51 @@
+# GitHub Copilot Coding Agent Setup Steps
+# This workflow defines the environment setup for GitHub Copilot coding agent
+# when it works on this repository.
+#
+# Documentation: https://docs.github.com/en/copilot/using-github-copilot/using-copilot-coding-agent
+#
+# IMPORTANT:
+# - This workflow runs on Ubuntu x64 Linux runners only
+# - Cannot use reusable workflows in setup steps
+# - All steps should have continue-on-error: true for resilience
+# - No untrusted inputs are used in this workflow
+
+name: Copilot Setup Steps
+
+on: workflow_dispatch
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    steps:
+      # Install Node.js for markdown linting and formatting
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+        continue-on-error: true
+
+      # Install development dependencies
+      - name: Install development tools
+        run: |
+          npm install -D prettier markdownlint-cli2 markdown-link-check
+        continue-on-error: true
+
+      # Install shellcheck for shell script linting
+      - name: Install shellcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck jq
+        continue-on-error: true
+
+      # Verify installation
+      - name: Verify tools
+        run: |
+          echo "=== Tool Versions ==="
+          node --version || echo "Node.js not available"
+          npm --version || echo "npm not available"
+          npx prettier --version || echo "Prettier not available"
+          shellcheck --version || echo "shellcheck not available"
+          jq --version || echo "jq not available"
+          echo "=== Setup Complete ==="
+        continue-on-error: true
