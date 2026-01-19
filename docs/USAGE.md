@@ -333,6 +333,58 @@ Initialize SDLC-compliant project structure.
 └── SECURITY.md
 ```
 
+## GitHub Actions Integration
+
+Run SDLC compliance checks automatically in CI/CD pipelines.
+
+### Quick Start
+
+```yaml
+# .github/workflows/sdlc.yml
+name: SDLC Compliance
+
+on: [pull_request, push]
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+```
+
+### Full Configuration
+
+```yaml
+- uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+  with:
+    domains: 'all'           # or 'security,ci,docs'
+    fail-on-error: 'true'
+    report-format: 'all'     # markdown, json, sarif
+    create-pr-comment: 'true'
+    create-issue: 'true'
+```
+
+### Available Inputs
+
+| Input | Description | Default |
+|-------|-------------|---------|
+| `domains` | Domains to check (or "all") | `all` |
+| `fail-on-error` | Fail if MUST requirements unmet | `true` |
+| `report-format` | Output format(s) | `markdown` |
+| `create-pr-comment` | Comment on PR | `true` |
+| `create-issue` | Create issue on failure | `false` |
+
+### Outputs
+
+| Output | Description |
+|--------|-------------|
+| `score` | Overall compliance score (0-100) |
+| `status` | pass, warn, or fail |
+| `critical-count` | MUST violations count |
+
+See [GitHub Actions Integration](GITHUB_ACTIONS.md) for complete documentation.
+
 ## Integration Examples
 
 ### With Existing Project
@@ -424,6 +476,18 @@ If an agent fails:
 2. **Regular audits**: Run compliance auditor periodically
 3. **Update standards**: Keep PROJECT_REQUIREMENTS.md current
 4. **Train team**: Share standards with all contributors
+
+## AI Agent Interoperability
+
+This plugin supports multiple AI coding assistants:
+
+| Agent | Configuration | Usage |
+|-------|---------------|-------|
+| Claude Code | `.claude-plugin/`, skills, agents | Install plugin, use `/sdlc:check` |
+| GitHub Copilot | `.github/copilot-instructions.md` | Provides repo context to Copilot |
+| OpenAI Codex | `AGENTS.md` | Guidelines for Codex interactions |
+
+All agents reference the same SDLC standards from `docs/PROJECT_REQUIREMENTS.md`.
 
 ## Support
 

@@ -3,23 +3,22 @@
 [![CI](https://github.com/zircote/sdlc-quality/actions/workflows/ci.yml/badge.svg)](https://github.com/zircote/sdlc-quality/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](.claude-plugin/plugin.json)
+[![GitHub Stars](https://img.shields.io/github/stars/zircote/sdlc-quality?style=social)](https://github.com/zircote/sdlc-quality)
+
+[![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-blueviolet?logo=anthropic)](https://github.com/anthropics/claude-code)
+[![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-Compatible-blue?logo=github)](https://github.com/features/copilot)
+[![OpenAI Codex](https://img.shields.io/badge/OpenAI_Codex-Compatible-green?logo=openai)](https://openai.com/blog/openai-codex)
+[![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Ready-2088FF?logo=github-actions&logoColor=white)](docs/GITHUB_ACTIONS.md)
 
 Software Development Lifecycle standards and requirements plugin for AI coding assistants.
+
+<p align="center">
+  <img src=".github/readme-infographic.svg" alt="SDLC Standards Plugin Architecture" width="800">
+</p>
 
 ## Overview
 
 This plugin provides comprehensive SDLC standards guidance that works with **any AI coding assistant** (Claude, Gemini, Codex, Copilot, OpenCode, etc.). It codifies project quality requirements across the entire software development lifecycle.
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    Your Project                              │
-├─────────────────────────────────────────────────────────────┤
-│  Build │ Quality │ Testing │ CI/CD │ Security │ Docs │ VCS │
-│   ✓    │    ✓    │    ✓    │   ✓   │    ✓     │  ✓   │  ✓  │
-└─────────────────────────────────────────────────────────────┘
-                            ↑
-              SDLC Standards Plugin validates all domains
-```
 
 ## Features
 
@@ -130,11 +129,61 @@ Claude: [Launches compliance-auditor agent for autonomous analysis]
 | `/sdlc:check` | Assess current project against SDLC standards |
 | `/sdlc:init` | Initialize a new SDLC-compliant project |
 
+## GitHub Actions Integration
+
+Run SDLC compliance checks in your CI/CD pipeline:
+
+```yaml
+name: SDLC Compliance
+
+on: [pull_request, push]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run SDLC Check
+        uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+        with:
+          domains: 'all'
+          fail-on-error: 'true'
+          create-pr-comment: 'true'
+```
+
+**Features:**
+- Composite action for easy integration
+- Reusable workflow for full audit capabilities
+- Multiple trigger modes: PR, push, schedule, issue assignment
+- Report formats: Markdown, JSON, SARIF (GitHub Security tab)
+- Automatic PR comments with results
+- Issue creation for compliance failures
+
+See [GitHub Actions Integration](docs/GITHUB_ACTIONS.md) for complete documentation.
+
+## AI Agent Interoperability
+
+This plugin is designed to work with multiple AI coding assistants:
+
+| Agent | Configuration |
+|-------|---------------|
+| Claude Code | `.claude-plugin/`, skills, agents, commands |
+| GitHub Copilot | `.github/copilot-instructions.md`, `copilot-setup-steps.yml` |
+| OpenAI Codex | `AGENTS.md` |
+
+All agents follow the same SDLC standards and can be used interchangeably.
+
 ## Documentation
 
 | Document | Purpose |
 |----------|---------|
 | [Project Requirements](docs/PROJECT_REQUIREMENTS.md) | Complete SDLC standards specification |
+| [GitHub Actions](docs/GITHUB_ACTIONS.md) | CI/CD integration guide |
 | [Architecture](docs/ARCHITECTURE.md) | Plugin design and structure |
 | [Usage Guide](docs/USAGE.md) | Detailed usage instructions |
 | [Contributing](CONTRIBUTING.md) | How to contribute |

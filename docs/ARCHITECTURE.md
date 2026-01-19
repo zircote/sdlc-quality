@@ -104,7 +104,48 @@ commands/
 - All commands MUST be namespaced: `/sdlc:<command>`
 - Clear, action-oriented names
 
-### 4. Canonical Source (`docs/PROJECT_REQUIREMENTS.md`)
+### 4. GitHub Actions (`/.github/actions/` and `/.github/workflows/`)
+
+GitHub Actions integration for CI/CD compliance checking.
+
+```
+.github/
+├── actions/
+│   └── sdlc-check/           # Composite action
+│       ├── action.yml        # Action definition
+│       └── scripts/
+│           ├── sdlc-check.sh       # Main orchestrator
+│           ├── report-generator.sh # Multi-format reports
+│           └── checks/             # Domain check modules
+│               ├── build.sh
+│               ├── quality.sh
+│               ├── testing.sh
+│               ├── ci.sh
+│               ├── security.sh
+│               ├── docs.sh
+│               ├── vcs.sh
+│               ├── release.sh
+│               ├── observability.sh
+│               └── ai.sh
+├── workflows/
+│   ├── ci.yml                # Repository CI
+│   ├── sdlc-audit.yml        # Reusable SDLC workflow
+│   └── copilot-setup-steps.yml  # Copilot agent setup
+└── copilot-instructions.md   # GitHub Copilot context
+```
+
+**Output Formats:**
+- Markdown: Human-readable compliance reports
+- JSON: Machine-readable for tooling integration
+- SARIF: GitHub Security tab integration
+
+**Trigger Modes:**
+- Pull Request / Push events
+- Scheduled (cron) for periodic audits
+- Manual dispatch with parameters
+- Issue assignment triggers
+
+### 5. Canonical Source (`docs/PROJECT_REQUIREMENTS.md`)
 
 The single source of truth for all SDLC standards. Skills derive their content from this document.
 
@@ -252,16 +293,24 @@ sdlc-quality/
 ├── .claude-plugin/
 │   └── plugin.json          # Plugin manifest
 ├── .github/
+│   ├── actions/
+│   │   └── sdlc-check/      # Composite action for CI
+│   │       ├── action.yml   # Action definition
+│   │       └── scripts/     # Check modules & reporters
 │   ├── workflows/
-│   │   └── ci.yml           # CI pipeline
+│   │   ├── ci.yml           # Repository CI pipeline
+│   │   ├── sdlc-audit.yml   # Reusable SDLC workflow
+│   │   └── copilot-setup-steps.yml  # Copilot agent setup
 │   ├── ISSUE_TEMPLATE/      # Issue templates
 │   ├── PULL_REQUEST_TEMPLATE.md
+│   ├── copilot-instructions.md  # GitHub Copilot context
 │   └── dependabot.yml       # Dependency updates
 ├── agents/                   # Autonomous agents
 ├── commands/                 # User commands
 ├── docs/
 │   ├── adrs/                # Architecture decisions
 │   ├── ARCHITECTURE.md      # This file
+│   ├── GITHUB_ACTIONS.md    # GitHub Actions integration guide
 │   ├── USAGE.md             # Usage guide
 │   └── PROJECT_REQUIREMENTS.md  # Canonical standards
 ├── scripts/
@@ -269,6 +318,7 @@ sdlc-quality/
 ├── skills/                   # Topic skills
 ├── .claude/
 │   └── documentation-review.local.md  # Doc config
+├── AGENTS.md                # OpenAI Codex guidelines
 ├── CHANGELOG.md
 ├── CONTRIBUTING.md
 ├── LICENSE
