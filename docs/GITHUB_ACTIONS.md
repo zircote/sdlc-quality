@@ -1,12 +1,37 @@
 # GitHub Actions Integration
 
-This document describes how to integrate the sdlc plugin compliance checking into your GitHub Actions workflows.
+This document describes how to integrate SDLC compliance checking into your GitHub Actions workflows.
 
-> **Plugin Name**: `sdlc`
+## GitHub Action vs Claude Code Plugin
+
+This repository provides **two independent tools**:
+
+| Tool | Purpose | Installation |
+|------|---------|--------------|
+| **GitHub Action** | Automated CI/CD compliance checks | Add `uses: zircote/sdlc-quality@v1` to workflow |
+| **Claude Code Plugin** | Interactive AI-assisted checks & skills | `claude plugins add github:zircote/sdlc-quality` |
+
+> **Important**: The GitHub Action runs independently and does **not** require the Claude Code plugin.
+> If you want interactive skills, agents, and slash commands, you must install the plugin separately.
+
+### Install Claude Code Plugin (Optional)
+
+To get interactive SDLC skills alongside CI/CD checks:
+
+```bash
+claude plugins add github:zircote/sdlc-quality
+```
+
+This enables:
+- `/sdlc:check` - Interactive compliance checking
+- `/sdlc:init` - Project scaffolding
+- SDLC skills for contextual guidance
+- Autonomous agents for deep analysis
+
+---
 
 ## Table of Contents
 
-- [Overview](#overview)
 - [Quick Start](#quick-start)
 - [Direct Action](#direct-action)
 - [Reusable Workflow](#reusable-workflow)
@@ -18,7 +43,7 @@ This document describes how to integrate the sdlc plugin compliance checking int
 
 ## Overview
 
-The sdlc plugin provides two integration options:
+The GitHub Action provides two integration options:
 
 1. **Direct Action** (`zircote/sdlc-quality@v1`) - Use directly in your workflow steps (GitHub Marketplace compatible)
 2. **Reusable Workflow** (`zircote/sdlc-quality/.github/workflows/sdlc-audit.yml@v1`) - Call as a complete workflow

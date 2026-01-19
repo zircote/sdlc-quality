@@ -34,22 +34,66 @@ This plugin provides comprehensive SDLC standards guidance that works with **any
 
 ## Installation
 
-### Claude Code
+This repository provides **two ways** to use SDLC compliance checking:
+
+| Method | Use Case | Installation |
+|--------|----------|--------------|
+| **GitHub Action** | Automated CI/CD checks | Add to workflow YAML |
+| **Claude Code Plugin** | Interactive AI-assisted checks | `claude plugins add` |
+
+You can use either or both depending on your needs.
+
+---
+
+### GitHub Action (CI/CD)
+
+Add automated SDLC compliance checks to your CI/CD pipeline:
+
+```yaml
+# .github/workflows/sdlc.yml
+name: SDLC Compliance
+
+on: [pull_request, push]
+
+jobs:
+  compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: zircote/sdlc-quality@v1
+        with:
+          domains: "all"
+          fail-on-error: "true"
+```
+
+See [GitHub Actions Integration](#github-actions-integration) for full documentation.
+
+---
+
+### Claude Code Plugin (Interactive)
+
+Install the plugin for interactive SDLC guidance with Claude Code:
 
 ```bash
 # Install from GitHub
 claude plugins add github:zircote/sdlc-quality
 
-# Or install from local path
-claude plugins add /path/to/sdlc-quality
-
 # Verify installation
 claude plugins list
 ```
 
+Once installed, use slash commands:
+
+```bash
+/sdlc:check    # Run compliance check
+/sdlc:init     # Initialize new project
+```
+
+---
+
 ## Quick Start
 
-### Check Your Project
+### Check Your Project (Claude Code)
 
 ```bash
 # Run comprehensive compliance check
@@ -138,6 +182,9 @@ Claude: [Launches compliance-auditor agent for autonomous analysis]
 
 Run SDLC compliance checks in your CI/CD pipeline.
 
+> **Note**: The GitHub Action runs independently and does not require the Claude Code plugin.
+> To use interactive skills with Claude Code, [install the plugin separately](#claude-code-plugin-interactive).
+
 ### Option 1: Direct Action (Recommended)
 
 ```yaml
@@ -186,14 +233,23 @@ jobs:
       issues: write
 ```
 
-**Features:**
+### Action Inputs
 
-- GitHub Marketplace compatible action
-- Reusable workflow for full audit capabilities
-- Multiple trigger modes: PR, push, schedule, issue assignment
-- Report formats: Markdown, JSON, SARIF (GitHub Security tab)
-- Automatic PR comments with results
-- Issue creation for compliance failures
+| Input | Description | Default |
+|-------|-------------|---------|
+| `domains` | Comma-separated list or "all" | `all` |
+| `fail-on-error` | Fail if MUST requirements not met | `true` |
+| `report-format` | markdown, json, sarif, or all | `markdown` |
+| `create-pr-comment` | Comment on PR with results | `true` |
+| `create-issue` | Create issue for failures | `false` |
+
+### Action Outputs
+
+| Output | Description |
+|--------|-------------|
+| `score` | Compliance score (0-100) |
+| `status` | pass, warn, or fail |
+| `critical-count` | Number of MUST violations |
 
 See [GitHub Actions Integration](docs/GITHUB_ACTIONS.md) for complete documentation.
 
