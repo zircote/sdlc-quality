@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <defs>
+    <linearGradient id="infoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" rx="12" fill="url(#infoBg)"/>
+
+  <!-- Header -->
+  <text x="400" y="45" fill="#fff" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" text-anchor="middle">
+    How SDLC Standards Plugin Works
+  </text>
+
+  <!-- Architecture flow -->
+  <!-- Left: AI Agents -->
+  <g transform="translate(60, 90)">
+    <rect width="140" height="120" rx="8" fill="#3b82f6" opacity="0.15" stroke="#3b82f6" stroke-width="1"/>
+    <text x="70" y="30" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">AI AGENTS</text>
+
+    <g transform="translate(20, 45)">
+      <rect width="100" height="22" rx="4" fill="#3b82f6" opacity="0.3"/>
+      <text x="50" y="15" fill="#fff" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle">Claude Code</text>
+    </g>
+    <g transform="translate(20, 72)">
+      <rect width="100" height="22" rx="4" fill="#3b82f6" opacity="0.3"/>
+      <text x="50" y="15" fill="#fff" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle">GitHub Copilot</text>
+    </g>
+    <g transform="translate(20, 99)">
+      <rect width="100" height="22" rx="4" fill="#3b82f6" opacity="0.3"/>
+      <text x="50" y="15" fill="#fff" font-family="system-ui, sans-serif" font-size="10" text-anchor="middle">OpenAI Codex</text>
+    </g>
+  </g>
+
+  <!-- Arrow 1 -->
+  <path d="M210 150 L250 150" stroke="#4b5563" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4b5563"/>
+    </marker>
+  </defs>
+
+  <!-- Center: Plugin -->
+  <g transform="translate(260, 80)">
+    <rect width="280" height="140" rx="8" fill="#8b5cf6" opacity="0.15" stroke="#8b5cf6" stroke-width="2"/>
+    <text x="140" y="25" fill="#8b5cf6" font-family="system-ui, sans-serif" font-size="14" font-weight="700" text-anchor="middle">SDLC Standards Plugin</text>
+
+    <!-- Skills grid -->
+    <g transform="translate(15, 40)">
+      <rect width="55" height="24" rx="4" fill="#8b5cf6" opacity="0.4"/>
+      <text x="27.5" y="16" fill="#fff" font-family="system-ui, sans-serif" font-size="9" text-anchor="middle">Skills</text>
+    </g>
+    <g transform="translate(77, 40)">
+      <rect width="55" height="24" rx="4" fill="#8b5cf6" opacity="0.4"/>
+      <text x="27.5" y="16" fill="#fff" font-family="system-ui, sans-serif" font-size="9" text-anchor="middle">Agents</text>
+    </g>
+    <g transform="translate(139, 40)">
+      <rect width="55" height="24" rx="4" fill="#8b5cf6" opacity="0.4"/>
+      <text x="27.5" y="16" fill="#fff" font-family="system-ui, sans-serif" font-size="9" text-anchor="middle">Commands</text>
+    </g>
+    <g transform="translate(201, 40)">
+      <rect width="62" height="24" rx="4" fill="#8b5cf6" opacity="0.4"/>
+      <text x="31" y="16" fill="#fff" font-family="system-ui, sans-serif" font-size="9" text-anchor="middle">GH Actions</text>
+    </g>
+
+    <!-- Domain pills -->
+    <g transform="translate(15, 75)">
+      <rect width="40" height="18" rx="9" fill="#10b981" opacity="0.8"/>
+      <text x="20" y="13" fill="#fff" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">Build</text>
+    </g>
+    <g transform="translate(60, 75)">
+      <rect width="48" height="18" rx="9" fill="#06b6d4" opacity="0.8"/>
+      <text x="24" y="13" fill="#fff" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">Quality</text>
+    </g>
+    <g transform="translate(113, 75)">
+      <rect width="45" height="18" rx="9" fill="#f59e0b" opacity="0.8"/>
+      <text x="22.5" y="13" fill="#fff" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">Testing</text>
+    </g>
+    <g transform="translate(163, 75)">
+      <rect width="40" height="18" rx="9" fill="#ef4444" opacity="0.8"/>
+      <text x="20" y="13" fill="#fff" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">CI/CD</text>
+    </g>
+    <g transform="translate(208, 75)">
+      <rect width="52" height="18" rx="9" fill="#ec4899" opacity="0.8"/>
+      <text x="26" y="13" fill="#fff" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">Security</text>
+    </g>
+    <g transform="translate(15, 98)">
+      <rect width="40" height="18" rx="9" fill="#6366f1" opacity="0.8"/>
+      <text x="20" y="13" fill="#fff" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">Docs</text>
+    </g>
+    <g transform="translate(60, 98)">
+      <rect width="35" height="18" rx="9" fill="#14b8a6" opacity="0.8"/>
+      <text x="17.5" y="13" fill="#fff" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">VCS</text>
+    </g>
+    <g transform="translate(100, 98)">
+      <rect width="50" height="18" rx="9" fill="#a855f7" opacity="0.8"/>
+      <text x="25" y="13" fill="#fff" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">Release</text>
+    </g>
+    <g transform="translate(155, 98)">
+      <rect width="55" height="18" rx="9" fill="#0ea5e9" opacity="0.8"/>
+      <text x="27.5" y="13" fill="#fff" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">Observe</text>
+    </g>
+    <g transform="translate(215, 98)">
+      <rect width="30" height="18" rx="9" fill="#22c55e" opacity="0.8"/>
+      <text x="15" y="13" fill="#fff" font-family="system-ui, sans-serif" font-size="8" text-anchor="middle">AI</text>
+    </g>
+  </g>
+
+  <!-- Arrow 2 -->
+  <path d="M550 150 L590 150" stroke="#4b5563" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+
+  <!-- Right: Output -->
+  <g transform="translate(600, 90)">
+    <rect width="140" height="120" rx="8" fill="#10b981" opacity="0.15" stroke="#10b981" stroke-width="1"/>
+    <text x="70" y="30" fill="#10b981" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">OUTPUT</text>
+
+    <g transform="translate(15, 45)">
+      <rect width="110" height="20" rx="4" fill="#10b981" opacity="0.3"/>
+      <text x="55" y="14" fill="#fff" font-family="system-ui, sans-serif" font-size="9" text-anchor="middle">Compliance Report</text>
+    </g>
+    <g transform="translate(15, 70)">
+      <rect width="110" height="20" rx="4" fill="#10b981" opacity="0.3"/>
+      <text x="55" y="14" fill="#fff" font-family="system-ui, sans-serif" font-size="9" text-anchor="middle">PR Comments</text>
+    </g>
+    <g transform="translate(15, 95)">
+      <rect width="110" height="20" rx="4" fill="#10b981" opacity="0.3"/>
+      <text x="55" y="14" fill="#fff" font-family="system-ui, sans-serif" font-size="9" text-anchor="middle">GitHub Issues</text>
+    </g>
+  </g>
+
+  <!-- Bottom features section -->
+  <g transform="translate(60, 250)">
+    <!-- Feature 1 -->
+    <g transform="translate(0, 0)">
+      <circle cx="15" cy="15" r="15" fill="#3b82f6" opacity="0.2"/>
+      <text x="15" y="20" fill="#3b82f6" font-size="16" text-anchor="middle">&#9733;</text>
+      <text x="40" y="12" fill="#fff" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Technology Agnostic</text>
+      <text x="40" y="26" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Works with any language/framework</text>
+    </g>
+
+    <!-- Feature 2 -->
+    <g transform="translate(230, 0)">
+      <circle cx="15" cy="15" r="15" fill="#8b5cf6" opacity="0.2"/>
+      <text x="15" y="20" fill="#8b5cf6" font-size="16" text-anchor="middle">&#9879;</text>
+      <text x="40" y="12" fill="#fff" font-family="system-ui, sans-serif" font-size="11" font-weight="600">RFC 2119 Compliant</text>
+      <text x="40" y="26" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">MUST/SHOULD/MAY terminology</text>
+    </g>
+
+    <!-- Feature 3 -->
+    <g transform="translate(460, 0)">
+      <circle cx="15" cy="15" r="15" fill="#10b981" opacity="0.2"/>
+      <text x="15" y="20" fill="#10b981" font-size="16" text-anchor="middle">&#10003;</text>
+      <text x="40" y="12" fill="#fff" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Actionable Output</text>
+      <text x="40" y="26" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Clear remediation for every finding</text>
+    </g>
+  </g>
+
+  <!-- Feature row 2 -->
+  <g transform="translate(60, 310)">
+    <!-- Feature 4 -->
+    <g transform="translate(0, 0)">
+      <circle cx="15" cy="15" r="15" fill="#f59e0b" opacity="0.2"/>
+      <text x="15" y="20" fill="#f59e0b" font-size="14" text-anchor="middle">&#9889;</text>
+      <text x="40" y="12" fill="#fff" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Autonomous Agents</text>
+      <text x="40" y="26" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Deep analysis without user input</text>
+    </g>
+
+    <!-- Feature 5 -->
+    <g transform="translate(230, 0)">
+      <circle cx="15" cy="15" r="15" fill="#ef4444" opacity="0.2"/>
+      <text x="15" y="20" fill="#ef4444" font-size="14" text-anchor="middle">&#128274;</text>
+      <text x="40" y="12" fill="#fff" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Security First</text>
+      <text x="40" y="26" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">Supply chain and vulnerability scanning</text>
+    </g>
+
+    <!-- Feature 6 -->
+    <g transform="translate(460, 0)">
+      <circle cx="15" cy="15" r="15" fill="#06b6d4" opacity="0.2"/>
+      <text x="15" y="20" fill="#06b6d4" font-size="14" text-anchor="middle">&#128640;</text>
+      <text x="40" y="12" fill="#fff" font-family="system-ui, sans-serif" font-size="11" font-weight="600">CI/CD Ready</text>
+      <text x="40" y="26" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9">GitHub Actions with SARIF support</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <text x="400" y="380" fill="#64748b" font-family="system-ui, -apple-system, sans-serif" font-size="11" text-anchor="middle">
+    github.com/zircote/sdlc-quality | MIT License | v1.0.0
+  </text>
+</svg>
