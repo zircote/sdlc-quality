@@ -222,7 +222,7 @@ Claude: [Launches compliance-auditor agent for autonomous analysis]
 
 Automate SDLC skill enforcement in your CI/CD pipeline.
 
-> **Tip**: The action enforces the [skills](#skills) automatically. Install the [Claude Code plugin](#claude-code-plugin-interactive-skill-guidance) to get interactive guidance when fixing violations.
+> **Tip**: The action enforces the [skills](#skills) automatically. Install the [Claude Code plugin](#claude-code-plugin) to get interactive guidance when fixing violations.
 
 ### Option 1: Direct Action (Recommended)
 
