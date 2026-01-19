@@ -10,7 +10,7 @@
     "test": "./scripts/test.sh"
   },
   "devDependencies": {
-    "markdownlint-cli2": "^0.17.0",
+    "markdownlint-cli2": "^0.20.0",
     "prettier": "^3.4.0",
     "markdown-link-check": "^3.13.0"
   },
