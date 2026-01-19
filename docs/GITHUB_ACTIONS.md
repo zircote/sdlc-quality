@@ -8,7 +8,7 @@ This document describes how to integrate the sdlc plugin compliance checking int
 
 - [Overview](#overview)
 - [Quick Start](#quick-start)
-- [Composite Action](#composite-action)
+- [Direct Action](#direct-action)
 - [Reusable Workflow](#reusable-workflow)
 - [Trigger Modes](#trigger-modes)
 - [Output Formats](#output-formats)
@@ -20,8 +20,8 @@ This document describes how to integrate the sdlc plugin compliance checking int
 
 The sdlc plugin provides two integration options:
 
-1. **Composite Action** (`zircote/sdlc-quality/.github/actions/sdlc-check@v1`) - Use directly in your workflow steps
-2. **Reusable Workflow** (`zircote/sdlc-quality/.github/workflows/sdlc-audit.yml@main`) - Call as a complete workflow
+1. **Direct Action** (`zircote/sdlc-quality@v1`) - Use directly in your workflow steps (GitHub Marketplace compatible)
+2. **Reusable Workflow** (`zircote/sdlc-quality/.github/workflows/sdlc-audit.yml@v1`) - Call as a complete workflow
 
 Both options support:
 
@@ -54,7 +54,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run SDLC Check
-        uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+        uses: zircote/sdlc-quality@v1
 ```
 
 ### With All Features
@@ -83,7 +83,7 @@ jobs:
 
       - name: Run SDLC Check
         id: sdlc
-        uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+        uses: zircote/sdlc-quality@v1
         with:
           domains: "all"
           fail-on-error: "true"
@@ -99,7 +99,7 @@ jobs:
           echo "Critical: ${{ steps.sdlc.outputs.critical-count }}"
 ```
 
-## Composite Action
+## Direct Action
 
 ### Inputs
 
@@ -130,7 +130,7 @@ jobs:
 Check specific domains:
 
 ```yaml
-- uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+- uses: zircote/sdlc-quality@v1
   with:
     domains: "security,ci,docs"
 ```
@@ -162,7 +162,7 @@ on:
 
 jobs:
   audit:
-    uses: zircote/sdlc-quality/.github/workflows/sdlc-audit.yml@main
+    uses: zircote/sdlc-quality/.github/workflows/sdlc-audit.yml@v1
     with:
       domains: "all"
       fail-on-error: false
@@ -368,7 +368,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+      - uses: zircote/sdlc-quality@v1
         with:
           domains: "security"
           fail-on-error: "true"
@@ -392,7 +392,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+      - uses: zircote/sdlc-quality@v1
         with:
           domains: "docs,ai"
           fail-on-error: "false"
@@ -414,7 +414,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+      - uses: zircote/sdlc-quality@v1
         with:
           domains: "build,testing"
 ```
@@ -435,7 +435,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+      - uses: zircote/sdlc-quality@v1
         with:
           working-directory: "services/${{ matrix.service }}"
           upload-artifact: "true"
@@ -448,7 +448,7 @@ jobs:
 Ensure you're using the correct path:
 
 ```yaml
-uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+uses: zircote/sdlc-quality@v1
 ```
 
 ### Permission Denied
@@ -486,7 +486,7 @@ COVERAGE_THRESHOLD=70
 ```
 
 ```yaml
-- uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+- uses: zircote/sdlc-quality@v1
   with:
     config-file: ".sdlc-config.sh"
 ```

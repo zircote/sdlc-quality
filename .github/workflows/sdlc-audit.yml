@@ -116,18 +116,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout SDLC plugin
-        uses: actions/checkout@v4
-        with:
-          repository: zircote/sdlc-quality
-          path: .sdlc-plugin
-          sparse-checkout: |
-            .github/actions/sdlc-check/
-          sparse-checkout-cone-mode: false
-
       - name: Run SDLC compliance check
         id: audit
-        uses: ./.sdlc-plugin/.github/actions/sdlc-check
+        uses: zircote/sdlc-quality@v1
         with:
           domains: ${{ inputs.domains || 'all' }}
           fail-on-error: ${{ inputs.fail-on-error || false }}

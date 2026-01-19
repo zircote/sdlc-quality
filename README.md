@@ -138,7 +138,7 @@ Claude: [Launches compliance-auditor agent for autonomous analysis]
 
 Run SDLC compliance checks in your CI/CD pipeline.
 
-### Option 1: Composite Action (Recommended)
+### Option 1: Direct Action (Recommended)
 
 ```yaml
 name: SDLC Compliance
@@ -156,7 +156,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run SDLC Check
-        uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+        uses: zircote/sdlc-quality@v1
         with:
           domains: "all"
           fail-on-error: "true"
@@ -188,7 +188,7 @@ jobs:
 
 **Features:**
 
-- Composite action for easy integration
+- GitHub Marketplace compatible action
 - Reusable workflow for full audit capabilities
 - Multiple trigger modes: PR, push, schedule, issue assignment
 - Report formats: Markdown, JSON, SARIF (GitHub Security tab)
