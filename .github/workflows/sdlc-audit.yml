@@ -161,7 +161,7 @@ jobs:
     name: SDLC Compliance Audit
     needs: check-trigger
     if: needs.check-trigger.outputs.should-run == 'true'
-    runs-on: ${{ inputs.runner || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     outputs:
       score: ${{ steps.audit.outputs.score }}
       status: ${{ steps.audit.outputs.status }}
@@ -179,7 +179,8 @@ jobs:
           repository: zircote/sdlc-quality
           path: .sdlc-plugin
           sparse-checkout: |
-            .github/actions/sdlc-check
+            .github/actions/sdlc-check/
+          sparse-checkout-cone-mode: false
 
       - name: Run SDLC compliance check
         id: audit

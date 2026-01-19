@@ -21,6 +21,9 @@ Thumbs.db
 .env
 .env.local
 
+# Dependencies
+node_modules/
+
 # Build artifacts (if any)
 dist/
 build/
