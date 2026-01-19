@@ -6,26 +6,26 @@ This document describes how to integrate SDLC compliance checking into your GitH
 
 This repository provides SDLC skills that can be used by AI coding assistants:
 
-| Skill | Domain | What It Checks |
-|-------|--------|----------------|
-| `sdlc:build` | Build System | Makefile targets, dependency lockfiles, MSV |
-| `sdlc:quality` | Code Quality | Formatting, linting configuration |
-| `sdlc:testing` | Testing | Coverage config, test organization |
-| `sdlc:ci` | CI/CD | Workflow structure, pinned versions |
-| `sdlc:security` | Security | Vulnerability scanning, secret detection |
-| `sdlc:docs` | Documentation | README sections, CHANGELOG, ADRs |
-| `sdlc:vcs` | Version Control | Branch protection, commit conventions |
-| `sdlc:release` | Release | Semantic versioning, release automation |
-| `sdlc:observability` | Observability | Logging, metrics, health checks |
-| `sdlc:ai` | AI Config | CLAUDE.md, copilot-instructions |
+| Skill                | Domain          | What It Checks                              |
+| -------------------- | --------------- | ------------------------------------------- |
+| `sdlc:build`         | Build System    | Makefile targets, dependency lockfiles, MSV |
+| `sdlc:quality`       | Code Quality    | Formatting, linting configuration           |
+| `sdlc:testing`       | Testing         | Coverage config, test organization          |
+| `sdlc:ci`            | CI/CD           | Workflow structure, pinned versions         |
+| `sdlc:security`      | Security        | Vulnerability scanning, secret detection    |
+| `sdlc:docs`          | Documentation   | README sections, CHANGELOG, ADRs            |
+| `sdlc:vcs`           | Version Control | Branch protection, commit conventions       |
+| `sdlc:release`       | Release         | Semantic versioning, release automation     |
+| `sdlc:observability` | Observability   | Logging, metrics, health checks             |
+| `sdlc:ai`            | AI Config       | CLAUDE.md, copilot-instructions             |
 
 ## Installation Options
 
-| Method | Use Case | How It Works |
-|--------|----------|--------------|
-| **GitHub Copilot** | AI-powered audits | Install skills in `.github/skills/`, Copilot uses them automatically |
-| **GitHub Action** | Standalone CI/CD | `uses: zircote/sdlc-quality@v1` |
-| **Claude Code** | Interactive guidance | `claude plugins add github:zircote/sdlc-quality` |
+| Method             | Use Case             | How It Works                                                         |
+| ------------------ | -------------------- | -------------------------------------------------------------------- |
+| **GitHub Copilot** | AI-powered audits    | Install skills in `.github/skills/`, Copilot uses them automatically |
+| **GitHub Action**  | Standalone CI/CD     | `uses: zircote/sdlc-quality@v1`                                      |
+| **Claude Code**    | Interactive guidance | `claude plugins add github:zircote/sdlc-quality`                     |
 
 ---
 

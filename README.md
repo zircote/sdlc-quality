@@ -36,11 +36,11 @@ This plugin provides comprehensive SDLC standards guidance that works with **any
 
 This repository provides SDLC [skills](#skills) that work with multiple AI coding assistants:
 
-| Interface | Use Case | Installation |
-|-----------|----------|--------------|
-| **GitHub Copilot** | Automated skill enforcement via coding agent | Skills auto-loaded from `.github/skills/` |
-| **Claude Code Plugin** | Interactive skill guidance & commands | `claude plugins add` |
-| **GitHub Action** | CI/CD enforcement without AI agent | `uses: zircote/sdlc-quality@v1` |
+| Interface              | Use Case                                     | Installation                              |
+| ---------------------- | -------------------------------------------- | ----------------------------------------- |
+| **GitHub Copilot**     | Automated skill enforcement via coding agent | Skills auto-loaded from `.github/skills/` |
+| **Claude Code Plugin** | Interactive skill guidance & commands        | `claude plugins add`                      |
+| **GitHub Action**      | CI/CD enforcement without AI agent           | `uses: zircote/sdlc-quality@v1`           |
 
 **Recommended**: Use GitHub Copilot coding agent with these skills for AI-powered SDLC compliance.
 
@@ -274,20 +274,20 @@ jobs:
 
 ### Action Inputs
 
-| Input | Description | Default |
-|-------|-------------|---------|
-| `domains` | Comma-separated list or "all" | `all` |
-| `fail-on-error` | Fail if MUST requirements not met | `true` |
-| `report-format` | markdown, json, sarif, or all | `markdown` |
-| `create-pr-comment` | Comment on PR with results | `true` |
-| `create-issue` | Create issue for failures | `false` |
+| Input               | Description                       | Default    |
+| ------------------- | --------------------------------- | ---------- |
+| `domains`           | Comma-separated list or "all"     | `all`      |
+| `fail-on-error`     | Fail if MUST requirements not met | `true`     |
+| `report-format`     | markdown, json, sarif, or all     | `markdown` |
+| `create-pr-comment` | Comment on PR with results        | `true`     |
+| `create-issue`      | Create issue for failures         | `false`    |
 
 ### Action Outputs
 
-| Output | Description |
-|--------|-------------|
-| `score` | Compliance score (0-100) |
-| `status` | pass, warn, or fail |
+| Output           | Description               |
+| ---------------- | ------------------------- |
+| `score`          | Compliance score (0-100)  |
+| `status`         | pass, warn, or fail       |
 | `critical-count` | Number of MUST violations |
 
 See [GitHub Actions Integration](docs/GITHUB_ACTIONS.md) for complete documentation.
