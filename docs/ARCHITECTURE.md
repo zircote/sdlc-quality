@@ -1,16 +1,18 @@
 # Architecture Documentation
 
-This document describes the architecture and design of the SDLC Standards Plugin.
+This document describes the architecture and design of the sdlc plugin.
+
+> **Plugin Name**: `sdlc`
 
 ## Overview
 
-The SDLC Standards Plugin is a Claude Code plugin that provides comprehensive Software Development Lifecycle guidance for AI coding assistants. It uses a modular architecture with skills, agents, and commands to deliver standards-based guidance.
+The sdlc plugin is a Claude Code plugin that provides comprehensive Software Development Lifecycle guidance for AI coding assistants. It uses a modular architecture with skills, agents, and commands to deliver standards-based guidance.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        Claude Code                               │
 ├─────────────────────────────────────────────────────────────────┤
-│                     SDLC Standards Plugin                        │
+│                         sdlc plugin                              │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
 │  │    Skills    │  │    Agents    │  │   Commands   │          │
 │  │  (Guidance)  │  │  (Analysis)  │  │  (Actions)   │          │

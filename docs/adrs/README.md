@@ -1,6 +1,6 @@
 # Architecture Decision Records
 
-This directory contains Architecture Decision Records (ADRs) for the SDLC Standards Plugin.
+This directory contains Architecture Decision Records (ADRs) for the sdlc plugin.
 
 ## What is an ADR?
 

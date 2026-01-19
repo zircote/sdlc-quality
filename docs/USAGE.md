@@ -1,6 +1,8 @@
 # Usage Guide
 
-Complete guide to using the SDLC Standards Plugin with Claude Code.
+Complete guide to using the sdlc plugin with Claude Code.
+
+> **Plugin Name**: `sdlc`
 
 ## Installation
 

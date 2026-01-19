@@ -1,6 +1,6 @@
-# Contributing to SDLC Standards Plugin
+# Contributing to sdlc
 
-Thank you for your interest in contributing to the SDLC Standards Plugin.
+Thank you for your interest in contributing to the sdlc plugin.
 
 ## Table of Contents
 
@@ -422,4 +422,4 @@ By contributing, you agree that your contributions will be licensed under the [M
 
 ---
 
-Thank you for contributing to SDLC Standards Plugin!
+Thank you for contributing to the sdlc plugin!

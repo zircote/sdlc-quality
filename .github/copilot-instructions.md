@@ -1,10 +1,12 @@
-# Copilot Instructions for SDLC Standards Plugin
+# Copilot Instructions for sdlc plugin
 
-This document provides guidance for GitHub Copilot when working with the SDLC Standards Plugin repository.
+This document provides guidance for GitHub Copilot when working with the sdlc plugin repository.
 
 ## Project Overview
 
-The SDLC Standards Plugin is a Claude Code plugin that provides comprehensive Software Development Lifecycle standards guidance. It works with any AI coding assistant (Claude, Gemini, Codex, Copilot, OpenCode, etc.) and codifies project quality requirements across the entire software development lifecycle.
+**Plugin Name**: `sdlc`
+
+The sdlc plugin is a Claude Code plugin that provides comprehensive Software Development Lifecycle standards guidance. It works with any AI coding assistant (Claude, Gemini, Codex, Copilot, OpenCode, etc.) and codifies project quality requirements across the entire software development lifecycle.
 
 ## Repository Structure
 

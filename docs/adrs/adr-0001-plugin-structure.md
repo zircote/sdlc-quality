@@ -10,7 +10,7 @@ Accepted
 
 ## Context
 
-We need to define a consistent structure for the SDLC Standards Plugin that:
+We need to define a consistent structure for the sdlc plugin that:
 
 - Works with Claude Code's plugin system
 - Supports skills, agents, and commands

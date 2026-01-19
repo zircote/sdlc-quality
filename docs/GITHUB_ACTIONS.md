@@ -1,6 +1,8 @@
 # GitHub Actions Integration
 
-This document describes how to integrate the SDLC Standards Plugin compliance checking into your GitHub Actions workflows.
+This document describes how to integrate the sdlc plugin compliance checking into your GitHub Actions workflows.
+
+> **Plugin Name**: `sdlc`
 
 ## Table of Contents
 
@@ -16,7 +18,7 @@ This document describes how to integrate the SDLC Standards Plugin compliance ch
 
 ## Overview
 
-The SDLC Standards Plugin provides two integration options:
+The sdlc plugin provides two integration options:
 
 1. **Composite Action** (`zircote/sdlc-quality/.github/actions/sdlc-check@v1`) - Use directly in your workflow steps
 2. **Reusable Workflow** (`zircote/sdlc-quality/.github/workflows/sdlc-audit.yml@main`) - Call as a complete workflow

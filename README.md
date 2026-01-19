@@ -1,4 +1,4 @@
-# SDLC Standards Plugin
+# sdlc
 
 [![CI](https://github.com/zircote/sdlc-quality/actions/workflows/ci.yml/badge.svg)](https://github.com/zircote/sdlc-quality/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -12,8 +12,10 @@
 
 Software Development Lifecycle standards and requirements plugin for AI coding assistants.
 
+> **Plugin Name**: `sdlc`
+
 <p align="center">
-  <img src=".github/readme-infographic.svg" alt="SDLC Standards Plugin Architecture" width="800">
+  <img src=".github/readme-infographic.svg" alt="sdlc plugin architecture" width="800">
 </p>
 
 ## Overview

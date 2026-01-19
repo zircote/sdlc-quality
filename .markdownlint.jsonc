@@ -1,5 +1,5 @@
 {
-  // Markdownlint configuration for SDLC Standards Plugin
+  // Markdownlint configuration for sdlc plugin
   "default": true,
 
   // Relax heading increment requirement (h4 after h2 is sometimes intentional)

@@ -1,10 +1,10 @@
 # AGENTS.md - OpenAI Codex Guidelines
 
-This file provides guidelines for OpenAI Codex and other AI agents working with the SDLC Standards Plugin.
+This file provides guidelines for OpenAI Codex and other AI agents working with the sdlc plugin.
 
 ## Project Identity
 
-**Name**: SDLC Standards Plugin
+**Plugin Name**: `sdlc`
 **Purpose**: Comprehensive Software Development Lifecycle standards and compliance checking
 **Repository**: https://github.com/zircote/sdlc-quality
 **License**: MIT
@@ -13,7 +13,7 @@ This file provides guidelines for OpenAI Codex and other AI agents working with 
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    SDLC Standards Plugin                     │
+│                        sdlc plugin                           │
 ├─────────────────────────────────────────────────────────────┤
 │  Build │ Quality │ Testing │ CI/CD │ Security │ Docs │ VCS │
 │   ✓    │    ✓    │    ✓    │   ✓   │    ✓     │  ✓   │  ✓  │

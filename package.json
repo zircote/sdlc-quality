@@ -1,7 +1,7 @@
 {
   "name": "sdlc-quality",
   "version": "1.0.0",
-  "description": "SDLC Standards Plugin for AI coding assistants",
+  "description": "sdlc plugin - Software Development Lifecycle standards for AI coding assistants",
   "private": true,
   "scripts": {
     "lint": "markdownlint-cli2 '**/*.md' '#node_modules'",

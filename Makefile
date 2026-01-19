@@ -53,7 +53,7 @@ ci: format-check lint-strict test
 
 # Display help
 help:
-	@echo "SDLC Standards Plugin - Available targets:"
+	@echo "sdlc plugin - Available targets:"
 	@echo ""
 	@echo "  all          - Run lint and test (default)"
 	@echo "  build        - Build (no-op for this plugin)"
