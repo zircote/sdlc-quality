@@ -17,6 +17,7 @@ Thumbs.db
 
 # Local configuration
 *.local.md
+!.claude/github-social.local.md
 .env
 .env.local
 
