@@ -2,30 +2,48 @@
 
 This document describes how to integrate SDLC compliance checking into your GitHub Actions workflows.
 
-## GitHub Action vs Claude Code Plugin
+## How It Works
 
-This repository provides **two independent tools**:
+The GitHub Action enforces the SDLC [skills](../skills/) defined in this repository:
 
-| Tool | Purpose | Installation |
-|------|---------|--------------|
-| **GitHub Action** | Automated CI/CD compliance checks | Add `uses: zircote/sdlc-quality@v1` to workflow |
-| **Claude Code Plugin** | Interactive AI-assisted checks & skills | `claude plugins add github:zircote/sdlc-quality` |
+| Skill | Domain | What It Checks |
+|-------|--------|----------------|
+| `sdlc:build` | Build System | Makefile targets, dependency lockfiles, MSV |
+| `sdlc:quality` | Code Quality | Formatting, linting configuration |
+| `sdlc:testing` | Testing | Coverage config, test organization |
+| `sdlc:ci` | CI/CD | Workflow structure, pinned versions |
+| `sdlc:security` | Security | Vulnerability scanning, secret detection |
+| `sdlc:docs` | Documentation | README sections, CHANGELOG, ADRs |
+| `sdlc:vcs` | Version Control | Branch protection, commit conventions |
+| `sdlc:release` | Release | Semantic versioning, release automation |
+| `sdlc:observability` | Observability | Logging, metrics, health checks |
+| `sdlc:ai` | AI Config | CLAUDE.md, copilot-instructions |
 
-> **Important**: The GitHub Action runs independently and does **not** require the Claude Code plugin.
-> If you want interactive skills, agents, and slash commands, you must install the plugin separately.
+The action uses the same skill definitions for automated enforcement that the Claude Code plugin uses for interactive guidance.
 
-### Install Claude Code Plugin (Optional)
+## Installation Options
 
-To get interactive SDLC skills alongside CI/CD checks:
+| Interface | When to Use | Installation |
+|-----------|-------------|--------------|
+| **GitHub Action** | Automated CI/CD enforcement | `uses: zircote/sdlc-quality@v1` |
+| **Claude Code Plugin** | Interactive guidance & remediation | `claude plugins add github:zircote/sdlc-quality` |
+
+**Recommended**: Use both together for comprehensive coverage:
+- **Action** enforces skills automatically in CI/CD
+- **Plugin** provides the same skills interactively for remediation
+
+### Install Claude Code Plugin
+
+To get interactive skill guidance when working on compliance issues:
 
 ```bash
 claude plugins add github:zircote/sdlc-quality
 ```
 
-This enables:
-- `/sdlc:check` - Interactive compliance checking
-- `/sdlc:init` - Project scaffolding
-- SDLC skills for contextual guidance
+This provides:
+- `/sdlc:check` - Interactive compliance checking with remediation guidance
+- `/sdlc:init` - Scaffold SDLC-compliant project structure
+- Contextual skill activation when asking related questions
 - Autonomous agents for deep analysis
 
 ---
