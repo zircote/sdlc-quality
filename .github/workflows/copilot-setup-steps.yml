@@ -20,7 +20,7 @@ jobs:
     steps:
       # Install Node.js for markdown linting and formatting
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: "20"
         continue-on-error: true
