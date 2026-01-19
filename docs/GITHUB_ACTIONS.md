@@ -2,9 +2,9 @@
 
 This document describes how to integrate SDLC compliance checking into your GitHub Actions workflows.
 
-## How It Works
+## SDLC Skills
 
-The GitHub Action enforces the SDLC [skills](../skills/) defined in this repository:
+This repository provides SDLC skills that can be used by AI coding assistants:
 
 | Skill | Domain | What It Checks |
 |-------|--------|----------------|
@@ -19,32 +19,109 @@ The GitHub Action enforces the SDLC [skills](../skills/) defined in this reposit
 | `sdlc:observability` | Observability | Logging, metrics, health checks |
 | `sdlc:ai` | AI Config | CLAUDE.md, copilot-instructions |
 
-The action uses the same skill definitions for automated enforcement that the Claude Code plugin uses for interactive guidance.
-
 ## Installation Options
 
-| Interface | When to Use | Installation |
-|-----------|-------------|--------------|
-| **GitHub Action** | Automated CI/CD enforcement | `uses: zircote/sdlc-quality@v1` |
-| **Claude Code Plugin** | Interactive guidance & remediation | `claude plugins add github:zircote/sdlc-quality` |
+| Method | Use Case | How It Works |
+|--------|----------|--------------|
+| **GitHub Copilot** | AI-powered audits | Install skills in `.github/skills/`, Copilot uses them automatically |
+| **GitHub Action** | Standalone CI/CD | `uses: zircote/sdlc-quality@v1` |
+| **Claude Code** | Interactive guidance | `claude plugins add github:zircote/sdlc-quality` |
 
-**Recommended**: Use both together for comprehensive coverage:
-- **Action** enforces skills automatically in CI/CD
-- **Plugin** provides the same skills interactively for remediation
+---
 
-### Install Claude Code Plugin
+## GitHub Copilot (Recommended)
 
-To get interactive skill guidance when working on compliance issues:
+Install the SDLC skills in your project so GitHub Copilot coding agent can use them:
+
+### Option 1: Copy Skills
+
+```bash
+# Clone and copy skills to your project
+git clone --depth 1 https://github.com/zircote/sdlc-quality.git /tmp/sdlc
+cp -r /tmp/sdlc/.github/skills .github/skills
+rm -rf /tmp/sdlc
+
+# Commit the skills
+git add .github/skills
+git commit -m "feat: add SDLC skills for Copilot"
+```
+
+### Option 2: Git Submodule
+
+```bash
+# Add as submodule
+git submodule add https://github.com/zircote/sdlc-quality.git .github/sdlc-quality
+
+# Create symlink for Copilot
+ln -s sdlc-quality/.github/skills .github/skills
+
+# Commit
+git add .github/sdlc-quality .github/skills .gitmodules
+git commit -m "feat: add SDLC skills submodule for Copilot"
+```
+
+### Workflow for Copilot Audits
+
+Create a workflow that triggers Copilot to run SDLC audits:
+
+```yaml
+# .github/workflows/copilot-sdlc-audit.yml
+name: Copilot SDLC Audit
+
+on:
+  issues:
+    types: [assigned]
+  workflow_dispatch:
+    inputs:
+      domains:
+        description: "Domains to audit (comma-separated or 'all')"
+        default: "all"
+
+jobs:
+  audit:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.issue.labels.*.name, 'sdlc-audit')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Copilot coding agent automatically loads skills from .github/skills/
+      # when assigned to issues or triggered via workflow_dispatch
+```
+
+### Triggering Audits
+
+1. **Via Issue**: Create an issue with the `sdlc-audit` label and assign Copilot
+2. **Via Workflow**: Trigger manually from Actions tab
+3. **Via PR Comment**: `@copilot run SDLC compliance audit`
+
+Copilot will use the skills in `.github/skills/` to perform the audit.
+
+---
+
+## GitHub Action (Standalone)
+
+For CI/CD enforcement without Copilot:
+
+```yaml
+- uses: zircote/sdlc-quality@v1
+  with:
+    domains: "all"
+    fail-on-error: "true"
+```
+
+---
+
+## Claude Code Plugin
+
+For interactive guidance:
 
 ```bash
 claude plugins add github:zircote/sdlc-quality
 ```
-
-This provides:
-- `/sdlc:check` - Interactive compliance checking with remediation guidance
-- `/sdlc:init` - Scaffold SDLC-compliant project structure
-- Contextual skill activation when asking related questions
-- Autonomous agents for deep analysis
 
 ---
 

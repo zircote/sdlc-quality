@@ -34,20 +34,64 @@ This plugin provides comprehensive SDLC standards guidance that works with **any
 
 ## Installation
 
-This repository provides **two interfaces** to the same SDLC [skills](#skills):
+This repository provides SDLC [skills](#skills) that work with multiple AI coding assistants:
 
 | Interface | Use Case | Installation |
 |-----------|----------|--------------|
-| **GitHub Action** | Automated enforcement of skills in CI/CD | Add to workflow YAML |
-| **Claude Code Plugin** | Interactive skill guidance & remediation | `claude plugins add` |
+| **GitHub Copilot** | Automated skill enforcement via coding agent | Skills auto-loaded from `.github/skills/` |
+| **Claude Code Plugin** | Interactive skill guidance & commands | `claude plugins add` |
+| **GitHub Action** | CI/CD enforcement without AI agent | `uses: zircote/sdlc-quality@v1` |
 
-**Recommended**: Use both together - the action enforces skills in CI/CD while the plugin helps developers fix issues.
+**Recommended**: Use GitHub Copilot coding agent with these skills for AI-powered SDLC compliance.
 
 ---
 
-### GitHub Action (Automated Skill Enforcement)
+### GitHub Copilot (Recommended)
 
-Automatically enforce SDLC skills in your CI/CD pipeline:
+Install the SDLC skills in your project for GitHub Copilot coding agent:
+
+```bash
+# Clone the skills into your project
+git clone --depth 1 https://github.com/zircote/sdlc-quality.git /tmp/sdlc
+cp -r /tmp/sdlc/.github/skills .github/skills
+rm -rf /tmp/sdlc
+```
+
+Or add as a git submodule:
+
+```bash
+git submodule add https://github.com/zircote/sdlc-quality.git .github/sdlc-quality
+ln -s sdlc-quality/.github/skills .github/skills
+```
+
+Once installed, GitHub Copilot coding agent will automatically use these skills when running SDLC audits in your workflows.
+
+**Workflow example:**
+
+```yaml
+# .github/workflows/sdlc-audit.yml
+name: SDLC Audit
+
+on:
+  issues:
+    types: [assigned]
+
+jobs:
+  audit:
+    if: contains(github.event.issue.labels.*.name, 'sdlc-audit')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Copilot coding agent uses .github/skills/ automatically
+```
+
+Assign the `sdlc-audit` label to an issue and Copilot will run the compliance audit using these skills.
+
+---
+
+### GitHub Action (Standalone)
+
+For CI/CD enforcement without Copilot:
 
 ```yaml
 # .github/workflows/sdlc.yml
@@ -66,32 +110,24 @@ jobs:
           fail-on-error: "true"
 ```
 
-The action enforces the [skills](#skills) listed below (build, quality, testing, etc.).
-
 See [GitHub Actions Integration](#github-actions-integration) for full documentation.
 
 ---
 
-### Claude Code Plugin (Interactive Skill Guidance)
+### Claude Code Plugin
 
-Install the plugin for interactive SDLC skill guidance:
+Install for interactive SDLC guidance:
 
 ```bash
-# Install from GitHub
 claude plugins add github:zircote/sdlc-quality
-
-# Verify installation
-claude plugins list
 ```
 
-Once installed, use slash commands and get contextual skill guidance:
+Use slash commands:
 
 ```bash
 /sdlc:check    # Run compliance check with remediation help
 /sdlc:init     # Initialize SDLC-compliant project structure
 ```
-
-The plugin provides interactive access to the same skills the action enforces.
 
 ---
 
