@@ -167,7 +167,7 @@ calculate_overall_score() {
 
   for domain in "${!DOMAIN_SCORES[@]}"; do
     total=$((total + DOMAIN_SCORES[$domain]))
-    ((count++))
+    count=$((count + 1))
   done
 
   if [[ $count -gt 0 ]]; then

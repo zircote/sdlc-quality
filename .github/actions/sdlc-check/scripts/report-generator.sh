@@ -322,7 +322,7 @@ generate_sarif_report() {
           }')
         results=$(echo "$results" | jq ". + [$result]")
 
-        ((rule_index++))
+        rule_index=$((rule_index + 1))
       done < "$findings_file"
     fi
   done
