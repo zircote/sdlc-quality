@@ -10,16 +10,16 @@ The sdlc plugin is a Claude Code plugin that provides comprehensive Software Dev
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        Claude Code                               │
+│                        Claude Code                              │
 ├─────────────────────────────────────────────────────────────────┤
-│                         sdlc plugin                              │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
-│  │    Skills    │  │    Agents    │  │   Commands   │          │
-│  │  (Guidance)  │  │  (Analysis)  │  │  (Actions)   │          │
-│  └──────────────┘  └──────────────┘  └──────────────┘          │
+│                         sdlc plugin                             │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐           │
+│  │    Skills    │  │    Agents    │  │   Commands   │           │
+│  │  (Guidance)  │  │  (Analysis)  │  │  (Actions)   │           │
+│  └──────────────┘  └──────────────┘  └──────────────┘           │
 │         │                 │                 │                   │
 │         └─────────────────┼─────────────────┘                   │
-│                           │                                      │
+│                           │                                     │
 │              ┌────────────▼────────────┐                        │
 │              │  PROJECT_REQUIREMENTS   │                        │
 │              │   (Canonical Source)    │                        │
@@ -29,23 +29,23 @@ The sdlc plugin is a Claude Code plugin that provides comprehensive Software Dev
 
 ## Component Architecture
 
-### 1. Skills (`skills/`)
+### 1. Skills (`.github/skills/`)
 
-Skills provide topic-specific guidance that Claude Code surfaces contextually.
+Skills provide topic-specific guidance that Claude Code surfaces contextually. Skills are located in `.github/skills/` for compatibility with GitHub Copilot coding agent.
 
 ```
-skills/
-├── build/SKILL.md      # Build system standards
-├── quality/SKILL.md    # Code quality (format, lint, errors)
-├── testing/SKILL.md    # Test organization and coverage
-├── ci/SKILL.md         # CI/CD pipeline configuration
-├── security/SKILL.md   # Security scanning and supply chain
-├── docs/SKILL.md       # Documentation requirements
-├── vcs/SKILL.md        # Version control practices
-├── release/SKILL.md    # Versioning and releases
-├── observability/SKILL.md  # Logging, metrics, tracing
-├── ai/SKILL.md         # AI context configuration
-└── setup/SKILL.md      # Project initialization
+.github/skills/
+├── build/SKILL.md         # Build system standards
+├── quality/SKILL.md       # Code quality (format, lint, errors)
+├── testing/SKILL.md       # Test organization and coverage
+├── ci/SKILL.md            # CI/CD pipeline configuration
+├── security/SKILL.md      # Security scanning and supply chain
+├── docs/SKILL.md          # Documentation requirements
+├── vcs/SKILL.md           # Version control practices
+├── release/SKILL.md       # Versioning and releases
+├── observability/SKILL.md # Logging, metrics, tracing
+├── ai/SKILL.md            # AI context configuration
+└── setup/SKILL.md         # Project initialization
 ```
 
 **Skill Structure:**
@@ -111,34 +111,20 @@ commands/
 - All commands MUST be namespaced: `/sdlc:<command>`
 - Clear, action-oriented names
 
-### 4. GitHub Actions (`/.github/actions/` and `/.github/workflows/`)
+### 4. GitHub Actions (`/action.yml` and `/.github/workflows/`)
 
 GitHub Actions integration for CI/CD compliance checking.
 
 ```
-.github/
-├── actions/
-│   └── sdlc-check/           # Composite action
-│       ├── action.yml        # Action definition
-│       └── scripts/
-│           ├── sdlc-check.sh       # Main orchestrator
-│           ├── report-generator.sh # Multi-format reports
-│           └── checks/             # Domain check modules
-│               ├── build.sh
-│               ├── quality.sh
-│               ├── testing.sh
-│               ├── ci.sh
-│               ├── security.sh
-│               ├── docs.sh
-│               ├── vcs.sh
-│               ├── release.sh
-│               ├── observability.sh
-│               └── ai.sh
-├── workflows/
-│   ├── ci.yml                # Repository CI
-│   ├── sdlc-audit.yml        # Reusable SDLC workflow
-│   └── copilot-setup-steps.yml  # Copilot agent setup
-└── copilot-instructions.md   # GitHub Copilot context
+/
+├── action.yml                # Root composite action (zircote/sdlc-quality@v1)
+└── .github/
+    ├── workflows/
+    │   ├── ci.yml                # Repository CI
+    │   ├── sdlc-audit.yml        # Reusable SDLC workflow
+    │   └── copilot-setup-steps.yml  # Copilot agent setup
+    ├── copilot-instructions.md   # GitHub Copilot context
+    └── skills/                   # Skills (shared location)
 ```
 
 **Output Formats:**
@@ -266,7 +252,7 @@ See [ADRs](adrs/) for detailed architectural decisions.
 
 ### Adding a New Skill
 
-1. Create `skills/<topic>/SKILL.md`
+1. Create `.github/skills/<topic>/SKILL.md`
 2. Add YAML frontmatter with `name`, `description`
 3. Write content following existing patterns
 4. Update PROJECT_REQUIREMENTS.md if introducing new standards
@@ -301,12 +287,20 @@ See [ADRs](adrs/) for detailed architectural decisions.
 ```
 sdlc-quality/
 ├── .claude-plugin/
-│   └── plugin.json          # Plugin manifest
+│   └── plugin.json          # Plugin manifest (skills path configured here)
 ├── .github/
-│   ├── actions/
-│   │   └── sdlc-check/      # Composite action for CI
-│   │       ├── action.yml   # Action definition
-│   │       └── scripts/     # Check modules & reporters
+│   ├── skills/              # Topic skills (shared with GitHub Copilot)
+│   │   ├── build/SKILL.md
+│   │   ├── quality/SKILL.md
+│   │   ├── testing/SKILL.md
+│   │   ├── ci/SKILL.md
+│   │   ├── security/SKILL.md
+│   │   ├── docs/SKILL.md
+│   │   ├── vcs/SKILL.md
+│   │   ├── release/SKILL.md
+│   │   ├── observability/SKILL.md
+│   │   ├── ai/SKILL.md
+│   │   └── setup/SKILL.md
 │   ├── workflows/
 │   │   ├── ci.yml           # Repository CI pipeline
 │   │   ├── sdlc-audit.yml   # Reusable SDLC workflow
@@ -315,8 +309,16 @@ sdlc-quality/
 │   ├── PULL_REQUEST_TEMPLATE.md
 │   ├── copilot-instructions.md  # GitHub Copilot context
 │   └── dependabot.yml       # Dependency updates
+├── action.yml               # Root composite action (zircote/sdlc-quality@v1)
 ├── agents/                   # Autonomous agents
+│   ├── ci-architect.md
+│   ├── compliance-auditor.md
+│   ├── quality-enforcer.md
+│   └── security-reviewer.md
 ├── commands/                 # User commands
+│   ├── check.md             # /sdlc:check
+│   └── init.md              # /sdlc:init
+├── skills/                   # Symlink or copy of .github/skills
 ├── docs/
 │   ├── adrs/                # Architecture decisions
 │   ├── ARCHITECTURE.md      # This file
@@ -325,7 +327,6 @@ sdlc-quality/
 │   └── PROJECT_REQUIREMENTS.md  # Canonical standards
 ├── scripts/
 │   └── test.sh              # Test script
-├── skills/                   # Topic skills
 ├── .claude/
 │   └── documentation-review.local.md  # Doc config
 ├── AGENTS.md                # OpenAI Codex guidelines

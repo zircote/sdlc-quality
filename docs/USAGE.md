@@ -393,13 +393,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+      - uses: zircote/sdlc-quality@v1
 ```
 
 ### Full Configuration
 
 ```yaml
-- uses: zircote/sdlc-quality/.github/actions/sdlc-check@v1
+- uses: zircote/sdlc-quality@v1
   with:
     domains: "all" # or 'security,ci,docs'
     fail-on-error: "true"
@@ -537,5 +537,4 @@ All agents reference the same SDLC standards from `docs/PROJECT_REQUIREMENTS.md`
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/zircote/sdlc-quality/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/zircote/sdlc-quality/discussions)
 - **Standards Reference**: [PROJECT_REQUIREMENTS.md](PROJECT_REQUIREMENTS.md)

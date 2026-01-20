@@ -90,7 +90,8 @@ sdlc-quality/
 │   └── PROJECT_REQUIREMENTS.md  # Canonical SDLC standards
 ├── scripts/
 │   └── test.sh               # Test script
-├── skills/                   # Topic-specific guidance
+├── skills/                   # Topic-specific guidance (symlink to .github/skills)
+├── .github/skills/           # Shared skills directory
 │   ├── build/SKILL.md
 │   ├── quality/SKILL.md
 │   ├── testing/SKILL.md
@@ -102,6 +103,7 @@ sdlc-quality/
 │   ├── observability/SKILL.md
 │   ├── ai/SKILL.md
 │   └── setup/SKILL.md
+├── action.yml                # GitHub Actions composite action
 ├── .claude/
 │   └── documentation-review.local.md  # Doc review config
 ├── CHANGELOG.md
@@ -157,7 +159,7 @@ Language-specific examples go at the end of each skill file.
 
 ### Adding a Skill
 
-1. Create `skills/<topic>/SKILL.md`
+1. Create `.github/skills/<topic>/SKILL.md`
 2. Add YAML frontmatter:
    ```yaml
    ---

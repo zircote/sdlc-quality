@@ -25,12 +25,12 @@ lint-strict:
 # Format markdown files
 format:
 	@echo "Formatting markdown files..."
-	@npx prettier --write "**/*.md" "**/*.yml" "**/*.yaml" "**/*.json"
+	@npx prettier --write "**/*.md" "**/*.yml" "**/*.json"
 
 # Check formatting
 format-check:
 	@echo "Checking formatting..."
-	@npx prettier --check "**/*.md" "**/*.yml" "**/*.yaml" "**/*.json"
+	@npx prettier --check "**/*.md" "**/*.yml" "**/*.json"
 
 # Clean artifacts
 clean:

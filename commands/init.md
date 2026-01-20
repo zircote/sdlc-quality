@@ -1,13 +1,8 @@
 ---
 name: init
 description: Initialize a new project with SDLC-compliant structure. Creates required files, configures build system, sets up CI/CD, and establishes quality tooling.
-arguments:
-  - name: language
-    description: "Project language: rust, typescript, python, java, go"
-    required: false
-  - name: name
-    description: "Project name (defaults to directory name)"
-    required: false
+argument-hint: "[language] [project-name-optional]"
+allowed-tools: Bash, Read, Write, Glob
 ---
 
 # SDLC Project Initialization

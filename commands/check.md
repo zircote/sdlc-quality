@@ -1,6 +1,8 @@
 ---
 name: check
 description: Run SDLC compliance check against the current project. Validates build system, code quality, testing, CI/CD, security, documentation, VCS, and release configurations.
+argument-hint: "[domain-optional]"
+allowed-tools: Bash, Read, Glob, Grep
 ---
 
 # SDLC Compliance Check

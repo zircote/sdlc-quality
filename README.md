@@ -2,12 +2,12 @@
 
 [![CI](https://github.com/zircote/sdlc-quality/actions/workflows/ci.yml/badge.svg)](https://github.com/zircote/sdlc-quality/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](.claude-plugin/plugin.json)
+[![Version](https://img.shields.io/badge/version-1.1.2-green.svg)](.claude-plugin/plugin.json)
 [![GitHub Stars](https://img.shields.io/github/stars/zircote/sdlc-quality?style=social)](https://github.com/zircote/sdlc-quality)
 
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Plugin-blueviolet?logo=anthropic)](https://github.com/anthropics/claude-code)
 [![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-Compatible-blue?logo=github)](https://github.com/features/copilot)
-[![OpenAI Codex](https://img.shields.io/badge/OpenAI_Codex-Compatible-green?logo=openai)](https://openai.com/blog/openai-codex)
+[![OpenAI Codex](https://img.shields.io/badge/OpenAI_Codex-Compatible-green?logo=openai)](https://platform.openai.com/docs)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Ready-2088FF?logo=github-actions&logoColor=white)](docs/GITHUB_ACTIONS.md)
 
 Software Development Lifecycle standards and requirements plugin for AI coding assistants.
@@ -409,4 +409,3 @@ claude plugins add ./sdlc-quality
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/zircote/sdlc-quality/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/zircote/sdlc-quality/discussions)
