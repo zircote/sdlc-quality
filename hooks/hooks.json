@@ -1,0 +1,17 @@
+{
+  "description": "Hook-driven test framework hooks for sdlc-quality. Intercepts user prompts to enable automated test execution.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./hooks/test-wrapper.sh user-prompt-submit",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

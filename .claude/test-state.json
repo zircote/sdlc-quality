@@ -1,0 +1,203 @@
+{
+  "mode": "completed",
+  "total_tests": 24,
+  "current_index": 24,
+  "current_test": {
+    "id": "cmd_setup_help",
+    "description": "Verify sdlc-setup command is available and shows help",
+    "category": "commands",
+    "action": "Ask: 'What does the /sdlc-setup command do?'",
+    "expect": [
+      {
+        "contains": "SDLC"
+      },
+      {
+        "contains": "setup"
+      },
+      {
+        "not_contains": "not found"
+      },
+      {
+        "not_contains": "unknown command"
+      }
+    ],
+    "tags": ["smoke", "commands", "setup"]
+  },
+  "filtered_tests": [
+    "cmd_setup_help",
+    "cmd_setup_detection",
+    "cmd_validate_help",
+    "cmd_validate_check",
+    "agent_ci_architect_basic",
+    "agent_ci_architect_workflow",
+    "agent_compliance_auditor_basic",
+    "agent_compliance_auditor_check",
+    "agent_security_reviewer_basic",
+    "agent_security_reviewer_scan",
+    "agent_quality_enforcer_basic",
+    "agent_quality_enforcer_lint",
+    "skill_setup_trigger",
+    "skill_validate_trigger",
+    "skill_quality_trigger",
+    "skill_ci_trigger",
+    "skill_security_trigger",
+    "skill_testing_trigger",
+    "skill_docs_trigger",
+    "skill_build_trigger",
+    "skill_release_trigger",
+    "skill_vcs_trigger",
+    "skill_observability_trigger",
+    "skill_ai_trigger"
+  ],
+  "results": [
+    {
+      "id": "cmd_setup_help",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T20:54:51.627062+00:00Z"
+    },
+    {
+      "id": "cmd_setup_detection",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T20:55:22.583193+00:00Z"
+    },
+    {
+      "id": "cmd_validate_help",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T20:55:47.089581+00:00Z"
+    },
+    {
+      "id": "cmd_validate_check",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T20:56:12.563196+00:00Z"
+    },
+    {
+      "id": "agent_ci_architect_basic",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T20:57:15.263453+00:00Z"
+    },
+    {
+      "id": "agent_ci_architect_workflow",
+      "status": "fail",
+      "failures": ["Missing: 'workflow'"],
+      "timestamp": "2026-01-21T20:57:37.616611+00:00Z"
+    },
+    {
+      "id": "agent_compliance_auditor_basic",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T20:59:50.303196+00:00Z"
+    },
+    {
+      "id": "agent_compliance_auditor_check",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:00:09.605615+00:00Z"
+    },
+    {
+      "id": "agent_security_reviewer_basic",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:01:32.437095+00:00Z"
+    },
+    {
+      "id": "agent_security_reviewer_scan",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:01:54.668726+00:00Z"
+    },
+    {
+      "id": "agent_quality_enforcer_basic",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:03:28.366895+00:00Z"
+    },
+    {
+      "id": "agent_quality_enforcer_lint",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:03:49.268519+00:00Z"
+    },
+    {
+      "id": "skill_setup_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:04:03.282429+00:00Z"
+    },
+    {
+      "id": "skill_validate_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:04:16.026231+00:00Z"
+    },
+    {
+      "id": "skill_quality_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:04:37.703655+00:00Z"
+    },
+    {
+      "id": "skill_ci_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:04:50.818532+00:00Z"
+    },
+    {
+      "id": "skill_security_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:05:04.701888+00:00Z"
+    },
+    {
+      "id": "skill_testing_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:05:26.657951+00:00Z"
+    },
+    {
+      "id": "skill_docs_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:05:38.461500+00:00Z"
+    },
+    {
+      "id": "skill_build_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:05:50.295308+00:00Z"
+    },
+    {
+      "id": "skill_release_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:06:10.383673+00:00Z"
+    },
+    {
+      "id": "skill_vcs_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:06:22.830497+00:00Z"
+    },
+    {
+      "id": "skill_observability_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:06:34.160406+00:00Z"
+    },
+    {
+      "id": "skill_ai_trigger",
+      "status": "pass",
+      "failures": [],
+      "timestamp": "2026-01-21T21:06:47.064279+00:00Z"
+    }
+  ],
+  "saved_vars": {},
+  "filter_category": null,
+  "filter_tag": null,
+  "started_at": "2026-01-21T20:54:21.849152+00:00Z",
+  "completed_at": "2026-01-21T21:06:47.064456+00:00Z"
+}
