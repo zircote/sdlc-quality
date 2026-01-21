@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-01-21
+
+### Added
+
+- **Tests**: Hook-driven functional test framework with commands `/run-tests`, `/add-test`, `/test-report`
+- **Tests**: Smoke and regression test definitions for commands, agents, and skills
+
+### Fixed
+
+- **Commands**: Updated command names in frontmatter to match filenames
+- **Commands**: Prefixed commands with `sdlc-` for local plugin visibility
+
 ## [1.2.0] - 2026-01-20
 
 ### Changed
@@ -70,7 +82,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Issue and PR templates
 - Architecture Decision Records structure
 
-[Unreleased]: https://github.com/zircote/sdlc-quality/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/zircote/sdlc-quality/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/zircote/sdlc-quality/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/zircote/sdlc-quality/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/zircote/sdlc-quality/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/zircote/sdlc-quality/compare/v1.1.0...v1.1.1
