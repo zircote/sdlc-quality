@@ -2,7 +2,7 @@
 name: sdlc-validate
 description: Run SDLC compliance check against the current project. Validates build system, code quality, testing, CI/CD, security, documentation, VCS, and release configurations.
 argument-hint: "[domain-optional]"
-allowed-tools: Bash, Read, Glob, Grep
+allowed-tools: Bash, Read, Glob, Grep, Skill
 ---
 
 # SDLC Compliance Check
@@ -199,3 +199,22 @@ Present findings clearly with:
 3. Prioritized list of issues
 4. Specific remediation steps
 5. Commands to fix auto-fixable issues
+
+## Post-Validation: Capture to Mnemonic
+
+After completing validation, capture significant findings:
+
+For **critical violations**:
+```bash
+/mnemonic:capture blockers "SDLC Violation: {DOMAIN} in {PROJECT}"
+```
+
+For **compliance achievements**:
+```bash
+/mnemonic:capture learnings "SDLC Compliance: {PROJECT} passes {DOMAIN}"
+```
+
+This enables tracking of:
+- Recurring compliance issues
+- Remediation patterns that work
+- Project compliance history

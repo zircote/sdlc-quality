@@ -2,7 +2,7 @@
 name: sdlc-setup
 description: Initialize a new project with SDLC-compliant structure. Creates required files, configures build system, sets up CI/CD, and establishes quality tooling.
 argument-hint: "[language] [project-name-optional]"
-allowed-tools: Bash, Read, Write, Glob
+allowed-tools: Bash, Read, Write, Glob, Skill
 ---
 
 # SDLC Project Initialization
@@ -383,3 +383,22 @@ For detailed language-specific setup, refer to the skill files:
 - `skills/build/SKILL.md` - Build system details
 - `skills/quality/SKILL.md` - Quality tool configuration
 - `skills/ci/SKILL.md` - CI workflow templates
+
+## Post-Creation: Capture to Mnemonic
+
+After creating the SDLC project structure, capture the setup to mnemonic:
+
+```bash
+/mnemonic:capture decisions "SDLC Setup: {PROJECT_NAME} ({LANGUAGE})"
+```
+
+Include in the memory:
+- Project name and language
+- SDLC domains configured
+- CI/CD workflow created
+- Quality tools selected
+
+This enables future recall when:
+- Setting up similar projects
+- Reviewing established patterns
+- Checking consistency across projects
