@@ -141,7 +141,7 @@ runs:
 
     - name: Upload SARIF to GitHub Security
       if: inputs.report-format == 'sarif' || inputs.report-format == 'all'
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@v4
       with:
         sarif_file: ${{ env.SDLC_REPORT_DIR }}/report.sarif
       continue-on-error: true
