@@ -1,7 +1,6 @@
 ---
-name: Project Setup Standards
-description: This skill should be used when the user asks about "project setup", "project initialization", "repository setup", "new project", "bootstrap project", "project structure", "development environment", "toolchain setup", "project configuration", or needs guidance on setting up new projects that comply with SDLC standards.
-version: 1.0.0
+name: setup
+description: Review and apply project setup standards including repository structure, development environment, toolchain configuration, and SDLC-compliant project initialization.
 ---
 
 # Project Setup Standards

@@ -1,7 +1,6 @@
 ---
-name: Observability Standards
-description: This skill should be used when the user asks about "observability", "logging", "metrics", "tracing", "monitoring", "structured logging", "log format", "log levels", "distributed tracing", "OpenTelemetry", "health checks", or needs guidance on implementing observability and monitoring requirements.
-version: 1.0.0
+name: observability
+description: Review and apply observability standards including structured logging, metrics collection, distributed tracing, OpenTelemetry integration, and health check endpoints.
 ---
 
 # Observability Standards

@@ -1,7 +1,6 @@
 ---
-name: Documentation Standards
-description: This skill should be used when the user asks about "documentation", "README", "CHANGELOG", "CONTRIBUTING", "ADR", "architecture decision record", "changelog format", "keep a changelog", "doc comments", "API documentation", or needs guidance on project documentation requirements.
-version: 1.0.0
+name: docs
+description: Review and apply documentation standards including README, CHANGELOG, CONTRIBUTING, ADR templates, doc comments, and API documentation requirements.
 ---
 
 # Documentation Standards
