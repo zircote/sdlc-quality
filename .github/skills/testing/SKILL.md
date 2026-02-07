@@ -1,5 +1,5 @@
 ---
-name: Testing Standards
+name: testing
 description: This skill should be used when the user asks about "testing", "test coverage", "unit tests", "integration tests", "test organization", "test best practices", "flaky tests", "test isolation", "TDD", "regression tests", or needs guidance on test structure, coverage requirements, and test execution.
 version: 1.0.0
 ---

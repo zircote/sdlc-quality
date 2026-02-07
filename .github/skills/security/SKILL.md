@@ -1,5 +1,5 @@
 ---
-name: Security Standards
+name: security
 description: This skill should be used when the user asks about "security", "vulnerability scanning", "dependency audit", "supply chain security", "license compliance", "security audit", "CVE", "OWASP", "secrets scanning", "cargo-deny", "npm audit", or needs guidance on security requirements and vulnerability management.
 version: 1.0.0
 ---

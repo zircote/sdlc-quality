@@ -1,5 +1,5 @@
 ---
-name: Code Quality Standards
+name: quality
 description: This skill should be used when the user asks about "code quality", "formatting", "linting", "lint rules", "code style", "error handling", "unsafe code", "documentation comments", "doc comments", "rustfmt", "prettier", "eslint", "clippy", or needs guidance on code quality enforcement and configuration.
 version: 1.0.0
 ---
