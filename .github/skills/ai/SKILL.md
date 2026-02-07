@@ -1,6 +1,7 @@
 ---
-name: ai
-description: Review and apply AI-assisted development standards including CLAUDE.md configuration, AI coding guidelines, code generation workflows, and AI assistant context setup.
+name: AI-Assisted Development Standards
+description: This skill should be used when the user asks about "AI development", "AI coding", "AI assistant", "CLAUDE.md", "AI context", "AI guidelines", "code generation", "AI workflow", "AI review", "AI configuration", or needs guidance on configuring AI assistants and AI-assisted development workflows.
+version: 1.0.0
 ---
 
 # AI-Assisted Development Standards

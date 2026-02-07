@@ -1,6 +1,7 @@
 ---
-name: security
-description: Review and apply security standards including vulnerability scanning, dependency audits, supply chain security, license compliance, secrets scanning, and OWASP guidelines.
+name: Security Standards
+description: This skill should be used when the user asks about "security", "vulnerability scanning", "dependency audit", "supply chain security", "license compliance", "security audit", "CVE", "OWASP", "secrets scanning", "cargo-deny", "npm audit", or needs guidance on security requirements and vulnerability management.
+version: 1.0.0
 ---
 
 # Security Standards

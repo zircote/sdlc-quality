@@ -1,6 +1,7 @@
 ---
-name: testing
-description: Review and apply testing standards including coverage requirements, unit and integration test organization, test isolation, TDD practices, and regression test strategies.
+name: Testing Standards
+description: This skill should be used when the user asks about "testing", "test coverage", "unit tests", "integration tests", "test organization", "test best practices", "flaky tests", "test isolation", "TDD", "regression tests", or needs guidance on test structure, coverage requirements, and test execution.
+version: 1.0.0
 ---
 
 # Testing Standards

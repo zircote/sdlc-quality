@@ -1,5 +1,5 @@
 ---
-name: setup
+name: sdlc-setup
 description: Initialize a new project with SDLC-compliant structure. Creates required files, configures build system, sets up CI/CD, and establishes quality tooling.
 argument-hint: "[language] [project-name-optional]"
 allowed-tools: Bash, Read, Write, Glob, Skill

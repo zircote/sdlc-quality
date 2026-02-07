@@ -1,6 +1,7 @@
 ---
-name: release
-description: Review and apply release management standards including semantic versioning, release automation, package publishing, version bumping, and release note generation.
+name: Release Management Standards
+description: This skill should be used when the user asks about "release process", "versioning", "semantic versioning", "semver", "release automation", "publishing", "package publishing", "release checklist", "version bump", "release notes", or needs guidance on release workflows and version management.
+version: 1.0.0
 ---
 
 # Release Management Standards

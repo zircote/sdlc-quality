@@ -1,6 +1,7 @@
 ---
-name: vcs
-description: Review and apply version control standards including branching strategy, conventional commits, git hooks, branch naming, merge policies, and pull request requirements.
+name: Version Control Standards
+description: This skill should be used when the user asks about "version control", "git workflow", "branching strategy", "commit messages", "conventional commits", "git hooks", "branch naming", "merge strategy", "PR requirements", "pull request process", or needs guidance on version control practices and Git configuration.
+version: 1.0.0
 ---
 
 # Version Control Standards

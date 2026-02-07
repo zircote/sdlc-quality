@@ -1,6 +1,7 @@
 ---
-name: ci
-description: Review and apply CI/CD pipeline standards including GitHub Actions workflows, job orchestration, caching strategies, environment configuration, and pipeline structure.
+name: CI/CD Standards
+description: This skill should be used when the user asks about "CI pipeline", "continuous integration", "GitHub Actions", "CI configuration", "CI jobs", "workflow", "CI caching", "CI environment", "pipeline structure", or needs guidance on setting up or configuring CI/CD pipelines.
+version: 1.0.0
 ---
 
 # CI/CD Standards
