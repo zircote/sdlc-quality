@@ -17,6 +17,5 @@
     "testing",
     "documentation",
     "compliance"
-  ],
-  "skills": "./.github/skills"
+  ]
 }
