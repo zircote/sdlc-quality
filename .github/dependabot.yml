@@ -4,21 +4,18 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+    labels:
+      - "type/chore"
+      - "area/ci"
     commit-message:
       prefix: "ci"
-    labels:
-      - "dependencies"
-      - "ci"
-
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
-    commit-message:
-      prefix: "chore"
+      day: "monday"
     labels:
-      - "dependencies"
-    groups:
-      dev-dependencies:
-        patterns:
-          - "*"
+      - "type/chore"
+    commit-message:
+      prefix: "deps"
